@@ -93,6 +93,36 @@ router.get('/users', (req, res) => {
   }
 });
 
+router.post('/users', (req, res) => {
+  try {
+    const { fullName, email, username, password, roleId, employeeId, status } = req.body;
+    if (!fullName || !email || !username || !roleId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Vui lòng cung cấp đầy đủ: Họ tên, Email, Tên đăng nhập và Vai trò'
+      });
+    }
+
+    const newUser = db.createUserAccount({
+      fullName,
+      email,
+      username,
+      password: password || 'Amis@123456',
+      roleId,
+      employeeId,
+      status: status || 'active'
+    });
+
+    res.status(201).json({
+      success: true,
+      data: newUser,
+      message: 'Tạo tài khoản người dùng thành công'
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message || 'Lỗi tạo tài khoản người dùng' });
+  }
+});
+
 router.patch('/users/:id/status', (req, res) => {
   try {
     const { status } = req.body;

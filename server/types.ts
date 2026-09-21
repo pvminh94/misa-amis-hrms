@@ -409,6 +409,7 @@ export interface UserAccount {
   fullName: string;
   email: string;
   username: string;
+  password?: string;
   avatar?: string;
   departmentName: string;
   positionTitle: string;
@@ -420,6 +421,36 @@ export interface UserAccount {
   lastIp?: string;
   twoFactorEnabled: boolean;
   createdAt: string;
+}
+
+export interface CrmCandidate {
+  id: string;
+  candidateCode: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  positionId: string;
+  positionTitle: string;
+  departmentId: string;
+  departmentName: string;
+  expectedSalary: number;
+  offerSalary: number;
+  onboardingDate: string;
+  status: 'offer_accepted' | 'onboarding_in_progress' | 'converted_to_employee' | 'rejected';
+  source: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface OnboardingTask {
+  id: string;
+  employeeId: string;
+  title: string;
+  category: 'profile' | 'contract' | 'asset' | 'account' | 'training';
+  assignedTo: string;
+  dueDate: string;
+  status: 'pending' | 'in_progress' | 'completed';
+  completedAt?: string;
 }
 
 export interface AuditLog {

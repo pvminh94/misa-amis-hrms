@@ -8,6 +8,7 @@ import payrollRoutes from './routes/payroll';
 import departmentsRoutes from './routes/departments';
 import settingsRoutes from './routes/settings';
 import adminRoutes from './routes/admin';
+import authRoutes from './routes/auth';
 
 export const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // API Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/employees', employeesRoutes);
 app.use('/api/attendance', attendanceRoutes);

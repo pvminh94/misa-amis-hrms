@@ -46,6 +46,7 @@ import {
   initialUserAccounts,
   initialAuditLogs,
   initialSecuritySettings,
+  initialCrmCandidates,
   calculateVietnamesePayroll
 } from './data/seedData';
 
@@ -69,6 +70,8 @@ interface DatabaseSchema {
   userAccounts: UserAccount[];
   auditLogs: AuditLog[];
   securitySettings: SecuritySetting;
+  crmCandidates: CrmCandidate[];
+  onboardingTasks: OnboardingTask[];
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -100,6 +103,8 @@ class DatabaseStore {
         if (!parsed.userAccounts) parsed.userAccounts = initialUserAccounts;
         if (!parsed.auditLogs) parsed.auditLogs = initialAuditLogs;
         if (!parsed.securitySettings) parsed.securitySettings = initialSecuritySettings;
+        if (!parsed.crmCandidates) parsed.crmCandidates = initialCrmCandidates;
+        if (!parsed.onboardingTasks) parsed.onboardingTasks = [];
         return parsed;
       }
     } catch (err) {
@@ -125,7 +130,9 @@ class DatabaseStore {
       roles: initialRoles,
       userAccounts: initialUserAccounts,
       auditLogs: initialAuditLogs,
-      securitySettings: initialSecuritySettings
+      securitySettings: initialSecuritySettings,
+      crmCandidates: initialCrmCandidates,
+      onboardingTasks: []
     };
     this.saveData(defaultData);
     return defaultData;
@@ -149,13 +156,57 @@ class DatabaseStore {
     return this.data.employees.find((e) => e.id === id);
   }
 
-  createEmployee(employeeData: Omit<Employee, 'id'>) {
+  createEmployee(
+    employeeData: Omit<Employee, 'id'>,
+    options?: {
+      createUserAccount?: boolean;
+      roleId?: string;
+      username?: string;
+      password?: string;
+      autoRoster?: boolean;
+    }
+  ) {
     const id = `emp-${Date.now().toString().slice(-6)}`;
+    const code = employeeData.code || `AMIS-${String(this.data.employees.length + 1).padStart(4, '0')}`;
+
+    // Auto generate initial contract if not provided
+    const contracts = employeeData.contracts && employeeData.contracts.length > 0
+      ? employeeData.contracts
+      : [
+          {
+            id: `ctr-${Date.now().toString().slice(-6)}`,
+            contractNumber: `HĐLĐ-2026/${code}`,
+            contractType: employeeData.contractType || 'Hợp đồng thử việc 02 tháng',
+            signDate: employeeData.joinDate || '2026-09-21',
+            startDate: employeeData.contractStartDate || employeeData.joinDate || '2026-09-21',
+            endDate: employeeData.contractEndDate || '2026-11-21',
+            signerName: 'Trịnh Văn Cường',
+            signerTitle: 'Tổng Giám Đốc',
+            salaryInsurance: employeeData.salary?.baseSalary || 15000000,
+            status: 'active' as const
+          }
+        ];
+
     const newEmployee: Employee = {
       ...employeeData,
       id,
-      code: employeeData.code || `AMIS-${String(this.data.employees.length + 1).padStart(4, '0')}`
+      code,
+      contracts,
+      workHistory: employeeData.workHistory || [
+        {
+          id: `wh-${Date.now().toString().slice(-6)}`,
+          fromDate: employeeData.joinDate || '2026-09-21',
+          toDate: 'Hiện tại',
+          company: 'Công ty Cổ phần AMIS HRM',
+          position: employeeData.positionTitle || 'Chuyên viên',
+          note: 'Tiếp nhận tuyển dụng mới'
+        }
+      ],
+      rewardsDisciplines: employeeData.rewardsDisciplines || [],
+      dependentsList: employeeData.dependentsList || [],
+      documents: employeeData.documents || []
     };
+
     this.data.employees.unshift(newEmployee);
     
     // Also generate payroll row for current period
@@ -163,10 +214,75 @@ class DatabaseStore {
     this.data.payroll.unshift(newPayroll);
 
     // Update department count
-    const dept = this.data.departments.find(d => d.id === newEmployee.departmentId);
+    const dept = this.data.departments.find((d) => d.id === newEmployee.departmentId);
     if (dept) {
       dept.employeeCount += 1;
     }
+
+    // Auto-create Shift Roster entries for the current month
+    if (options?.autoRoster !== false && this.data.shiftRosters) {
+      const defaultSchedules: { [day: number]: any } = {};
+      for (let day = 1; day <= 30; day++) {
+        const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
+        defaultSchedules[day] = {
+          shiftId: isWeekend ? 'shift-off' : 'shift-std',
+          shiftCode: isWeekend ? 'OFF' : 'CA-HC',
+          shiftName: isWeekend ? 'Nghỉ cuối tuần' : 'Ca Hành chính (8h)'
+        };
+      }
+
+      this.data.shiftRosters.push({
+        id: `roster-${newEmployee.id}`,
+        employeeId: newEmployee.id,
+        employeeCode: newEmployee.code,
+        employeeName: newEmployee.fullName,
+        departmentName: newEmployee.departmentName,
+        period: '2026-09',
+        schedules: defaultSchedules
+      });
+    }
+
+    // Auto-create User Account if requested (default: true)
+    if (options?.createUserAccount !== false) {
+      const roleId = options?.roleId || 'role-employee';
+      const role = this.data.roles.find((r) => r.id === roleId) || this.data.roles[this.data.roles.length - 1];
+      const username = options?.username || (newEmployee.email ? newEmployee.email.split('@')[0] : `user_${newEmployee.code.toLowerCase().replace('-', '')}`);
+      
+      const userAccount: UserAccount = {
+        id: `usr-${Date.now().toString().slice(-6)}`,
+        employeeId: newEmployee.id,
+        employeeCode: newEmployee.code,
+        fullName: newEmployee.fullName,
+        email: newEmployee.email || `${username}@amis.vn`,
+        username: username.toLowerCase().trim(),
+        password: options?.password || 'Amis@123456',
+        departmentName: newEmployee.departmentName,
+        positionTitle: newEmployee.positionTitle,
+        roleId: role.id,
+        roleName: role.name,
+        roleCode: role.code,
+        status: 'active',
+        twoFactorEnabled: false,
+        createdAt: '2026-09-21'
+      };
+      this.data.userAccounts.push(userAccount);
+      role.userCount = (role.userCount || 0) + 1;
+    }
+
+    // Log to Audit Trail
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'employees',
+      action: 'CREATE',
+      description: `Tiếp nhận nhân sự mới thành công: ${newEmployee.fullName} (${newEmployee.code}) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản`,
+      targetId: newEmployee.id,
+      targetName: newEmployee.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
 
     this.saveData();
     return newEmployee;
@@ -694,6 +810,7 @@ class DatabaseStore {
     }
 
     targets.forEach((roster) => {
+      if (!roster.schedules) roster.schedules = {};
       for (let day = startDay; day <= endDay; day++) {
         const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
         if (isWeekend && !includeWeekends) continue;
@@ -968,6 +1085,114 @@ class DatabaseStore {
     return users;
   }
 
+  createUserAccount(accountData: {
+    fullName: string;
+    email: string;
+    username: string;
+    password?: string;
+    roleId: string;
+    employeeId?: string;
+    departmentName?: string;
+    positionTitle?: string;
+    status?: 'active' | 'locked';
+  }): UserAccount {
+    const existing = this.data.userAccounts.find(
+      (u) =>
+        u.username.toLowerCase() === accountData.username.toLowerCase().trim() ||
+        u.email.toLowerCase() === accountData.email.toLowerCase().trim()
+    );
+    if (existing) {
+      throw new Error('Tên đăng nhập hoặc Email này đã tồn tại trong hệ thống');
+    }
+
+    const role = this.data.roles.find((r) => r.id === accountData.roleId) || this.data.roles[0];
+    const id = `usr-${Date.now().toString().slice(-6)}`;
+
+    let empCode = 'AMIS-EXT';
+    let deptName = accountData.departmentName || 'Hệ thống';
+    let posTitle = accountData.positionTitle || 'Quản trị viên';
+
+    if (accountData.employeeId) {
+      const emp = this.data.employees.find((e) => e.id === accountData.employeeId);
+      if (emp) {
+        empCode = emp.code;
+        deptName = emp.departmentName;
+        posTitle = emp.positionTitle;
+      }
+    }
+
+    const newUser: UserAccount = {
+      id,
+      employeeId: accountData.employeeId || id,
+      employeeCode: empCode,
+      fullName: accountData.fullName,
+      email: accountData.email,
+      username: accountData.username.toLowerCase().trim(),
+      password: accountData.password || 'Amis@123456',
+      departmentName: deptName,
+      positionTitle: posTitle,
+      roleId: role.id,
+      roleName: role.name,
+      roleCode: role.code,
+      status: accountData.status || 'active',
+      twoFactorEnabled: false,
+      createdAt: '2026-09-21'
+    };
+
+    this.data.userAccounts.unshift(newUser);
+    role.userCount = (role.userCount || 0) + 1;
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'CREATE',
+      description: `Khởi tạo tài khoản người dùng mới: ${newUser.fullName} (${newUser.username}) - Gán vai trò ${role.name}`,
+      targetId: newUser.id,
+      targetName: newUser.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return newUser;
+  }
+
+  deleteUserAccount(userId: string): boolean {
+    const idx = this.data.userAccounts.findIndex((u) => u.id === userId);
+    if (idx === -1) return false;
+
+    const user = this.data.userAccounts[idx];
+    if (user.roleCode === 'ROLE_SUPER_ADMIN') {
+      throw new Error('Không thể xóa tài khoản Quản trị viên cấp cao nhất');
+    }
+
+    this.data.userAccounts.splice(idx, 1);
+    const role = this.data.roles.find((r) => r.id === user.roleId);
+    if (role && role.userCount > 0) {
+      role.userCount -= 1;
+    }
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'DELETE',
+      description: `Xóa tài khoản người dùng: ${user.fullName} (${user.username})`,
+      targetId: user.id,
+      targetName: user.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return true;
+  }
+
   updateUserStatus(id: string, status: 'active' | 'locked'): UserAccount | null {
     const user = this.data.userAccounts.find((u) => u.id === id);
     if (!user) return null;
@@ -1107,6 +1332,162 @@ class DatabaseStore {
 
     this.saveData();
     return this.data.securitySettings;
+  }
+
+  // ========================================================
+  // CRM RECRUITMENT & CANDIDATE INTAKE PIPELINE METHODS
+  // ========================================================
+
+  getCrmCandidates(): CrmCandidate[] {
+    return this.data.crmCandidates || [];
+  }
+
+  createCrmCandidate(candData: Partial<CrmCandidate>): CrmCandidate {
+    const id = `cand-${Date.now().toString().slice(-6)}`;
+    const newCand: CrmCandidate = {
+      id,
+      candidateCode: candData.candidateCode || `CRM-2026-${Math.floor(100 + Math.random() * 900)}`,
+      fullName: candData.fullName || 'Ứng viên mới',
+      email: candData.email || '',
+      phone: candData.phone || '',
+      positionId: candData.positionId || 'pos-03',
+      positionTitle: candData.positionTitle || 'Chuyên viên',
+      departmentId: candData.departmentId || 'dept-02',
+      departmentName: candData.departmentName || 'Khối Công Nghệ',
+      expectedSalary: candData.expectedSalary || 15000000,
+      offerSalary: candData.offerSalary || 16000000,
+      onboardingDate: candData.onboardingDate || '2026-10-01',
+      status: candData.status || 'offer_accepted',
+      source: candData.source || 'CRM Talent Pool',
+      notes: candData.notes || '',
+      createdAt: '2026-09-21'
+    };
+
+    if (!this.data.crmCandidates) this.data.crmCandidates = [];
+    this.data.crmCandidates.unshift(newCand);
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'employees',
+      action: 'CREATE',
+      description: `Tiếp nhận hồ sơ ứng viên từ CRM Tuyển dụng: ${newCand.fullName} (${newCand.candidateCode})`,
+      targetId: newCand.id,
+      targetName: newCand.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return newCand;
+  }
+
+  convertCandidateToEmployee(candidateId: string, overrides?: any) {
+    const cand = (this.data.crmCandidates || []).find((c) => c.id === candidateId);
+    if (!cand) {
+      throw new Error('Không tìm thấy ứng viên trong CRM Pipeline');
+    }
+
+    const dept = this.data.departments.find((d) => d.id === cand.departmentId) || this.data.departments[0];
+    const pos = this.data.positions.find((p) => p.id === cand.positionId) || this.data.positions[0];
+
+    const employeePayload: Omit<Employee, 'id'> = {
+      code: overrides?.code || `AMIS-${String(this.data.employees.length + 1).padStart(4, '0')}`,
+      fullName: overrides?.fullName || cand.fullName,
+      gender: overrides?.gender || 'Nam',
+      dob: overrides?.dob || '1996-05-15',
+      idCard: overrides?.idCard || '001096001234',
+      idCardDate: overrides?.idCardDate || '2022-01-01',
+      idCardPlace: overrides?.idCardPlace || 'Cục Cảnh sát QLHC về TTXH',
+      phone: overrides?.phone || cand.phone,
+      email: overrides?.email || cand.email,
+      address: overrides?.address || 'Hà Nội, Việt Nam',
+      hometown: overrides?.hometown || 'Hà Nội',
+      education: overrides?.education || 'Đại học',
+      departmentId: dept.id,
+      departmentName: dept.name,
+      positionId: pos.id,
+      positionTitle: pos.title,
+      joinDate: cand.onboardingDate || '2026-10-01',
+      contractType: overrides?.contractType || 'Hợp đồng thử việc 02 tháng',
+      contractStartDate: cand.onboardingDate || '2026-10-01',
+      contractEndDate: overrides?.contractEndDate || '2026-12-01',
+      status: 'probation',
+      bankAccount: overrides?.bankAccount || { bankName: 'Vietcombank', accountNumber: '1012345678', branch: 'Sở Giao Dịch' },
+      salary: {
+        baseSalary: cand.offerSalary || 18000000,
+        allowanceResponsibility: 1000000,
+        allowanceLunch: 730000,
+        allowanceGas: 500000,
+        dependents: 0,
+        taxCode: '',
+        insuranceBookNumber: ''
+      }
+    };
+
+    const newEmp = this.createEmployee(employeePayload, {
+      createUserAccount: true,
+      roleId: 'role-employee',
+      username: cand.email.split('@')[0],
+      password: 'Amis@123456',
+      autoRoster: true
+    });
+
+    cand.status = 'converted_to_employee';
+    this.saveData();
+
+    return newEmp;
+  }
+
+  // ========================================================
+  // AUTHENTICATION & LOGIN ENGINE
+  // ========================================================
+
+  authenticateUser(usernameOrEmail: string, password?: string) {
+    const q = usernameOrEmail.trim().toLowerCase();
+    const user = this.data.userAccounts.find(
+      (u) => u.username.toLowerCase() === q || u.email.toLowerCase() === q
+    );
+
+    if (!user) return null;
+
+    if (user.status === 'locked') {
+      throw new Error('Tài khoản này đã bị tạm khóa do chính sách bảo mật. Vui lòng liên hệ Quản trị viên để mở khóa.');
+    }
+
+    const expectedPassword = user.password || 'Amis@123456';
+    if (password && password !== expectedPassword) {
+      throw new Error('Mật khẩu không chính xác');
+    }
+
+    const now = new Date();
+    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+    user.lastLogin = `2026-09-21 ${timeStr}`;
+    user.lastIp = '118.70.124.9';
+
+    const role = this.data.roles.find((r) => r.id === user.roleId) || this.data.roles[0];
+
+    this.addAuditLog({
+      userId: user.id,
+      userCode: user.employeeCode,
+      userName: user.fullName,
+      roleName: user.roleName,
+      module: 'admin_rbac',
+      action: 'LOGIN',
+      description: `Đăng nhập thành công vào hệ thống AMIS HRM`,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+
+    return {
+      user,
+      role,
+      permissions: role.permissions
+    };
   }
 
   // Dashboard Stats

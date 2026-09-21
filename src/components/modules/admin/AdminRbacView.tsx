@@ -39,6 +39,8 @@ import { useToast } from '../../../context/ToastContext';
 import { api } from '../../../services/api';
 import { RoleFormModal } from './RoleFormModal';
 import { UserRoleModal } from './UserRoleModal';
+import { UserCreateModal } from './UserCreateModal';
+import { Employee } from '../../../types';
 
 const moduleLabels: { [key: string]: string } = {
   dashboard: 'Tổng quan HR (Dashboard)',
@@ -69,6 +71,7 @@ export const AdminRbacView: React.FC = () => {
   // Core Data
   const [roles, setRoles] = useState<SystemRole[]>([]);
   const [users, setUsers] = useState<UserAccount[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [securitySettings, setSecuritySettings] = useState<SecuritySetting | null>(null);
 
@@ -81,6 +84,7 @@ export const AdminRbacView: React.FC = () => {
 
   // Modals
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+  const [isUserCreateModalOpen, setIsUserCreateModalOpen] = useState(false);
   const [editingRole, setEditingRole] = useState<SystemRole | null>(null);
   const [selectedUserForRole, setSelectedUserForRole] = useState<UserAccount | null>(null);
   const [tempPasswordModal, setTempPasswordModal] = useState<{
@@ -91,16 +95,18 @@ export const AdminRbacView: React.FC = () => {
   // Load all RBAC data
   const loadRbacData = async () => {
     try {
-      const [rRes, uRes, aRes, sRes] = await Promise.all([
+      const [rRes, uRes, aRes, sRes, eRes] = await Promise.all([
         api.getRoles(),
         api.getUserAccounts(),
         api.getAuditLogs(),
-        api.getSecuritySettings()
+        api.getSecuritySettings(),
+        api.getEmployees()
       ]);
       setRoles(rRes);
       setUsers(uRes);
       setAuditLogs(aRes);
       setSecuritySettings(sRes);
+      setEmployees(eRes);
       if (!selectedRole && rRes.length > 0) {
         setSelectedRole(rRes[0]);
       }
@@ -151,6 +157,17 @@ export const AdminRbacView: React.FC = () => {
   };
 
   // User Handlers
+  const handleCreateUser = async (payload: any) => {
+    try {
+      await api.createUserAccount(payload);
+      showToast(`Đã tạo tài khoản cho ${payload.fullName} thành công`, 'success');
+      setIsUserCreateModalOpen(false);
+      loadRbacData();
+    } catch (err: any) {
+      showToast(err.message || 'Lỗi tạo tài khoản người dùng', 'error');
+    }
+  };
+
   const handleToggleUserStatus = async (user: UserAccount) => {
     const newStatus = user.status === 'active' ? 'locked' : 'active';
     try {
@@ -570,8 +587,18 @@ export const AdminRbacView: React.FC = () => {
               </select>
             </div>
 
-            <div className="text-xs text-slate-500">
-              Tổng số tài khoản: <strong className="text-slate-800">{filteredUsers.length}</strong>
+            <div className="flex items-center gap-3">
+              <div className="text-xs text-slate-500 hidden sm:block">
+                Tổng số tài khoản: <strong className="text-slate-800">{filteredUsers.length}</strong>
+              </div>
+
+              <button
+                onClick={() => setIsUserCreateModalOpen(true)}
+                className="px-3 py-1.5 bg-[#0072BC] hover:bg-[#005A96] text-white text-xs font-semibold rounded-lg shadow-sm transition flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Tạo tài khoản mới</span>
+              </button>
             </div>
           </div>
 
@@ -983,6 +1010,17 @@ export const AdminRbacView: React.FC = () => {
           user={selectedUserForRole}
           roles={roles}
           onAssign={handleAssignRole}
+        />
+      )}
+
+      {isUserCreateModalOpen && (
+        <UserCreateModal
+          isOpen={isUserCreateModalOpen}
+          onClose={() => setIsUserCreateModalOpen(false)}
+          onSave={handleCreateUser}
+          roles={roles}
+          employees={employees}
+          existingUsers={users}
         />
       )}
 

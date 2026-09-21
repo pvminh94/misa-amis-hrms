@@ -2018,5 +2018,62 @@ export const initialSecuritySettings: SecuritySetting = {
   allowedIpWhitelist: ['118.70.0.0/16', '127.0.0.1', '192.168.1.0/24']
 };
 
+export const initialCrmCandidates: CrmCandidate[] = [
+  {
+    id: 'cand-01',
+    candidateCode: 'CRM-2026-089',
+    fullName: 'Đặng Hoàng Long',
+    email: 'long.dang@gmail.com',
+    phone: '0918 334 556',
+    positionId: 'pos-03',
+    positionTitle: 'Kỹ sư Backend Senior',
+    departmentId: 'dept-02',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    expectedSalary: 35000000,
+    offerSalary: 36000000,
+    onboardingDate: '2026-10-01',
+    status: 'offer_accepted',
+    source: 'TopCV Premium Talent',
+    notes: 'Ứng viên có 5 năm kinh nghiệm Node.js, Microservices, đã vượt qua 3 vòng phỏng vấn kỹ thuật đạt 9.5/10',
+    createdAt: '2026-09-15'
+  },
+  {
+    id: 'cand-02',
+    candidateCode: 'CRM-2026-092',
+    fullName: 'Nguyễn Thu Trang',
+    email: 'trang.nguyen.hr@gmail.com',
+    phone: '0977 221 445',
+    positionId: 'pos-09',
+    positionTitle: 'Chuyên viên Tuyển dụng & Onboarding',
+    departmentId: 'dept-04',
+    departmentName: 'Phòng Hành Chính Nhân Sự',
+    expectedSalary: 18000000,
+    offerSalary: 18500000,
+    onboardingDate: '2026-09-25',
+    status: 'offer_accepted',
+    source: 'LinkedIn Talent Solutions',
+    notes: 'Đã nhận Offer Letter, hoàn thành nộp bằng cấp Đại học Ngoại thương và CCCD',
+    createdAt: '2026-09-18'
+  },
+  {
+    id: 'cand-03',
+    candidateCode: 'CRM-2026-095',
+    fullName: 'Bùi Văn Hưng',
+    email: 'hung.buivan.bi@gmail.com',
+    phone: '0904 889 112',
+    positionId: 'pos-14',
+    positionTitle: 'Chuyên viên Phân tích Dữ liệu BI',
+    departmentId: 'dept-03',
+    departmentName: 'Phòng Kế Toán & Tài Chính',
+    expectedSalary: 23000000,
+    offerSalary: 24000000,
+    onboardingDate: '2026-10-05',
+    status: 'offer_accepted',
+    source: 'Nội bộ công ty giới thiệu',
+    notes: 'Ứng viên chuyển tiếp từ dự án đối tác tài chính AMIS FinTech',
+    createdAt: '2026-09-20'
+  }
+];
+
 
 

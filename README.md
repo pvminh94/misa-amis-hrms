@@ -234,13 +234,13 @@ misa-amis-hrms/
   * *Chi nhánh / Điểm làm việc (Branch Scope)*: Giới hạn theo cơ sở/nhà máy.
   * *Dữ liệu cá nhân (Self-Service)*: Chỉ cho phép xem/thao tác dữ liệu của chính tài khoản.
 * **Quản lý Danh bạ Tài khoản (User Directory & Account Controls):**
+  * Khởi tạo tài khoản người dùng mới trực tiếp trong trang quản trị (`POST /api/admin/users`).
   * Danh bạ người dùng đồng bộ hồ sơ nhân sự, trạng thái kích hoạt, huy hiệu vai trò và trạng thái 2FA.
   * Khóa / Mở khóa tài khoản khẩn cấp chỉ bằng 1 cú nhấp chuột.
   * Cơ chế cấp lại mật khẩu tạm thời an toàn (Temporary Password Generator) bắt buộc đổi mật khẩu khi truy cập.
   * Gán và thay đổi vai trò phân quyền người dùng trực tiếp trên giao diện.
 * **Nhật ký Truy vết Bảo mật (Security Audit Trail):**
   * Ghi nhận bất biến (Append-only) mọi sự kiện nhạy cảm: sửa phân quyền, gán vai trò, khóa tài khoản, đăng nhập, duyệt đơn, xuất file.
-  * Lưu trữ đầy đủ: Thời gian UTC/GMT+7, Người thực hiện, Mã vai trò, Hành động (CREATE, UPDATE, DELETE, APPROVE, EXPORT, PERM_CHANGE), Địa chỉ IP Client và Kết quả.
   * Hỗ trợ tìm kiếm, lọc theo phân hệ và xuất file báo cáo **CSV** phục vụ kiểm toán nội bộ.
 * **Chính sách An toàn Thông tin & Quản trị Phiên (Security & Session Policy):**
   * Thiết lập độ dài tối thiểu của mật khẩu, yêu cầu bắt buộc chữ hoa, số và ký tự đặc biệt.
@@ -249,13 +249,47 @@ misa-amis-hrms/
   * Bắt buộc xác thực đa yếu tố 2FA (Two-Factor Authentication).
   * Danh sách trắng địa chỉ IP (IP Whitelisting) dành riêng cho các tác vụ Quản trị viên từ mạng nội bộ doanh nghiệp.
 
+### 8. AMIS Xác Thực Đăng Nhập & Tiếp Nhận Tuyển Dụng Từ CRM A-Z (Authentication & CRM Onboarding Pipeline)
+* **Cổng Đăng Nhập Doanh Nghiệp (Enterprise Login Portal):**
+  * Giao diện đăng nhập chuẩn mực AMIS HRM, hỗ trợ đăng nhập bằng Tên đăng nhập hoặc Email.
+  * Bật/Tắt xem mật khẩu, tùy chọn "Ghi nhớ phiên đăng nhập", liên hệ hỗ trợ khôi phục mật khẩu.
+  * **Trải nghiệm nhanh 1-Click (Demo Logins):** Cho phép kiểm thử tức thì 4 vai trò đại diện:
+    1. 👑 *Tổng Giám Đốc (Super Admin)*: Toàn quyền cấu hình, phê duyệt và quản trị RBAC.
+    2. 👔 *Trưởng Khối Tech (Manager)*: Quản lý hồ sơ phòng ban, duyệt công, duyệt phép.
+    3. 👩‍💼 *Chuyên viên C&B (HR & Payroll)*: Quản lý tiền lương, BHXH và hồ sơ nhân sự.
+    4. 👨‍💻 *Nhân viên Tiêu Chuẩn (Employee)*: Tự phục vụ cá nhân (ESS), chấm công, nộp đơn từ.
+  * Nút Đăng xuất (Logout) an toàn trên thanh điều hướng góc phải, xóa sạch phiên và quay về trang đăng nhập.
+* **Tiếp Nhận Ứng Viên Từ Tuyển Dụng / CRM (CRM Talent Pool Pipeline):**
+  * Danh mục ứng viên đã trúng tuyển từ các kênh tuyển dụng (TopCV, LinkedIn, Giới thiệu nội bộ).
+  * Nút **"Tiếp nhận & Onboarding ngay" (1-Click Convert)**: Tự động chuyển đổi hồ sơ ứng viên thành Nhân viên chính thức trong công ty.
+* **Quy Trình Onboarding A-Z Tự Động Kích Hoạt 100%:**
+  1. *Hồ sơ nhân sự:* Tạo bản ghi với mã số `AMIS-xxxx` và lưu trữ đầy đủ thông tin định danh cá nhân.
+  2. *Hợp đồng lao động:* Tự động sinh bản ghi HĐLĐ đầu tiên (HĐ thử việc 2 tháng hoặc chính thức 12 tháng) có mã số chuẩn hóa `HĐLĐ-2026/AMIS-xxxx`.
+  3. *Lịch phân ca (Rostering):* Tự động xếp lịch phân ca hành chính chuẩn 22 ngày công trong tháng.
+  4. *Bảng lương:* Tự động tính toán và thêm dòng lương vào Bảng lương tháng hiện tại.
+  5. *Tài khoản hệ thống (User Account Provisioning):* Tự động khởi tạo tài khoản đăng nhập với tên người dùng, mật khẩu mặc định `Amis@123456` và gán vai trò tương ứng.
+  6. *Nhật ký truy vết:* Tự động ghi bản ghi Audit Trail ghi nhận hành vi tiếp nhận nhân sự.
+* **Quản Trị Thôi Việc (Offboarding Governance):**
+  * Quy trình 3 bước chuẩn hóa: Khóa tài khoản thu hồi quyền truy cập bảo mật -> Bàn giao thiết bị & công việc -> Quyết toán tiền lương, phép năm và chốt sổ BHXH.
+
 ---
 
 ## 🧪 8. Hệ Thống Kiểm Thử Tự Động & CI/CD (Quality Gate)
 
-Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **46 bài test tự động** đạt tỷ lệ thành công 100%:
+Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **55 bài test tự động** đạt tỷ lệ thành công 100%:
 
-1. **Kiểm thử Quản trị Phân quyền & RBAC (`tests/rbac.test.ts` - 16 tests):**
+1. **Kiểm thử Xác thực Đăng nhập & Tiếp nhận Onboarding A-Z (`tests/onboarding_auth.test.ts` - 9 tests):**
+   * Đăng nhập thành công với tài khoản Quản trị viên (Super Admin).
+   * Từ chối đăng nhập khi sai mật khẩu và bắt lỗi chính sách khóa tài khoản.
+   * Lấy danh sách tài khoản Demo kiểm thử 1-click.
+   * Đăng xuất và ghi nhận nhật ký Audit Trail.
+   * Quản trị viên tạo tài khoản người dùng mới thành công qua `POST /api/admin/users`.
+   * Bắt lỗi trùng lặp tên đăng nhập trong hệ thống.
+   * Lấy danh sách ứng viên đã trúng tuyển từ CRM qua `GET /api/employees/candidates`.
+   * Tiếp nhận ứng viên CRM thành nhân viên chính thức 1-click (`POST /api/employees/candidates/:id/convert`).
+   * Kiểm thử luồng Onboarding A-Z: Tự động sinh HĐLĐ, phân ca 30 ngày, bảng lương và tài khoản đăng nhập.
+
+2. **Kiểm thử Quản trị Phân quyền & RBAC (`tests/rbac.test.ts` - 16 tests):**
    * Đọc danh mục vai trò hệ thống và vai trò tùy biến.
    * Tạo vai trò mới với ma trận phân quyền chi tiết 6 quyền trên 8 phân hệ.
    * Cập nhật động quyền hạn vai trò và lưu trữ thời gian thực.

@@ -34,6 +34,40 @@ router.get('/', (req, res) => {
   }
 });
 
+// GET CRM candidates
+router.get('/candidates', (req, res) => {
+  try {
+    const candidates = db.getCrmCandidates();
+    res.json({ success: true, data: candidates });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi lấy danh sách ứng viên từ CRM' });
+  }
+});
+
+// CREATE CRM candidate
+router.post('/candidates', (req, res) => {
+  try {
+    const newCand = db.createCrmCandidate(req.body);
+    res.status(201).json({ success: true, data: newCand, message: 'Tiếp nhận ứng viên thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi thêm mới ứng viên' });
+  }
+});
+
+// CONVERT candidate to employee
+router.post('/candidates/:id/convert', (req, res) => {
+  try {
+    const result = db.convertCandidateToEmployee(req.params.id, req.body);
+    res.status(201).json({
+      success: true,
+      data: result,
+      message: 'Chuyển đổi ứng viên thành nhân viên chính thức và tạo tài khoản thành công'
+    });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message || 'Lỗi chuyển đổi ứng viên' });
+  }
+});
+
 // GET single employee
 router.get('/:id', (req, res) => {
   try {
@@ -61,39 +95,48 @@ router.post('/', (req, res) => {
     const dept = depts.find((d) => d.id === data.departmentId);
     const pos = positions.find((p) => p.id === data.positionId);
 
-    const newEmp = db.createEmployee({
-      code: data.code || `AMIS-${Math.floor(1000 + Math.random() * 9000)}`,
-      fullName: data.fullName,
-      gender: data.gender || 'Nam',
-      dob: data.dob || '1995-01-01',
-      idCard: data.idCard || '001095000000',
-      idCardDate: data.idCardDate || '2022-01-01',
-      idCardPlace: data.idCardPlace || 'Cục Cảnh sát QLHC về TTXH',
-      phone: data.phone || '',
-      email: data.email || '',
-      address: data.address || '',
-      hometown: data.hometown || '',
-      education: data.education || 'Đại học',
-      departmentId: data.departmentId,
-      departmentName: dept ? dept.name : 'Khác',
-      positionId: data.positionId,
-      positionTitle: pos ? pos.title : 'Chuyên viên',
-      joinDate: data.joinDate || '2026-09-01',
-      contractType: data.contractType || 'Hợp đồng xác định thời hạn 12 tháng',
-      contractStartDate: data.contractStartDate || data.joinDate || '2026-09-01',
-      contractEndDate: data.contractEndDate,
-      status: data.status || 'active',
-      bankAccount: data.bankAccount || { bankName: 'Vietcombank', accountNumber: '', branch: '' },
-      salary: data.salary || {
-        baseSalary: 15000000,
-        allowanceResponsibility: 1000000,
-        allowanceLunch: 1500000,
-        allowanceGas: 500000,
-        dependents: 0,
-        taxCode: '',
-        insuranceBookNumber: ''
+    const newEmp = db.createEmployee(
+      {
+        code: data.code || `AMIS-${Math.floor(1000 + Math.random() * 9000)}`,
+        fullName: data.fullName,
+        gender: data.gender || 'Nam',
+        dob: data.dob || '1995-01-01',
+        idCard: data.idCard || '001095000000',
+        idCardDate: data.idCardDate || '2022-01-01',
+        idCardPlace: data.idCardPlace || 'Cục Cảnh sát QLHC về TTXH',
+        phone: data.phone || '',
+        email: data.email || '',
+        address: data.address || '',
+        hometown: data.hometown || '',
+        education: data.education || 'Đại học',
+        departmentId: data.departmentId,
+        departmentName: dept ? dept.name : 'Khác',
+        positionId: data.positionId,
+        positionTitle: pos ? pos.title : 'Chuyên viên',
+        joinDate: data.joinDate || '2026-09-01',
+        contractType: data.contractType || 'Hợp đồng xác định thời hạn 12 tháng',
+        contractStartDate: data.contractStartDate || data.joinDate || '2026-09-01',
+        contractEndDate: data.contractEndDate,
+        status: data.status || 'active',
+        bankAccount: data.bankAccount || { bankName: 'Vietcombank', accountNumber: '', branch: '' },
+        salary: data.salary || {
+          baseSalary: 15000000,
+          allowanceResponsibility: 1000000,
+          allowanceLunch: 1500000,
+          allowanceGas: 500000,
+          dependents: 0,
+          taxCode: '',
+          insuranceBookNumber: ''
+        }
+      },
+      {
+        createUserAccount: data.createUserAccount !== false,
+        roleId: data.roleId || 'role-employee',
+        username: data.username,
+        password: data.password || 'Amis@123456',
+        autoRoster: true
       }
-    });
+    );
 
     res.status(201).json({ success: true, data: newEmp, message: 'Thêm nhân viên thành công' });
   } catch (error) {

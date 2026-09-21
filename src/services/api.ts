@@ -460,5 +460,55 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+  },
+
+  async createUserAccount(payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
+  // Authentication & Session
+  async login(username: string, password?: string): Promise<any> {
+    return fetchJson(`${API_BASE}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+  },
+
+  async getDemoAccounts(): Promise<any[]> {
+    return fetchJson(`${API_BASE}/auth/demo-accounts`);
+  },
+
+  async logout(userId?: string): Promise<any> {
+    return fetchJson(`${API_BASE}/auth/logout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId })
+    });
+  },
+
+  // CRM Recruitment Pipeline
+  async getCrmCandidates(): Promise<any[]> {
+    return fetchJson(`${API_BASE}/employees/candidates`);
+  },
+
+  async createCrmCandidate(payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/employees/candidates`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
+  async convertCandidateToEmployee(candidateId: string, overrides?: any): Promise<any> {
+    return fetchJson(`${API_BASE}/employees/candidates/${candidateId}/convert`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(overrides || {})
+    });
   }
 };

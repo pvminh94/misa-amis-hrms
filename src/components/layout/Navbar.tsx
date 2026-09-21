@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   birthdaysCount = 2,
   onNavigateTab
 }) => {
-  const { currentUser, role, switchUser } = useAuth();
+  const { currentUser, role, switchUser, logout } = useAuth();
   const { showToast } = useToast();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
@@ -278,8 +278,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </div>
 
-        {/* User Profile Mini */}
-        <div className="flex items-center gap-2.5 pl-2 border-l border-slate-200">
+        {/* User Profile Mini & Logout */}
+        <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-600 to-blue-700 text-white font-bold text-xs flex items-center justify-center ring-2 ring-blue-100">
             {currentUser.name.split(' ').slice(-1)[0][0]}
           </div>
@@ -287,6 +287,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="text-xs font-semibold text-slate-800 leading-none">{currentUser.name}</div>
             <div className="text-[10px] text-slate-500 mt-0.5 leading-none">{currentUser.title}</div>
           </div>
+
+          <button
+            onClick={async () => {
+              await logout();
+              showToast('Đã đăng xuất an toàn khỏi hệ thống AMIS HRM', 'info');
+            }}
+            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition cursor-pointer ml-1"
+            title="Đăng xuất"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </header>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Save, User, Briefcase, DollarSign, Building } from 'lucide-react';
+import { X, Save, User, Briefcase, DollarSign, Building, CreditCard, KeyRound, ShieldCheck, Sparkles } from 'lucide-react';
 import { Employee, Department, Position } from '../../../types';
 
 interface EmployeeFormModalProps {
@@ -51,6 +51,11 @@ export const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
       insuranceBookNumber: ''
     }
   });
+
+  const [createUserAccount, setCreateUserAccount] = useState(true);
+  const [userRole, setUserRole] = useState('role-employee');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('Amis@123456');
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -110,7 +115,17 @@ export const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
 
     try {
       setSaving(true);
-      await onSave(formData);
+      await onSave({
+        ...formData,
+        ...(initialData
+          ? {}
+          : {
+              createUserAccount,
+              roleId: userRole,
+              username: username || (formData.email ? formData.email.split('@')[0] : undefined),
+              password: password || 'Amis@123456'
+            })
+      } as any);
       onClose();
     } catch (err: any) {
       setError(err.message || 'Lỗi lưu thông tin');
@@ -418,6 +433,142 @@ export const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Section 4: Tài khoản ngân hàng nhận lương */}
+          <div className="space-y-3">
+            <div className="font-bold text-slate-800 text-xs uppercase tracking-wider text-[#0072BC] flex items-center gap-2 border-b pb-1">
+              <CreditCard className="w-4 h-4" />
+              <span>4. Tài khoản ngân hàng chi trả lương</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-slate-700 font-semibold mb-1">Ngân hàng</label>
+                <select
+                  value={formData.bankAccount?.bankName || 'Vietcombank'}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      bankAccount: { ...formData.bankAccount!, bankName: e.target.value }
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                >
+                  <option value="Vietcombank">Vietcombank</option>
+                  <option value="Techcombank">Techcombank</option>
+                  <option value="MBBank">MBBank (Quân Đội)</option>
+                  <option value="BIDV">BIDV</option>
+                  <option value="VietinBank">VietinBank</option>
+                  <option value="ACB">ACB</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-semibold mb-1">Số tài khoản</label>
+                <input
+                  type="text"
+                  value={formData.bankAccount?.accountNumber || ''}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      bankAccount: { ...formData.bankAccount!, accountNumber: e.target.value }
+                    })
+                  }
+                  placeholder="001100xxxxxxx"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg font-mono"
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-semibold mb-1">Chi nhánh mở thẻ</label>
+                <input
+                  type="text"
+                  value={formData.bankAccount?.branch || ''}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      bankAccount: { ...formData.bankAccount!, branch: e.target.value }
+                    })
+                  }
+                  placeholder="Sở Giao Dịch Hà Nội"
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Section 5: Khởi tạo tài khoản đăng nhập & Thiết lập hệ thống */}
+          {!initialData && (
+            <div className="space-y-3 p-4 bg-blue-50/50 rounded-xl border border-blue-200">
+              <div className="font-bold text-slate-800 text-xs uppercase tracking-wider text-[#0072BC] flex items-center justify-between border-b border-blue-200 pb-2">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#0072BC]" />
+                  <span>5. Khởi tạo tài khoản & Cấp quyền hệ thống (Tự động Onboarding)</span>
+                </div>
+                <span className="text-[10px] bg-blue-100 text-[#0072BC] px-2 py-0.5 rounded-full font-bold">
+                  AMIS RBAC Provisioning
+                </span>
+              </div>
+
+              <label className="flex items-center gap-2 cursor-pointer pt-1">
+                <input
+                  type="checkbox"
+                  checked={createUserAccount}
+                  onChange={(e) => setCreateUserAccount(e.target.checked)}
+                  className="w-4 h-4 text-[#0072BC] rounded border-slate-300"
+                />
+                <span className="font-bold text-slate-900 text-xs">
+                  Tự động khởi tạo tài khoản người dùng đăng nhập hệ thống AMIS HRM cho nhân sự này
+                </span>
+              </label>
+
+              {createUserAccount && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Tên đăng nhập (Username)</label>
+                    <input
+                      type="text"
+                      placeholder={formData.email ? formData.email.split('@')[0] : 'Tự động theo email'}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value.toLowerCase().trim())}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-mono font-bold text-slate-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Mật khẩu khởi tạo</label>
+                    <input
+                      type="text"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-mono font-bold text-[#0072BC]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-700 font-semibold mb-1">Vai trò phân quyền (Role)</label>
+                    <select
+                      value={userRole}
+                      onChange={(e) => setUserRole(e.target.value)}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-slate-800 font-semibold"
+                    >
+                      <option value="role-employee">Nhân viên Tiêu chuẩn (Self-Service)</option>
+                      <option value="role-dept-head">Trưởng bộ phận (Manager Scope)</option>
+                      <option value="role-cb-specialist">Chuyên viên C&B (HR & Payroll)</option>
+                      <option value="role-super-admin">Quản trị viên Toàn quyền (Super Admin)</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              <div className="text-[11px] text-slate-500 flex items-center gap-2 pt-1">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                <span>
+                  Hệ thống sẽ tự động tạo Hợp đồng lao động đầu tiên, phân ca chuẩn 22 ngày công trong tháng và tạo dòng trên Bảng lương hiện tại.
+                </span>
+              </div>
+            </div>
+          )}
         </form>
 
         {/* Footer */}

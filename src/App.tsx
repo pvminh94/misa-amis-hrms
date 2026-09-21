@@ -13,8 +13,9 @@ import { PayslipModal } from './components/modules/payroll/PayslipModal';
 import { OrganizationView } from './components/modules/organization/OrganizationView';
 import { SettingsView } from './components/modules/settings/SettingsView';
 import { AdminRbacView } from './components/modules/admin/AdminRbacView';
+import { LoginView } from './components/modules/auth/LoginView';
 import { ToastProvider, useToast } from './context/ToastContext';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { api } from './services/api';
 import {
   Employee,
@@ -28,6 +29,7 @@ import {
 } from './types';
 
 function MainApp() {
+  const { isAuthenticated } = useAuth();
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -196,6 +198,10 @@ function MainApp() {
   };
 
   const pendingLeavesCount = leaves.filter((l) => l.status === 'pending').length;
+
+  if (!isAuthenticated) {
+    return <LoginView />;
+  }
 
   return (
     <div className="flex h-screen bg-[#F4F6F9] overflow-hidden text-slate-900 font-sans">
