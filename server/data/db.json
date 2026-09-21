@@ -5279,7 +5279,7 @@
       "allowedWifiBSSID": [
         "AMIS_CORP_5G",
         "AMIS_GUEST",
-        "MISA_TECH_WIFI"
+        "AMIS_TECH_WIFI"
       ],
       "isActive": true
     },

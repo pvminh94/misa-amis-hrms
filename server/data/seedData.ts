@@ -1239,7 +1239,7 @@ export const initialGeofenceLocations: GeofenceLocation[] = [
     latitude: 21.0315,
     longitude: 105.7832,
     radiusMeters: 100,
-    allowedWifiBSSID: ['AMIS_CORP_5G', 'AMIS_GUEST', 'MISA_TECH_WIFI'],
+    allowedWifiBSSID: ['AMIS_CORP_5G', 'AMIS_GUEST', 'AMIS_TECH_WIFI'],
     isActive: true
   },
   {

@@ -2,12 +2,12 @@
 
 @layer base {
   :root {
-    --misa-primary: #0072BC;
-    --misa-primary-dark: #005A96;
-    --misa-primary-light: #EBF5FB;
-    --misa-accent: #10B981;
-    --misa-warning: #F59E0B;
-    --misa-danger: #EF4444;
+    --amis-primary: #0072BC;
+    --amis-primary-dark: #005A96;
+    --amis-primary-light: #EBF5FB;
+    --amis-accent: #10B981;
+    --amis-warning: #F59E0B;
+    --amis-danger: #EF4444;
   }
 
   body {
