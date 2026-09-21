@@ -381,5 +381,84 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+  },
+
+  // Enterprise Admin RBAC & Security Management API
+  async getRoles(): Promise<any[]> {
+    return fetchJson(`${API_BASE}/admin/roles`);
+  },
+
+  async createRole(payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/roles`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
+  async updateRole(id: string, payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/roles/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
+  async deleteRole(id: string): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/roles/${id}`, {
+      method: 'DELETE'
+    });
+  },
+
+  async getUserAccounts(params?: { search?: string; roleId?: string; status?: string }): Promise<any[]> {
+    const query = new URLSearchParams();
+    if (params?.search) query.append('search', params.search);
+    if (params?.roleId) query.append('roleId', params.roleId);
+    if (params?.status) query.append('status', params.status);
+
+    return fetchJson(`${API_BASE}/admin/users?${query.toString()}`);
+  },
+
+  async updateUserStatus(id: string, status: 'active' | 'locked'): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/users/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+  },
+
+  async assignUserRole(userId: string, roleId: string): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/users/${userId}/role`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ roleId })
+    });
+  },
+
+  async resetUserPassword(userId: string): Promise<{ tempPassword: string; message: string }> {
+    return fetchJson(`${API_BASE}/admin/users/${userId}/reset-password`, {
+      method: 'POST'
+    });
+  },
+
+  async getAuditLogs(params?: { module?: string; action?: string; search?: string }): Promise<any[]> {
+    const query = new URLSearchParams();
+    if (params?.module) query.append('module', params.module);
+    if (params?.action) query.append('action', params.action);
+    if (params?.search) query.append('search', params.search);
+
+    return fetchJson(`${API_BASE}/admin/audit-logs?${query.toString()}`);
+  },
+
+  async getSecuritySettings(): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/security`);
+  },
+
+  async updateSecuritySettings(payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/admin/security`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
   }
 };

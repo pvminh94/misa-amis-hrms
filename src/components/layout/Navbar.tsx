@@ -11,7 +11,8 @@ import {
   Calendar,
   AlertTriangle,
   Cake,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Shield
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -260,6 +261,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>Nhân viên cá nhân (Staff)</span>
                 {role === 'employee' && <span className="w-1.5 h-1.5 rounded-full bg-[#0072BC]"></span>}
               </button>
+
+              <div className="border-t border-slate-100 mt-1 pt-1">
+                <button
+                  onClick={() => {
+                    setShowRoleMenu(false);
+                    onNavigateTab?.('admin_rbac');
+                  }}
+                  className="w-full px-3 py-2 text-left text-xs text-[#0072BC] font-semibold hover:bg-blue-50/50 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  <span>Mở Ma Trận RBAC</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

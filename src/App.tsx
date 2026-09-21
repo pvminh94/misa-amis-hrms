@@ -12,6 +12,7 @@ import { PayrollView } from './components/modules/payroll/PayrollView';
 import { PayslipModal } from './components/modules/payroll/PayslipModal';
 import { OrganizationView } from './components/modules/organization/OrganizationView';
 import { SettingsView } from './components/modules/settings/SettingsView';
+import { AdminRbacView } from './components/modules/admin/AdminRbacView';
 import { ToastProvider, useToast } from './context/ToastContext';
 import { AuthProvider } from './context/AuthContext';
 import { api } from './services/api';
@@ -308,6 +309,10 @@ function MainApp() {
               onAddDepartment={handleAddDepartment}
               onRefresh={() => loadData(false)}
             />
+          )}
+
+          {currentTab === 'admin_rbac' && (
+            <AdminRbacView />
           )}
 
           {currentTab === 'settings' && (

@@ -19,9 +19,9 @@
 4. [Các lệnh vận hành (NPM Scripts)](#-4-các-lệnh-vận-hành-npm-scripts)
 5. [Cấu trúc thư mục dự án](#-5-cấu-trúc-thư-mục-dự-án)
 6. [Tổng quan các phân hệ chức năng](#-6-tổng-quan-các-phân-hệ-chức-năng)
-7. [Hệ thống kiểm thử tự động & CI/CD](#-7-hệ-thống-kiểm-thử-tự-động--cicd-quality-gate)
-8. [Hướng dẫn triển khai Production](#-8-hướng-dẫn-triển-khai-production)
-9. [Khắc phục sự cố thường gặp (FAQ)](#-9-khắc-phục-sự-cố-thường-gặp-faq)
+7. [Hệ thống kiểm thử tự động & CI/CD](#-8-hệ-thống-kiểm-thử-tự-động--cicd-quality-gate)
+8. [Hướng dẫn triển khai Production](#-9-hướng-dẫn-triển-khai-production)
+9. [Khắc phục sự cố thường gặp (FAQ)](#-10-khắc-phục-sự-cố-thường-gặp-faq)
 
 ---
 
@@ -222,18 +222,53 @@ misa-amis-hrms/
 * Nghiệp vụ: Khóa & Chốt bảng lương, Xác nhận chi trả, Xuất bảng lương ra Excel.
 * **Phiếu lương điện tử (Payslip):** Minh bạch từng khoản mục thu nhập, giảm trừ, thực lĩnh nhận về và hỗ trợ nút **In phiếu lương**.
 
-### 6. Cơ cấu tổ chức & Thiết lập hệ thống (Organization & Settings)
+### 6. Cơ cấu tổ chức (Organization)
 * Sơ đồ phân cấp các Khối / Phòng ban.
 * Khung chức danh và tiêu chuẩn cấp bậc chuyên môn.
-* Cấu hình tham số doanh nghiệp, thời gian ca làm việc hành chính, tỷ lệ bảo hiểm và mức giảm trừ thuế.
+
+### 7. AMIS Quản trị Phân quyền RBAC & An Toàn Thông Tin Doanh Nghiệp (Enterprise RBAC & Security Hub)
+* **Ma trận phân quyền chi tiết (Granular Permission Matrix):** Phân định 6 quyền tác vụ độc lập (*Xem, Thêm, Sửa, Xóa, Phê duyệt, Xuất file*) trên 8 phân hệ cốt lõi (`dashboard`, `employees`, `attendance`, `leaves`, `payroll`, `organization`, `admin_rbac`, `settings`).
+* **Phạm vi dữ liệu động (Data Scoping Engine):**
+  * *Toàn bộ công ty (All Company)*: Dành cho Ban Giám Đốc, Quản trị hệ thống cấp cao.
+  * *Phòng ban trực thuộc (Department Scope)*: Giới hạn theo khối/bộ phận của cấp Trưởng bộ phận.
+  * *Chi nhánh / Điểm làm việc (Branch Scope)*: Giới hạn theo cơ sở/nhà máy.
+  * *Dữ liệu cá nhân (Self-Service)*: Chỉ cho phép xem/thao tác dữ liệu của chính tài khoản.
+* **Quản lý Danh bạ Tài khoản (User Directory & Account Controls):**
+  * Danh bạ người dùng đồng bộ hồ sơ nhân sự, trạng thái kích hoạt, huy hiệu vai trò và trạng thái 2FA.
+  * Khóa / Mở khóa tài khoản khẩn cấp chỉ bằng 1 cú nhấp chuột.
+  * Cơ chế cấp lại mật khẩu tạm thời an toàn (Temporary Password Generator) bắt buộc đổi mật khẩu khi truy cập.
+  * Gán và thay đổi vai trò phân quyền người dùng trực tiếp trên giao diện.
+* **Nhật ký Truy vết Bảo mật (Security Audit Trail):**
+  * Ghi nhận bất biến (Append-only) mọi sự kiện nhạy cảm: sửa phân quyền, gán vai trò, khóa tài khoản, đăng nhập, duyệt đơn, xuất file.
+  * Lưu trữ đầy đủ: Thời gian UTC/GMT+7, Người thực hiện, Mã vai trò, Hành động (CREATE, UPDATE, DELETE, APPROVE, EXPORT, PERM_CHANGE), Địa chỉ IP Client và Kết quả.
+  * Hỗ trợ tìm kiếm, lọc theo phân hệ và xuất file báo cáo **CSV** phục vụ kiểm toán nội bộ.
+* **Chính sách An toàn Thông tin & Quản trị Phiên (Security & Session Policy):**
+  * Thiết lập độ dài tối thiểu của mật khẩu, yêu cầu bắt buộc chữ hoa, số và ký tự đặc biệt.
+  * Quy định thời gian tự động khóa phiên làm việc (Session Inactivity Timeout).
+  * Giới hạn số lần đăng nhập sai tối đa trước khi tài khoản tự động bị khóa bảo vệ.
+  * Bắt buộc xác thực đa yếu tố 2FA (Two-Factor Authentication).
+  * Danh sách trắng địa chỉ IP (IP Whitelisting) dành riêng cho các tác vụ Quản trị viên từ mạng nội bộ doanh nghiệp.
 
 ---
 
-## 🧪 7. Hệ Thống Kiểm Thử Tự Động & CI/CD (Quality Gate)
+## 🧪 8. Hệ Thống Kiểm Thử Tự Động & CI/CD (Quality Gate)
 
-Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **30 bài test tự động** đạt tỷ lệ thành công 100%:
+Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **46 bài test tự động** đạt tỷ lệ thành công 100%:
 
-1. **Kiểm thử Thuế TNCN & Tiền lương (`tests/payroll.test.ts`):**
+1. **Kiểm thử Quản trị Phân quyền & RBAC (`tests/rbac.test.ts` - 16 tests):**
+   * Đọc danh mục vai trò hệ thống và vai trò tùy biến.
+   * Tạo vai trò mới với ma trận phân quyền chi tiết 6 quyền trên 8 phân hệ.
+   * Cập nhật động quyền hạn vai trò và lưu trữ thời gian thực.
+   * Cơ chế bảo vệ bất khả xâm phạm đối với các vai trò mặc định của hệ thống (`ROLE_SUPER_ADMIN`).
+   * Truy vấn danh sách tài khoản người dùng gắn liền với vai trò tương ứng.
+   * Khóa và mở khóa tài khoản người dùng 1 chạm.
+   * Phân bổ và thay đổi vai trò của người dùng.
+   * Sinh mật khẩu tạm thời bảo mật khi thực hiện reset mật khẩu.
+   * Đọc và cập nhật các chính sách bảo mật an toàn thông tin.
+   * Tự động sinh nhật ký truy vết (Audit Trail) khi xảy ra các thao tác quản trị.
+   * Kiểm thử RESTful API phân hệ Admin RBAC (`/api/admin/roles`, `/api/admin/users`, `/api/admin/audit-logs`, `/api/admin/security`).
+
+2. **Kiểm thử Thuế TNCN & Tiền lương (`tests/payroll.test.ts` - 7 tests):**
    * Đóng BHXH bắt buộc 10.5% (8% BHXH + 1.5% BHYT + 1% BHTN).
    * Mức trần đóng BHXH (tối đa 20 lần lương cơ sở = 46.800.000 VNĐ).
    * Miễn thuế phụ cấp ăn trưa hợp lệ (tối đa 730.000 VNĐ).
@@ -242,21 +277,25 @@ Hệ thống được trang bị bộ kiểm thử tự động toàn diện v�
    * Tính lương tăng ca (OT 150%).
    * Cân đối kế toán: `Lương thực lĩnh = Gross - BHXH - Thuế TNCN`.
 
-2. **Kiểm thử Nghiệp vụ Chấm công (`tests/attendance.test.ts`):**
+3. **Kiểm thử Nghiệp vụ Chấm công (`tests/attendance.test.ts` - 8 tests):**
    * Danh mục ca làm việc (Ca hành chính 8h, Ca đêm phụ cấp hệ số 1.3).
    * Phân loại Đúng giờ vs Đi muộn (> 08:30).
    * Tính giờ công làm việc thực tế trừ giờ nghỉ trưa.
    * Điểm Geofencing GPS và danh sách WiFi BSSID hợp lệ.
+   * Xếp lịch phân ca động (Shift Rostering Engine) cho nhân sự.
+   * Lịch sử bấm công sinh trắc học (Biometric Punch Logs).
+   * Thống kê chấm công phân tích nâng cao (Analytics KPI).
+   * Áp dụng chính sách ân hạn đi muộn (Grace Period Policy 15 phút).
 
-3. **Kiểm thử DataStore & Liên kết Nghiệp vụ (`tests/db.test.ts`):**
+4. **Kiểm thử DataStore & Liên kết Nghiệp vụ (`tests/db.test.ts` - 5 tests):**
    * Đọc danh sách nhân viên và kiểm tra tính toàn vẹn dữ liệu.
    * Thêm nhân viên mới và tự động sinh bản ghi lương tương ứng.
    * Thêm người phụ thuộc và tự động cập nhật giảm trừ trên bảng lương.
    * Phê duyệt đơn nghỉ phép trực tuyến.
    * Sửa ô công ma trận 30 ngày và tự động liên kết tính lại bảng lương.
 
-4. **Kiểm thử RESTful API Endpoints (`tests/api.test.ts`):**
-   * Kiểm thử tích hợp toàn bộ các endpoint Express (`/api/dashboard/stats`, `/api/employees`, `/api/attendance/shifts`, `/api/leaves`, `/api/payroll`, `/api/departments`, `/api/settings`, `/api/health`).
+5. **Kiểm thử RESTful API Endpoints (`tests/api.test.ts` - 10 tests):**
+   * Kiểm thử tích hợp toàn bộ các endpoint Express (`/api/dashboard/stats`, `/api/employees`, `/api/attendance/shifts`, `/api/attendance/locations`, `/api/attendance/rosters`, `/api/attendance/punches`, `/api/attendance/analytics`, `/api/leaves`, `/api/payroll`, `/api/departments`, `/api/settings`, `/api/health`).
 
 ### 🛡️ Git Pre-Push Hook & GitHub Actions CI
 * **Pre-Push Hook:** File script `.git/hooks/pre-push` được thiết lập sẵn. Khi bất kỳ ai gõ `git push`, hệ thống tự động chạy `npm test` và `npm run build`. Nếu có bất kỳ bài test nào thất bại hoặc lỗi TypeScript, thao tác đẩy mã nguồn sẽ lập tức bị chặn.
@@ -264,7 +303,7 @@ Hệ thống được trang bị bộ kiểm thử tự động toàn diện v�
 
 ---
 
-## 🚢 8. Hướng dẫn Triển khai Production
+## 🚢 9. Hướng dẫn Triển khai Production
 
 ### Cách 1: Chạy trực tiếp trên VPS/Server với PM2
 Nếu bạn muốn triển khai hệ thống lên máy chủ Linux/Ubuntu:
@@ -307,7 +346,7 @@ docker run -p 3000:3000 -p 5000:5000 amis-hrms
 
 ---
 
-## ❓ 9. Khắc phục Sự cố Thường gặp (FAQ)
+## ❓ 10. Khắc phục Sự cố Thường gặp (FAQ)
 
 #### Q1: Tôi gặp lỗi `Error: listen EADDRINUSE: address already in use :::3000` hoặc `:::5000`?
 * **Nguyên nhân:** Cổng 3000 hoặc 5000 đang bị một ứng dụng khác chiếm dụng trên máy bạn.

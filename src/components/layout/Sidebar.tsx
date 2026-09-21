@@ -13,7 +13,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export type NavTab = 'dashboard' | 'employees' | 'attendance' | 'leaves' | 'payroll' | 'organization' | 'settings';
+export type NavTab = 'dashboard' | 'employees' | 'attendance' | 'leaves' | 'payroll' | 'organization' | 'admin_rbac' | 'settings';
 
 interface SidebarProps {
   currentTab: NavTab;
@@ -75,10 +75,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
       subtext: 'Phòng ban & Chức vụ'
     },
     {
+      id: 'admin_rbac',
+      label: 'Quản trị & Phân quyền',
+      icon: ShieldCheck,
+      subtext: 'RBAC, Users & Audit'
+    },
+    {
       id: 'settings',
       label: 'Thiết lập hệ thống',
       icon: Settings,
-      subtext: 'Cấu hình & Phân quyền'
+      subtext: 'Cấu hình tham số'
     }
   ];
 

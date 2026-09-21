@@ -13,7 +13,12 @@ import {
   GeofenceLocation,
   ShiftRosterEntry,
   RawPunchLog,
-  AttendancePolicySetting
+  AttendancePolicySetting,
+  SystemRole,
+  UserAccount,
+  AuditLog,
+  SecuritySetting,
+  PermissionMatrix
 } from '../types';
 
 export const initialDepartments: Department[] = [
@@ -1594,5 +1599,424 @@ export const initialAttendancePolicy: AttendancePolicySetting = {
   maxContinuousDays: 6,
   minRestHoursBetweenShifts: 12
 };
+
+// ========================================================
+// SEED: ENTERPRISE RBAC & SYSTEM ADMINISTRATION
+// ========================================================
+
+const fullPermissions: PermissionMatrix = {
+  dashboard: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  employees: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  attendance: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  leaves: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  payroll: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  organization: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  admin_rbac: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+  settings: { view: true, create: true, edit: true, delete: true, approve: true, export: true }
+};
+
+export const initialRoles: SystemRole[] = [
+  {
+    id: 'role-super-admin',
+    code: 'ROLE_SUPER_ADMIN',
+    name: 'Quản trị viên Toàn quyền (Super Admin)',
+    description: 'Toàn quyền cấu hình, phê duyệt, trích xuất và quản trị dữ liệu trên toàn bộ hệ thống AMIS HRM',
+    isSystem: true,
+    userCount: 2,
+    color: '#EF4444',
+    dataScope: 'all',
+    permissions: fullPermissions,
+    createdAt: '2026-01-01',
+    updatedAt: '2026-09-21'
+  },
+  {
+    id: 'role-hr-manager',
+    code: 'ROLE_HR_MANAGER',
+    name: 'Trưởng phòng Nhân sự (HR Manager)',
+    description: 'Quản lý toàn bộ hồ sơ nhân viên, quy trình ký kết hợp đồng, phê duyệt đơn từ và cơ cấu phòng ban',
+    isSystem: true,
+    userCount: 2,
+    color: '#0072BC',
+    dataScope: 'all',
+    permissions: {
+      dashboard: { view: true, create: false, edit: false, delete: false, approve: false, export: true },
+      employees: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+      attendance: { view: true, create: true, edit: true, delete: false, approve: true, export: true },
+      leaves: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+      payroll: { view: true, create: false, edit: false, delete: false, approve: false, export: true },
+      organization: { view: true, create: true, edit: true, delete: false, approve: true, export: true },
+      admin_rbac: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      settings: { view: true, create: false, edit: true, delete: false, approve: false, export: false }
+    },
+    createdAt: '2026-01-01',
+    updatedAt: '2026-09-21'
+  },
+  {
+    id: 'role-cb-specialist',
+    code: 'ROLE_CB_SPECIALIST',
+    name: 'Chuyên viên C&B (Tiền lương & Chế độ)',
+    description: 'Chuyên trách tính lương, thuế TNCN, BHXH bắt buộc, giải trình chấm công và phiếu lương',
+    isSystem: false,
+    userCount: 2,
+    color: '#10B981',
+    dataScope: 'all',
+    permissions: {
+      dashboard: { view: true, create: false, edit: false, delete: false, approve: false, export: true },
+      employees: { view: true, create: false, edit: true, delete: false, approve: false, export: true },
+      attendance: { view: true, create: true, edit: true, delete: false, approve: true, export: true },
+      leaves: { view: true, create: false, edit: false, delete: false, approve: false, export: true },
+      payroll: { view: true, create: true, edit: true, delete: true, approve: true, export: true },
+      organization: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      admin_rbac: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      settings: { view: true, create: false, edit: true, delete: false, approve: false, export: false }
+    },
+    createdAt: '2026-02-15',
+    updatedAt: '2026-09-21'
+  },
+  {
+    id: 'role-dept-head',
+    code: 'ROLE_DEPT_HEAD',
+    name: 'Trưởng bộ phận / Quản lý Khối (Manager)',
+    description: 'Xếp ca làm việc, kiểm duyệt đơn nghỉ phép/OT của nhân sự trực thuộc bộ phận quản lý',
+    isSystem: true,
+    userCount: 3,
+    color: '#8B5CF6',
+    dataScope: 'department',
+    permissions: {
+      dashboard: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      employees: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      attendance: { view: true, create: true, edit: true, delete: false, approve: true, export: true },
+      leaves: { view: true, create: true, edit: false, delete: false, approve: true, export: false },
+      payroll: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      organization: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      admin_rbac: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      settings: { view: false, create: false, edit: false, delete: false, approve: false, export: false }
+    },
+    createdAt: '2026-01-01',
+    updatedAt: '2026-09-21'
+  },
+  {
+    id: 'role-recruiter',
+    code: 'ROLE_RECRUITER',
+    name: 'Chuyên viên Tuyển dụng & Đào tạo',
+    description: 'Tiếp nhận ứng viên, tạo mới hồ sơ nhân sự, tài liệu số hóa và hỗ trợ onboarding',
+    isSystem: false,
+    userCount: 1,
+    color: '#F59E0B',
+    dataScope: 'all',
+    permissions: {
+      dashboard: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      employees: { view: true, create: true, edit: true, delete: false, approve: false, export: true },
+      attendance: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      leaves: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      payroll: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      organization: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      admin_rbac: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      settings: { view: false, create: false, edit: false, delete: false, approve: false, export: false }
+    },
+    createdAt: '2026-03-01',
+    updatedAt: '2026-09-21'
+  },
+  {
+    id: 'role-employee',
+    code: 'ROLE_EMPLOYEE',
+    name: 'Nhân viên Tiêu chuẩn (Self-Service)',
+    description: 'Quyền xem hồ sơ cá nhân, quẹt thẻ chấm công, nộp đơn nghỉ phép/OT và tra cứu phiếu lương cá nhân',
+    isSystem: true,
+    userCount: 6,
+    color: '#64748B',
+    dataScope: 'self',
+    permissions: {
+      dashboard: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      employees: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      attendance: { view: true, create: true, edit: false, delete: false, approve: false, export: false },
+      leaves: { view: true, create: true, edit: false, delete: false, approve: false, export: false },
+      payroll: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      organization: { view: true, create: false, edit: false, delete: false, approve: false, export: false },
+      admin_rbac: { view: false, create: false, edit: false, delete: false, approve: false, export: false },
+      settings: { view: false, create: false, edit: false, delete: false, approve: false, export: false }
+    },
+    createdAt: '2026-01-01',
+    updatedAt: '2026-09-21'
+  }
+];
+
+export const initialUserAccounts: UserAccount[] = [
+  {
+    id: 'usr-01',
+    employeeId: 'emp-01',
+    employeeCode: 'AMIS-0001',
+    fullName: 'Trịnh Văn Cường',
+    email: 'cuongtv@amis.vn',
+    username: 'cuongtv',
+    departmentName: 'Ban Giám Đốc',
+    positionTitle: 'Tổng Giám Đốc',
+    roleId: 'role-super-admin',
+    roleName: 'Quản trị viên Toàn quyền',
+    roleCode: 'ROLE_SUPER_ADMIN',
+    status: 'active',
+    lastLogin: '2026-09-21 07:50:12',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: true,
+    createdAt: '2026-01-01'
+  },
+  {
+    id: 'usr-02',
+    employeeId: 'emp-02',
+    employeeCode: 'AMIS-0002',
+    fullName: 'Vũ Quốc Thái',
+    email: 'thaivq@amis.vn',
+    username: 'thaivq',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    positionTitle: 'Phó TGĐ / Trưởng Khối Tech',
+    roleId: 'role-dept-head',
+    roleName: 'Trưởng bộ phận / Quản lý Khối',
+    roleCode: 'ROLE_DEPT_HEAD',
+    status: 'active',
+    lastLogin: '2026-09-21 07:56:45',
+    lastIp: '192.168.1.105',
+    twoFactorEnabled: true,
+    createdAt: '2026-01-01'
+  },
+  {
+    id: 'usr-03',
+    employeeId: 'emp-03',
+    employeeCode: 'AMIS-0003',
+    fullName: 'Nguyễn Thị Thu Hằng',
+    email: 'hangntt@amis.vn',
+    username: 'hangntt',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    positionTitle: 'Giám Đốc Kinh Doanh',
+    roleId: 'role-dept-head',
+    roleName: 'Trưởng bộ phận / Quản lý Khối',
+    roleCode: 'ROLE_DEPT_HEAD',
+    status: 'active',
+    lastLogin: '2026-09-21 07:58:30',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: false,
+    createdAt: '2026-01-01'
+  },
+  {
+    id: 'usr-04',
+    employeeId: 'emp-04',
+    employeeCode: 'AMIS-0004',
+    fullName: 'Đặng Mai Lan',
+    email: 'landm@amis.vn',
+    username: 'landm',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    positionTitle: 'Trưởng phòng Nhân sự',
+    roleId: 'role-hr-manager',
+    roleName: 'Trưởng phòng Nhân sự',
+    roleCode: 'ROLE_HR_MANAGER',
+    status: 'active',
+    lastLogin: '2026-09-21 08:35:12',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: true,
+    createdAt: '2026-01-01'
+  },
+  {
+    id: 'usr-05',
+    employeeId: 'emp-05',
+    employeeCode: 'AMIS-0005',
+    fullName: 'Hoàng Minh Đức',
+    email: 'duchm@amis.vn',
+    username: 'duchm',
+    departmentName: 'Phòng Tài Chính - Kế Toán',
+    positionTitle: 'Giám Đốc Tài Chính (CFO)',
+    roleId: 'role-super-admin',
+    roleName: 'Quản trị viên Toàn quyền',
+    roleCode: 'ROLE_SUPER_ADMIN',
+    status: 'active',
+    lastLogin: '2026-09-21 07:49:05',
+    lastIp: '192.168.1.110',
+    twoFactorEnabled: true,
+    createdAt: '2026-01-01'
+  },
+  {
+    id: 'usr-07',
+    employeeId: 'emp-07',
+    employeeCode: 'AMIS-0007',
+    fullName: 'Phạm Thị Hương Ly',
+    email: 'lypth@amis.vn',
+    username: 'lypth',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    positionTitle: 'Lập trình viên Frontend (React)',
+    roleId: 'role-employee',
+    roleName: 'Nhân viên Tiêu chuẩn',
+    roleCode: 'ROLE_EMPLOYEE',
+    status: 'active',
+    lastLogin: '2026-09-21 07:54:33',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: false,
+    createdAt: '2026-02-01'
+  },
+  {
+    id: 'usr-12',
+    employeeId: 'emp-12',
+    employeeCode: 'AMIS-0012',
+    fullName: 'Lương Minh Quang',
+    email: 'quanglm@amis.vn',
+    username: 'quanglm',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    positionTitle: 'Chuyên viên C&B (Lương & Thưởng)',
+    roleId: 'role-cb-specialist',
+    roleName: 'Chuyên viên C&B (Tiền lương & Chế độ)',
+    roleCode: 'ROLE_CB_SPECIALIST',
+    status: 'active',
+    lastLogin: '2026-09-21 07:59:45',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: true,
+    createdAt: '2026-02-15'
+  },
+  {
+    id: 'usr-13',
+    employeeId: 'emp-13',
+    employeeCode: 'AMIS-0013',
+    fullName: 'Hoàng Kim Chi',
+    email: 'chihk@amis.vn',
+    username: 'chihk',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    positionTitle: 'Chuyên viên Tuyển dụng & Đào tạo',
+    roleId: 'role-recruiter',
+    roleName: 'Chuyên viên Tuyển dụng & Đào tạo',
+    roleCode: 'ROLE_RECRUITER',
+    status: 'active',
+    lastLogin: '2026-09-21 07:50:50',
+    lastIp: '118.70.124.9',
+    twoFactorEnabled: false,
+    createdAt: '2026-03-01'
+  },
+  {
+    id: 'usr-16',
+    employeeId: 'emp-16',
+    employeeCode: 'AMIS-0016',
+    fullName: 'Lê Thùy Dung',
+    email: 'dunglt@amis.vn',
+    username: 'dunglt',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    positionTitle: 'Chuyên viên Kinh doanh B2B',
+    roleId: 'role-employee',
+    roleName: 'Nhân viên Tiêu chuẩn',
+    roleCode: 'ROLE_EMPLOYEE',
+    status: 'locked', // Tài khoản tạm khóa để test
+    lastLogin: '2026-09-18 17:40:00',
+    lastIp: '14.162.12.80',
+    twoFactorEnabled: false,
+    createdAt: '2026-04-10'
+  }
+];
+
+export const initialAuditLogs: AuditLog[] = [
+  {
+    id: 'log-01',
+    timestamp: '2026-09-21 12:20:15',
+    userId: 'usr-01',
+    userCode: 'AMIS-0001',
+    userName: 'Trịnh Văn Cường',
+    roleName: 'Quản trị viên Toàn quyền',
+    module: 'admin_rbac',
+    action: 'PERM_CHANGE',
+    description: 'Cập nhật ma trận phân quyền vai trò: Chuyên viên C&B (bổ sung quyền xuất dữ liệu)',
+    targetName: 'ROLE_CB_SPECIALIST',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  },
+  {
+    id: 'log-02',
+    timestamp: '2026-09-21 11:45:22',
+    userId: 'usr-04',
+    userCode: 'AMIS-0004',
+    userName: 'Đặng Mai Lan',
+    roleName: 'Trưởng phòng Nhân sự',
+    module: 'employees',
+    action: 'APPROVE',
+    description: 'Ký duyệt Hợp đồng lao động xác định thời hạn 36 tháng cho nhân sự Phạm Thị Hương Ly',
+    targetId: 'emp-07',
+    targetName: 'Phạm Thị Hương Ly',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  },
+  {
+    id: 'log-03',
+    timestamp: '2026-09-21 10:30:10',
+    userId: 'usr-12',
+    userCode: 'AMIS-0012',
+    userName: 'Lương Minh Quang',
+    roleName: 'Chuyên viên C&B',
+    module: 'payroll',
+    action: 'UPDATE',
+    description: 'Tính lại bảng lương kỳ 09/2026 sau khi cập nhật giảm trừ người phụ thuộc',
+    targetName: 'Kỳ T09/2026',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  },
+  {
+    id: 'log-04',
+    timestamp: '2026-09-21 09:15:40',
+    userId: 'usr-02',
+    userCode: 'AMIS-0002',
+    userName: 'Vũ Quốc Thái',
+    roleName: 'Trưởng bộ phận',
+    module: 'leaves',
+    action: 'APPROVE',
+    description: 'Phê duyệt đơn xin nghỉ phép năm 1.0 ngày cho nhân viên Trần Gia Bảo',
+    targetId: 'leave-02',
+    targetName: 'Trần Gia Bảo',
+    ipAddress: '192.168.1.105',
+    status: 'success'
+  },
+  {
+    id: 'log-05',
+    timestamp: '2026-09-21 08:35:12',
+    userId: 'usr-04',
+    userCode: 'AMIS-0004',
+    userName: 'Đặng Mai Lan',
+    roleName: 'Trưởng phòng Nhân sự',
+    module: 'auth',
+    action: 'LOGIN',
+    description: 'Đăng nhập hệ thống quản trị thành công qua xác thực 2 bước 2FA',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  },
+  {
+    id: 'log-06',
+    timestamp: '2026-09-20 16:50:30',
+    userId: 'usr-01',
+    userCode: 'AMIS-0001',
+    userName: 'Trịnh Văn Cường',
+    roleName: 'Quản trị viên Toàn quyền',
+    module: 'admin_rbac',
+    action: 'UPDATE',
+    description: 'Tạm khóa tài khoản người dùng Lê Thùy Dung do chuyển công tác',
+    targetId: 'usr-16',
+    targetName: 'Lê Thùy Dung',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  },
+  {
+    id: 'log-07',
+    timestamp: '2026-09-20 14:10:00',
+    userId: 'usr-12',
+    userCode: 'AMIS-0012',
+    userName: 'Lương Minh Quang',
+    roleName: 'Chuyên viên C&B',
+    module: 'payroll',
+    action: 'EXPORT',
+    description: 'Xuất file Bảng lương chi tiết tháng 08/2026 định dạng Excel',
+    targetName: 'Bang_luong_T08_2026.xlsx',
+    ipAddress: '118.70.124.9',
+    status: 'success'
+  }
+];
+
+export const initialSecuritySettings: SecuritySetting = {
+  passwordMinLength: 8,
+  requireSpecialChar: true,
+  sessionTimeoutMinutes: 60,
+  maxFailedLoginAttempts: 5,
+  enforce2FA: false,
+  allowedIpWhitelist: ['118.70.0.0/16', '127.0.0.1', '192.168.1.0/24']
+};
+
 
 

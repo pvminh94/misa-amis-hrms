@@ -7,6 +7,7 @@ import leavesRoutes from './routes/leaves';
 import payrollRoutes from './routes/payroll';
 import departmentsRoutes from './routes/departments';
 import settingsRoutes from './routes/settings';
+import adminRoutes from './routes/admin';
 
 export const app = express();
 
@@ -21,6 +22,7 @@ app.use('/api/leaves', leavesRoutes);
 app.use('/api/payroll', payrollRoutes);
 app.use('/api/departments', departmentsRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({

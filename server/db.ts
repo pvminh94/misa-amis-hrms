@@ -19,7 +19,12 @@ import {
   RawPunchLog,
   AttendancePolicySetting,
   AttendanceAnalytics,
-  DayRosterSchedule
+  DayRosterSchedule,
+  SystemRole,
+  UserAccount,
+  AuditLog,
+  SecuritySetting,
+  PermissionMatrix
 } from './types';
 import {
   initialDepartments,
@@ -37,6 +42,10 @@ import {
   initialShiftRosters,
   initialRawPunchLogs,
   initialAttendancePolicy,
+  initialRoles,
+  initialUserAccounts,
+  initialAuditLogs,
+  initialSecuritySettings,
   calculateVietnamesePayroll
 } from './data/seedData';
 
@@ -56,6 +65,10 @@ interface DatabaseSchema {
   shiftRosters: ShiftRosterEntry[];
   rawPunches: RawPunchLog[];
   attendancePolicy: AttendancePolicySetting;
+  roles: SystemRole[];
+  userAccounts: UserAccount[];
+  auditLogs: AuditLog[];
+  securitySettings: SecuritySetting;
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -83,6 +96,10 @@ class DatabaseStore {
         if (!parsed.shiftRosters) parsed.shiftRosters = initialShiftRosters;
         if (!parsed.rawPunches) parsed.rawPunches = initialRawPunchLogs;
         if (!parsed.attendancePolicy) parsed.attendancePolicy = initialAttendancePolicy;
+        if (!parsed.roles) parsed.roles = initialRoles;
+        if (!parsed.userAccounts) parsed.userAccounts = initialUserAccounts;
+        if (!parsed.auditLogs) parsed.auditLogs = initialAuditLogs;
+        if (!parsed.securitySettings) parsed.securitySettings = initialSecuritySettings;
         return parsed;
       }
     } catch (err) {
@@ -104,7 +121,11 @@ class DatabaseStore {
       geofenceLocations: initialGeofenceLocations,
       shiftRosters: initialShiftRosters,
       rawPunches: initialRawPunchLogs,
-      attendancePolicy: initialAttendancePolicy
+      attendancePolicy: initialAttendancePolicy,
+      roles: initialRoles,
+      userAccounts: initialUserAccounts,
+      auditLogs: initialAuditLogs,
+      securitySettings: initialSecuritySettings
     };
     this.saveData(defaultData);
     return defaultData;
@@ -827,6 +848,265 @@ class DatabaseStore {
       departmentRates,
       lateLeaderboard
     };
+  }
+
+  // ========================================================
+  // ENTERPRISE RBAC & ADMIN SYSTEM MANAGEMENT METHODS
+  // ========================================================
+
+  getRoles(): SystemRole[] {
+    return this.data.roles;
+  }
+
+  getRoleById(id: string): SystemRole | undefined {
+    return this.data.roles.find((r) => r.id === id);
+  }
+
+  createRole(roleData: Omit<SystemRole, 'id' | 'createdAt' | 'updatedAt' | 'userCount'>): SystemRole {
+    const id = `role-${Date.now().toString().slice(-6)}`;
+    const today = '2026-09-21';
+    const newRole: SystemRole = {
+      ...roleData,
+      id,
+      isSystem: Boolean(roleData.isSystem),
+      userCount: 0,
+      createdAt: today,
+      updatedAt: today
+    };
+    this.data.roles.push(newRole);
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'CREATE',
+      description: `Tạo mới vai trò phân quyền: ${newRole.name} (${newRole.code})`,
+      targetId: newRole.id,
+      targetName: newRole.name,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return newRole;
+  }
+
+  updateRole(id: string, updates: Partial<SystemRole>): SystemRole | null {
+    const idx = this.data.roles.findIndex((r) => r.id === id);
+    if (idx === -1) return null;
+
+    const existing = this.data.roles[idx];
+    const updated: SystemRole = {
+      ...existing,
+      ...updates,
+      updatedAt: '2026-09-21'
+    };
+    this.data.roles[idx] = updated;
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'PERM_CHANGE',
+      description: `Cập nhật cấu hình phân quyền cho vai trò: ${updated.name}`,
+      targetId: updated.id,
+      targetName: updated.name,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return updated;
+  }
+
+  deleteRole(id: string): boolean {
+    const role = this.data.roles.find((r) => r.id === id);
+    if (!role || role.isSystem) return false; // Không được xóa vai trò hệ thống
+
+    this.data.roles = this.data.roles.filter((r) => r.id !== id);
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'DELETE',
+      description: `Xóa vai trò phân quyền tùy biến: ${role.name}`,
+      targetId: role.id,
+      targetName: role.name,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return true;
+  }
+
+  getUserAccounts(params?: { search?: string; roleId?: string; status?: string }): UserAccount[] {
+    let users = this.data.userAccounts;
+    if (params?.roleId && params.roleId !== 'all') {
+      users = users.filter((u) => u.roleId === params.roleId);
+    }
+    if (params?.status && params.status !== 'all') {
+      users = users.filter((u) => u.status === params.status);
+    }
+    if (params?.search) {
+      const q = params.search.toLowerCase().trim();
+      users = users.filter(
+        (u) =>
+          u.fullName.toLowerCase().includes(q) ||
+          u.email.toLowerCase().includes(q) ||
+          u.username.toLowerCase().includes(q) ||
+          u.employeeCode.toLowerCase().includes(q)
+      );
+    }
+    return users;
+  }
+
+  updateUserStatus(id: string, status: 'active' | 'locked'): UserAccount | null {
+    const user = this.data.userAccounts.find((u) => u.id === id);
+    if (!user) return null;
+
+    user.status = status;
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'UPDATE',
+      description: `${status === 'locked' ? 'Khóa' : 'Mở khóa'} tài khoản người dùng: ${user.fullName}`,
+      targetId: user.id,
+      targetName: user.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return user;
+  }
+
+  assignUserRole(userId: string, roleId: string): UserAccount | null {
+    const user = this.data.userAccounts.find((u) => u.id === userId);
+    const role = this.data.roles.find((r) => r.id === roleId);
+    if (!user || !role) return null;
+
+    user.roleId = role.id;
+    user.roleName = role.name;
+    user.roleCode = role.code;
+
+    // Recalculate userCount
+    this.data.roles.forEach((r) => {
+      r.userCount = this.data.userAccounts.filter((u) => u.roleId === r.id).length;
+    });
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'PERM_CHANGE',
+      description: `Điều chỉnh vai trò cho ${user.fullName} sang: ${role.name}`,
+      targetId: user.id,
+      targetName: user.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return user;
+  }
+
+  resetUserPassword(userId: string): { tempPassword: string; message: string } | null {
+    const user = this.data.userAccounts.find((u) => u.id === userId);
+    if (!user) return null;
+
+    const tempPassword = `Amis@${Math.floor(100000 + Math.random() * 900000)}`;
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'UPDATE',
+      description: `Yêu cầu cấp lại mật khẩu tạm thời cho tài khoản ${user.username}`,
+      targetId: user.id,
+      targetName: user.fullName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    return {
+      tempPassword,
+      message: `Đã cấp mật khẩu tạm thời mới cho ${user.fullName} (${user.email})`
+    };
+  }
+
+  getAuditLogs(params?: { module?: string; action?: string; search?: string }): AuditLog[] {
+    let logs = this.data.auditLogs;
+    if (params?.module && params.module !== 'all') {
+      logs = logs.filter((l) => l.module === params.module);
+    }
+    if (params?.action && params.action !== 'all') {
+      logs = logs.filter((l) => l.action === params.action);
+    }
+    if (params?.search) {
+      const q = params.search.toLowerCase().trim();
+      logs = logs.filter(
+        (l) =>
+          l.userName.toLowerCase().includes(q) ||
+          l.description.toLowerCase().includes(q) ||
+          (l.targetName && l.targetName.toLowerCase().includes(q))
+      );
+    }
+    return logs;
+  }
+
+  addAuditLog(logData: Omit<AuditLog, 'id' | 'timestamp'>): AuditLog {
+    const now = new Date();
+    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+    const newLog: AuditLog = {
+      ...logData,
+      id: `log-${Date.now().toString().slice(-6)}`,
+      timestamp: `2026-09-21 ${timeStr}`
+    };
+    this.data.auditLogs.unshift(newLog);
+    // Keep max 200 logs
+    if (this.data.auditLogs.length > 200) {
+      this.data.auditLogs = this.data.auditLogs.slice(0, 200);
+    }
+    return newLog;
+  }
+
+  getSecuritySettings(): SecuritySetting {
+    return this.data.securitySettings;
+  }
+
+  updateSecuritySettings(updates: Partial<SecuritySetting>): SecuritySetting {
+    this.data.securitySettings = { ...this.data.securitySettings, ...updates };
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'admin_rbac',
+      action: 'UPDATE',
+      description: 'Cập nhật chính sách an toàn thông tin & bảo mật hệ thống',
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return this.data.securitySettings;
   }
 
   // Dashboard Stats

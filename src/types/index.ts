@@ -245,7 +245,7 @@ export interface DashboardStats {
   }>;
 }
 
-export type UserRole = 'admin' | 'manager' | 'employee';
+export type UserRole = 'admin' | 'manager' | 'employee' | string;
 
 // ADVANCED SHIFT & ATTENDANCE MODULE TYPES
 export interface ShiftDefinition {
@@ -404,4 +404,87 @@ export interface AttendanceAnalytics {
   departmentRates: { departmentName: string; rate: number; count: number }[];
   lateLeaderboard: LateLeaderboardItem[];
 }
+
+// ENTERPRISE RBAC & ADMIN SYSTEM MANAGEMENT
+export type PermissionAction = 'view' | 'create' | 'edit' | 'delete' | 'approve' | 'export';
+
+export interface ModulePermissions {
+  view: boolean;
+  create: boolean;
+  edit: boolean;
+  delete: boolean;
+  approve: boolean;
+  export: boolean;
+}
+
+export interface PermissionMatrix {
+  dashboard: ModulePermissions;
+  employees: ModulePermissions;
+  attendance: ModulePermissions;
+  leaves: ModulePermissions;
+  payroll: ModulePermissions;
+  organization: ModulePermissions;
+  admin_rbac: ModulePermissions;
+  settings: ModulePermissions;
+}
+
+export interface SystemRole {
+  id: string;
+  code: string;
+  name: string;
+  description: string;
+  isSystem: boolean;
+  userCount: number;
+  color: string;
+  dataScope: 'all' | 'department' | 'branch' | 'self';
+  permissions: PermissionMatrix;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserAccount {
+  id: string;
+  employeeId: string;
+  employeeCode: string;
+  fullName: string;
+  email: string;
+  username: string;
+  avatar?: string;
+  departmentName: string;
+  positionTitle: string;
+  roleId: string;
+  roleName: string;
+  roleCode: string;
+  status: 'active' | 'locked' | 'pending_activation';
+  lastLogin?: string;
+  lastIp?: string;
+  twoFactorEnabled: boolean;
+  createdAt: string;
+}
+
+export interface AuditLog {
+  id: string;
+  timestamp: string;
+  userId: string;
+  userCode: string;
+  userName: string;
+  roleName: string;
+  module: string;
+  action: 'CREATE' | 'UPDATE' | 'DELETE' | 'APPROVE' | 'REJECT' | 'EXPORT' | 'LOGIN' | 'PERM_CHANGE';
+  description: string;
+  targetId?: string;
+  targetName?: string;
+  ipAddress: string;
+  status: 'success' | 'failed';
+}
+
+export interface SecuritySetting {
+  passwordMinLength: number;
+  requireSpecialChar: boolean;
+  sessionTimeoutMinutes: number;
+  maxFailedLoginAttempts: number;
+  enforce2FA: boolean;
+  allowedIpWhitelist: string[];
+}
+
 
