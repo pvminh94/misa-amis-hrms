@@ -27,7 +27,8 @@ import {
   Award,
   AlertOctagon,
   Download,
-  DollarSign
+  DollarSign,
+  Compass
 } from 'lucide-react';
 import {
   AttendanceRecord,
@@ -56,6 +57,7 @@ import { BulkRosterModal } from './BulkRosterModal';
 import { RosterCellModal } from './RosterCellModal';
 import { OmniCheckInModal } from './OmniCheckInModal';
 import { FaceEnrollmentModal } from './FaceEnrollmentModal';
+import { GpsGeofenceRadar } from './GpsGeofenceRadar';
 import { SelfPayslipModal } from '../payroll/SelfPayslipModal';
 import { PayrollRecord, FaceBiometricProfile } from '../../../types';
 
@@ -124,6 +126,8 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
   const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
   const [isSelfPayslipOpen, setIsSelfPayslipOpen] = useState(false);
   const [userPayslip, setUserPayslip] = useState<PayrollRecord | null>(null);
+  const [gpsDistance, setGpsDistance] = useState(18);
+  const [selectedLocationId, setSelectedLocationId] = useState('geo-01');
 
   // Load all enterprise attendance module data
   const loadModuleData = async () => {
@@ -507,6 +511,32 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           >
             <DollarSign className="w-4 h-4" />
             <span>Xem Phiếu Lương Của Tôi</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubTab('face_profiles')}
+            className={`px-3.5 py-2 text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer active:scale-95 border ${
+              activeSubTab === 'face_profiles'
+                ? 'bg-[#0072BC] text-white border-[#0072BC]'
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-300'
+            }`}
+            title="Xem danh mục và đăng ký hồ sơ khuôn mặt 3D"
+          >
+            <ScanFace className="w-4 h-4 text-sky-500" />
+            <span>Hồ Sơ FaceID ({faceBiometrics.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubTab('geofence')}
+            className={`px-3.5 py-2 text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer active:scale-95 border ${
+              activeSubTab === 'geofence'
+                ? 'bg-[#0072BC] text-white border-[#0072BC]'
+                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-300'
+            }`}
+            title="Kiểm tra toạ độ định vị GPS và Radar khoảng cách thực tế"
+          >
+            <Compass className="w-4 h-4 text-rose-500" />
+            <span>Định Vị GPS Radar</span>
           </button>
 
           {/* GPS Geofence Simulator Widget */}
@@ -2012,6 +2042,15 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                 </p>
               </div>
             </div>
+
+            {/* Interactive GPS Geofence Radar Live Testing Widget */}
+            <GpsGeofenceRadar
+              locations={locations}
+              selectedLocationId={selectedLocationId}
+              onLocationChange={setSelectedLocationId}
+              currentDistance={gpsDistance}
+              onDistanceChange={(dist) => setGpsDistance(dist)}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {locations.map((loc) => (

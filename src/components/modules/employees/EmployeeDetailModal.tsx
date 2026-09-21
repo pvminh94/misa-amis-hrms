@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   User,
@@ -26,12 +26,19 @@ import {
   Trash2,
   TrendingUp,
   AlertTriangle,
-  Download
+  Download,
+  ScanFace,
+  Sparkles,
+  Camera,
+  Cpu,
+  Eye,
+  Layers
 } from 'lucide-react';
-import { Employee, ContractItem, WorkHistoryItem, RewardDisciplineItem, DependentItem, DocumentItem } from '../../../types';
+import { Employee, ContractItem, WorkHistoryItem, RewardDisciplineItem, DependentItem, DocumentItem, FaceBiometricProfile } from '../../../types';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/ToastContext';
 import { api } from '../../../services/api';
+import { FaceEnrollmentModal } from '../attendance/FaceEnrollmentModal';
 
 interface EmployeeDetailModalProps {
   employee: Employee | null;
@@ -48,7 +55,30 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
 }) => {
   const { role } = useAuth();
   const { showToast } = useToast();
-  const [activeTab, setActiveTab] = useState<'profile' | 'contracts' | 'history' | 'dependents' | 'rewards' | 'documents' | 'salary'>('profile');
+  const [activeTab, setActiveTab] = useState<'profile' | 'contracts' | 'history' | 'dependents' | 'rewards' | 'documents' | 'salary' | 'biometrics'>('profile');
+
+  // Face Biometric Profile State
+  const [faceProfile, setFaceProfile] = useState<FaceBiometricProfile | null>(null);
+  const [allProfiles, setAllProfiles] = useState<FaceBiometricProfile[]>([]);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
+  // Load employee face biometric
+  const loadFaceData = async () => {
+    if (!employee) return;
+    try {
+      const data = await api.getFaceBiometrics();
+      const list = Array.isArray(data) ? data : [];
+      setAllProfiles(list);
+      const found = list.find((p) => p.employeeId === employee.id || p.employeeCode === employee.code);
+      setFaceProfile(found || null);
+    } catch (e) {
+      // silent
+    }
+  };
+
+  useEffect(() => {
+    loadFaceData();
+  }, [employee]);
 
   // Sub-entity Form States
   const [showAddContract, setShowAddContract] = useState(false);
@@ -403,6 +433,27 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
           >
             <BadgeDollarSign className="w-4 h-4" />
             <span>Lương & Ngân hàng</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('biometrics')}
+            className={`py-3 px-3.5 border-b-2 flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap ${
+              activeTab === 'biometrics'
+                ? 'border-[#0072BC] text-[#0072BC] font-bold'
+                : 'border-transparent text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <ScanFace className="w-4 h-4 text-sky-600" />
+            <span>Sinh trắc FaceID</span>
+            <span
+              className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                faceProfile
+                  ? 'bg-emerald-100 text-emerald-800'
+                  : 'bg-amber-100 text-amber-800 animate-pulse'
+              }`}
+            >
+              {faceProfile ? 'Đã có' : 'Chưa có'}
+            </span>
           </button>
         </div>
 
@@ -1282,6 +1333,144 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
               </div>
             </div>
           )}
+
+          {/* TAB 8: Sinh trắc học FaceID */}
+          {activeTab === 'biometrics' && (
+            <div className="space-y-6">
+              {faceProfile ? (
+                <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-5">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                    <div className="flex items-center gap-3">
+                      <div className="w-14 h-14 rounded-2xl bg-slate-100 border-2 border-emerald-500 overflow-hidden flex items-center justify-center shrink-0 shadow-sm">
+                        {faceProfile.photoThumbnail ? (
+                          <img
+                            src={faceProfile.photoThumbnail}
+                            alt={faceProfile.employeeName}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <ScanFace className="w-8 h-8 text-emerald-600" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-extrabold text-base text-slate-900">{faceProfile.employeeName}</h3>
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            Đã Đăng Ký (Active)
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-0.5">
+                          Mã nhân sự: <span className="font-mono font-bold text-slate-700">{faceProfile.employeeCode}</span> • {faceProfile.departmentName}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setIsEnrollModalOpen(true)}
+                        className="px-3.5 py-2 bg-[#0072BC] hover:bg-[#005A96] text-white font-bold rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
+                      >
+                        <Camera className="w-4 h-4" />
+                        <span>Chụp Lại Mẫu 3D</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (window.confirm(`Bạn có chắc muốn xóa mẫu FaceID của ${faceProfile.employeeName}?`)) {
+                            try {
+                              await api.deleteFaceBiometric(faceProfile.id);
+                              showToast('Đã xóa mẫu sinh trắc khuôn mặt', 'success');
+                              setFaceProfile(null);
+                              loadFaceData();
+                            } catch (e: any) {
+                              showToast(e.message || 'Lỗi xóa mẫu', 'error');
+                            }
+                          }
+                        }}
+                        className="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold rounded-xl text-xs transition flex items-center gap-1 cursor-pointer"
+                        title="Xóa mẫu khuôn mặt"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        <span>Xóa mẫu</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Biometric Feature Matrix */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                      <span className="text-slate-400 text-[11px] block">Mã hóa Vector (512-dim):</span>
+                      <div className="font-mono font-bold text-slate-800 text-xs break-all bg-white p-2 rounded-lg border border-slate-200">
+                        {faceProfile.featuresHash}
+                      </div>
+                      <span className="text-[10px] text-slate-400">Chuẩn bảo mật AES-256</span>
+                    </div>
+
+                    <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                      <span className="text-slate-400 text-[11px] block">Các góc độ đã quét 3D:</span>
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        <span className="px-2 py-0.5 rounded bg-blue-100 text-[#0072BC] font-bold text-[10px]">
+                          Chính diện (0°)
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-blue-100 text-[#0072BC] font-bold text-[10px]">
+                          Nghiêng trái (15°)
+                        </span>
+                        <span className="px-2 py-0.5 rounded bg-blue-100 text-[#0072BC] font-bold text-[10px]">
+                          Nghiêng phải (-15°)
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-emerald-600 font-semibold block pt-1">
+                        Đủ 3 góc độ lập bản đồ hình học 3D
+                      </span>
+                    </div>
+
+                    <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                      <span className="text-slate-400 text-[11px] block">Độ tin cậy nhận diện:</span>
+                      <div className="text-xl font-black text-emerald-600 font-mono">
+                        {faceProfile.confidenceScore || 99.8}%
+                      </div>
+                      <span className="text-[10px] text-slate-400">
+                        Đăng ký lúc: {faceProfile.enrolledAt}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-xl flex items-center justify-between text-xs text-blue-900">
+                    <span className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-[#0072BC]" />
+                      <span>Hồ sơ đã được đồng bộ tự động tới Camera Hikvision và App Mobile</span>
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-mono">Người cấp: {faceProfile.enrolledBy}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white border-2 border-dashed border-amber-300 rounded-2xl p-8 text-center space-y-4">
+                  <div className="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+                    <ScanFace className="w-8 h-8" />
+                  </div>
+                  <div className="max-w-md mx-auto space-y-1">
+                    <h3 className="font-extrabold text-sm text-slate-900">
+                      Chưa Đăng Ký Mẫu Sinh Trắc Khuôn Mặt FaceID!
+                    </h3>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Nhân viên này chưa có mẫu nhận diện khuôn mặt trong hệ thống AMIS HRM. Hãy bấm nút bên dưới để mở camera chụp và lập bản đồ 3 góc độ (Chính diện, Nghiêng trái, Nghiêng phải).
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsEnrollModalOpen(true)}
+                    className="px-5 py-2.5 bg-gradient-to-r from-[#0072BC] to-sky-600 hover:from-[#005A96] hover:to-sky-700 text-white font-bold rounded-xl text-xs transition shadow-md cursor-pointer active:scale-95 inline-flex items-center gap-2"
+                  >
+                    <ScanFace className="w-4 h-4" />
+                    <span>Đăng Ký Mẫu Khuôn Mặt 3D Ngay</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -1311,6 +1500,21 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Face Biometric Enrollment Sub-Modal */}
+      {isEnrollModalOpen && employee && (
+        <FaceEnrollmentModal
+          isOpen={isEnrollModalOpen}
+          onClose={() => setIsEnrollModalOpen(false)}
+          employees={[employee]}
+          enrolledProfiles={allProfiles}
+          onSuccess={() => {
+            loadFaceData();
+            setIsEnrollModalOpen(false);
+            showToast(`Đã lưu mẫu sinh trắc khuôn mặt FaceID cho ${employee.fullName}`, 'success');
+          }}
+        />
+      )}
     </div>
   );
 };

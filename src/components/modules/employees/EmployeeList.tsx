@@ -24,11 +24,12 @@ import {
   FileText,
   UserX
 } from 'lucide-react';
-import { Employee, Department, Position, CrmCandidate } from '../../../types';
+import { Employee, Department, Position, CrmCandidate, FaceBiometricProfile } from '../../../types';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/ToastContext';
 import { api } from '../../../services/api';
 import { CandidateIntakeModal } from './CandidateIntakeModal';
+import { ScanFace } from 'lucide-react';
 
 interface EmployeeListProps {
   employees: Employee[];
@@ -66,13 +67,18 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
   const [candidates, setCandidates] = useState<CrmCandidate[]>([]);
   const [selectedCandidateForIntake, setSelectedCandidateForIntake] = useState<CrmCandidate | null>(null);
   const [loadingCandidates, setLoadingCandidates] = useState(false);
+  const [faceBiometrics, setFaceBiometrics] = useState<FaceBiometricProfile[]>([]);
 
-  // Load CRM candidates
+  // Load CRM candidates and face biometrics
   const loadCandidates = async () => {
     try {
       setLoadingCandidates(true);
-      const res = await api.getCrmCandidates();
+      const [res, fbRes] = await Promise.all([
+        api.getCrmCandidates().catch(() => []),
+        api.getFaceBiometrics().catch(() => [])
+      ]);
       setCandidates(res);
+      setFaceBiometrics(Array.isArray(fbRes) ? fbRes : []);
     } catch (err) {
       console.error('Error fetching candidates:', err);
     } finally {
@@ -318,6 +324,7 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
                     <th className="py-3 px-4">Phòng ban</th>
                     <th className="py-3 px-4">Chức danh</th>
                     <th className="py-3 px-4">Thông tin liên hệ</th>
+                    <th className="py-3 px-4">Sinh trắc FaceID</th>
                     <th className="py-3 px-4">Loại hợp đồng</th>
                     <th className="py-3 px-4">Trạng thái</th>
                     <th className="py-3 px-4 text-right">Thao tác</th>
@@ -326,18 +333,22 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
                 <tbody className="divide-y divide-slate-100">
                   {loading ? (
                     <tr>
-                      <td colSpan={8} className="py-8 text-center text-slate-400">
+                      <td colSpan={9} className="py-8 text-center text-slate-400">
                         Đang đồng bộ dữ liệu nhân sự...
                       </td>
                     </tr>
                   ) : filteredEmployees.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="py-8 text-center text-slate-400">
+                      <td colSpan={9} className="py-8 text-center text-slate-400">
                         Không tìm thấy nhân sự phù hợp với bộ lọc
                       </td>
                     </tr>
                   ) : (
-                    filteredEmployees.map((emp) => (
+                    filteredEmployees.map((emp) => {
+                      const isFaceEnrolled = faceBiometrics.some(
+                        (fb) => fb.employeeId === emp.id || fb.employeeCode === emp.code
+                      );
+                      return (
                       <tr
                         key={emp.id}
                         onClick={() => onSelectEmployee(emp)}
@@ -380,6 +391,20 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
                               <span>{emp.phone}</span>
                             </div>
                           </div>
+                        </td>
+
+                        <td className="py-3 px-4">
+                          {isFaceEnrolled ? (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                              <ScanFace className="w-3.5 h-3.5 text-emerald-600" />
+                              Đã có FaceID
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                              <AlertCircle className="w-3 h-3 text-amber-500" />
+                              Chưa có
+                            </span>
+                          )}
                         </td>
 
                         <td className="py-3 px-4 text-slate-600">
@@ -447,8 +472,9 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
                           )}
                         </td>
                       </tr>
-                    ))
-                  )}
+                    );
+                  })
+                )}
                 </tbody>
               </table>
             </div>

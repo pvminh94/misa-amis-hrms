@@ -182,4 +182,32 @@ describe('AMIS HRMS - Phân hệ Chấm công & Ca kíp (Time & Attendance Engin
     expect(updatedPolicy.livenessLevel).toBe('strict');
     expect(updatedPolicy.requireWifi).toBe(true);
   });
+
+  it('11. Kiểm tra Định vị GPS Geofencing (Khoảng cách Haversine & Giới hạn bán kính)', () => {
+    // Haversine distance formula test
+    const calculateHaversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+      const R = 6371e3;
+      const φ1 = (lat1 * Math.PI) / 180;
+      const φ2 = (lat2 * Math.PI) / 180;
+      const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+      const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return Math.round(R * c);
+    };
+
+    const hanoiHQ = { lat: 21.0315, lng: 105.7832, radius: 100 };
+
+    // Point A: ~18m away (inbound)
+    const pointA = { lat: 21.0315 + 0.00011, lng: 105.7832 + 0.00009 };
+    const distA = calculateHaversine(pointA.lat, pointA.lng, hanoiHQ.lat, hanoiHQ.lng);
+    expect(distA).toBeLessThanOrEqual(hanoiHQ.radius);
+
+    // Point B: ~160m away (out-of-bounds)
+    const pointB = { lat: 21.0315 + 0.0011, lng: 105.7832 + 0.0009 };
+    const distB = calculateHaversine(pointB.lat, pointB.lng, hanoiHQ.lat, hanoiHQ.lng);
+    expect(distB).toBeGreaterThan(hanoiHQ.radius);
+  });
 });

@@ -35,6 +35,7 @@ import { Employee, GeofenceLocation, FaceBiometricProfile } from '../../../types
 import { api } from '../../../services/api';
 import { useToast } from '../../../context/ToastContext';
 import { FaceEnrollmentModal } from './FaceEnrollmentModal';
+import { GpsGeofenceRadar } from './GpsGeofenceRadar';
 
 interface OmniCheckInModalProps {
   isOpen: boolean;
@@ -195,7 +196,17 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
       return;
     }
 
-    // 3. Check liveness completion for mobile
+    // 3. Check GPS Geofence boundary for mobile_gps
+    if (source === 'mobile_gps' && gpsDistance > currentLocation.radiusMeters) {
+      playChime(false);
+      showToast(
+        `Từ chối chấm công: Bạn đang ở cách trụ sở ${gpsDistance}m (Vượt quá bán kính cho phép ${currentLocation.radiusMeters}m). Vui lòng di chuyển vào vùng GPS văn phòng!`,
+        'error'
+      );
+      return;
+    }
+
+    // 4. Check liveness completion for mobile
     if (source === 'mobile_gps' && livenessStage !== 'verified') {
       showToast('Vui lòng hoàn thành 2 bước kiểm tra người thật (Chớp mắt & Nghiêng đầu)', 'warning');
       return;
@@ -471,26 +482,17 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                         </div>
                       </div>
 
-                      {/* GPS & WiFi Verification Card */}
-                      <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs space-y-2">
-                        <div className="flex items-center justify-between text-[11px]">
-                          <span className="font-bold text-slate-800 flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-rose-500" />
-                            <span>GPS Geofence: {currentLocation.name}</span>
-                          </span>
-                          <span className="font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full text-[10px]">
-                            {gpsDistance}m (Hợp lệ)
-                          </span>
-                        </div>
-
-                        <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-100">
-                          <span className="flex items-center gap-1.5">
-                            <Wifi className="w-3.5 h-3.5 text-emerald-600" />
-                            <span>Mạng: {wifiSsid}</span>
-                          </span>
-                          <span className="text-[10px] text-emerald-600 font-bold">Đã đồng bộ</span>
-                        </div>
-                      </div>
+                      {/* Live GPS Geofence Radar Simulator inside Phone */}
+                      <GpsGeofenceRadar
+                        locations={locations}
+                        selectedLocationId={currentLocation.id}
+                        currentDistance={gpsDistance}
+                        onDistanceChange={(dist, coords) => {
+                          setGpsDistance(dist);
+                          setGpsCoords(coords);
+                        }}
+                        compact={true}
+                      />
 
                       {/* Biometric Enrollment Status Banner */}
                       {!isEnrolled ? (
