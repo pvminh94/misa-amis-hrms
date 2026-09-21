@@ -102,7 +102,73 @@ export const initialEmployees: Employee[] = [
       dependents: 2,
       taxCode: '8091234567',
       insuranceBookNumber: '7912345678'
-    }
+    },
+    contracts: [
+      {
+        id: 'c-01-1',
+        contractNumber: 'HĐLĐ-2016/MISA-001',
+        contractType: 'Không xác định thời hạn',
+        signDate: '2016-03-01',
+        startDate: '2016-03-01',
+        signerName: 'Hội đồng Quản trị',
+        signerTitle: 'Chủ tịch HĐQT',
+        salaryInsurance: 65000000,
+        status: 'active',
+        notes: 'Hợp đồng bổ nhiệm Tổng Giám Đốc điều hành'
+      }
+    ],
+    workHistory: [
+      {
+        id: 'wh-01-1',
+        decisionNumber: 'QĐ-HĐQT/2016/01',
+        effectiveDate: '2016-03-01',
+        type: 'appointment',
+        title: 'Bổ nhiệm Tổng Giám Đốc điều hành',
+        departmentName: 'Ban Giám Đốc',
+        positionTitle: 'Tổng Giám Đốc',
+        salaryBefore: 45000000,
+        salaryAfter: 65000000,
+        signDate: '2016-02-28',
+        notes: 'Bổ nhiệm theo Nghị quyết Đại hội đồng Cổ đông'
+      }
+    ],
+    rewardsDisciplines: [
+      {
+        id: 'rd-01-1',
+        decisionNumber: 'QĐ-KT/2025/10',
+        date: '2025-12-28',
+        type: 'reward',
+        title: 'Lãnh đạo xuất sắc tiêu biểu ngành Công nghệ Phần mềm',
+        reason: 'Đưa doanh thu sản phẩm AMIS SaaS tăng trưởng vượt bậc 140%',
+        amount: 20000000,
+        signBy: 'Chủ tịch HĐQT'
+      }
+    ],
+    dependentsList: [
+      {
+        id: 'dep-01-1',
+        fullName: 'Trịnh Gia Huy',
+        relationship: 'Con cái',
+        dob: '2012-04-10',
+        idCardOrBirthCert: '001212009876',
+        taxCode: '8501234501',
+        deductionStart: '2016-03-01'
+      },
+      {
+        id: 'dep-01-2',
+        fullName: 'Trịnh Bảo Ngọc',
+        relationship: 'Con cái',
+        dob: '2015-11-22',
+        idCardOrBirthCert: '001215004321',
+        taxCode: '8501234502',
+        deductionStart: '2016-03-01'
+      }
+    ],
+    documents: [
+      { id: 'doc-01-1', name: 'CCCD_TrinhVanCuong.pdf', category: 'CCCD', fileSize: '2.4 MB', uploadDate: '2021-05-15', fileType: 'application/pdf' },
+      { id: 'doc-01-2', name: 'BangThacSi_MBA_KTQD.pdf', category: 'Bằng cấp', fileSize: '3.8 MB', uploadDate: '2020-01-10', fileType: 'application/pdf' },
+      { id: 'doc-01-3', name: 'NghiQuyet_BoNhiem_CEO.pdf', category: 'Hợp đồng scan', fileSize: '1.9 MB', uploadDate: '2016-03-05', fileType: 'application/pdf' }
+    ]
   },
   {
     id: 'emp-02',
@@ -139,162 +205,95 @@ export const initialEmployees: Employee[] = [
       dependents: 1,
       taxCode: '8091234568',
       insuranceBookNumber: '7912345679'
-    }
-  },
-  {
-    id: 'emp-03',
-    code: 'MISA-0003',
-    fullName: 'Nguyễn Thị Thu Hằng',
-    gender: 'Nữ',
-    dob: '1990-09-28', // Sinh nhật tháng 9!
-    idCard: '001190009876',
-    idCardDate: '2022-01-10',
-    idCardPlace: 'Cục Cảnh sát QLHC về TTXH',
-    phone: '0977112233',
-    email: 'hangntt@misa.vn',
-    address: '22 Duy Tân, Cầu Giấy, Hà Nội',
-    hometown: 'Hải Phòng',
-    education: 'Cử nhân Thương Mại Quốc Tế - ĐH Ngoại Thương',
-    departmentId: 'dept-sales',
-    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
-    positionId: 'pos-08',
-    positionTitle: 'Giám Đốc Kinh Doanh',
-    joinDate: '2018-09-01',
-    contractType: 'Không xác định thời hạn',
-    contractStartDate: '2018-09-01',
-    status: 'active',
-    bankAccount: {
-      bankName: 'Vietcombank',
-      accountNumber: '0011004567890',
-      branch: 'Thăng Long'
     },
-    salary: {
-      baseSalary: 40000000,
-      allowanceResponsibility: 8000000,
-      allowanceLunch: 1500000,
-      allowanceGas: 2500000,
-      dependents: 1,
-      taxCode: '8091234569',
-      insuranceBookNumber: '7912345680'
-    }
-  },
-  {
-    id: 'emp-04',
-    code: 'MISA-0004',
-    fullName: 'Đặng Mai Lan',
-    gender: 'Nữ',
-    dob: '1992-05-14',
-    idCard: '001192003344',
-    idCardDate: '2021-11-05',
-    idCardPlace: 'Cục Cảnh sát QLHC về TTXH',
-    phone: '0966443322',
-    email: 'landm@misa.vn',
-    address: 'Tòa Sky Park, Tôn Thất Thuyết, Cầu Giấy, Hà Nội',
-    hometown: 'Hà Nội',
-    education: 'Cử nhân Quản trị Nhân lực - ĐH Kinh Tế Quốc Dân',
-    departmentId: 'dept-hr',
-    departmentName: 'Khối Nhân Sự & Vận Hành',
-    positionId: 'pos-11',
-    positionTitle: 'Trưởng phòng Nhân sự',
-    joinDate: '2019-02-15',
-    contractType: 'Không xác định thời hạn',
-    contractStartDate: '2019-02-15',
-    status: 'active',
-    bankAccount: {
-      bankName: 'VietinBank',
-      accountNumber: '102874659201',
-      branch: 'Đống Đa'
-    },
-    salary: {
-      baseSalary: 32000000,
-      allowanceResponsibility: 5000000,
-      allowanceLunch: 1500000,
-      allowanceGas: 1500000,
-      dependents: 1,
-      taxCode: '8091234570',
-      insuranceBookNumber: '7912345681'
-    }
-  },
-  {
-    id: 'emp-05',
-    code: 'MISA-0005',
-    fullName: 'Hoàng Minh Đức',
-    gender: 'Nam',
-    dob: '1989-12-03',
-    idCard: '001089004455',
-    idCardDate: '2022-03-15',
-    idCardPlace: 'Cục Cảnh sát QLHC về TTXH',
-    phone: '0903456789',
-    email: 'duchm@misa.vn',
-    address: 'Thanh Xuân, Hà Nội',
-    hometown: 'Thái Bình',
-    education: 'Cử nhân Tài chính Kế toán - Học Viện Tài Chính',
-    departmentId: 'dept-acc',
-    departmentName: 'Phòng Tài Chính - Kế Toán',
-    positionId: 'pos-14',
-    positionTitle: 'Kế toán trưởng',
-    joinDate: '2018-04-10',
-    contractType: 'Không xác định thời hạn',
-    contractStartDate: '2018-04-10',
-    status: 'active',
-    bankAccount: {
-      bankName: 'BIDV',
-      accountNumber: '21510001239874',
-      branch: 'Cầu Giấy'
-    },
-    salary: {
-      baseSalary: 35000000,
-      allowanceResponsibility: 6000000,
-      allowanceLunch: 1500000,
-      allowanceGas: 1500000,
-      dependents: 2,
-      taxCode: '8091234571',
-      insuranceBookNumber: '7912345682'
-    }
-  },
-  {
-    id: 'emp-06',
-    code: 'MISA-0006',
-    fullName: 'Lê Hoàng Long',
-    gender: 'Nam',
-    dob: '1994-03-22',
-    idCard: '001094002211',
-    idCardDate: '2022-04-18',
-    idCardPlace: 'Cục Cảnh sát QLHC về TTXH',
-    phone: '0983124567',
-    email: 'longlh@misa.vn',
-    address: 'Khu đô thị Trung Hòa Nhân Chính, Cầu Giấy, Hà Nội',
-    hometown: 'Bắc Ninh',
-    education: 'Kỹ sư Phần mềm - ĐH Bách Khoa Hà Nội',
-    departmentId: 'dept-it',
-    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
-    positionId: 'pos-04',
-    positionTitle: 'Kỹ sư Fullstack Cao cấp',
-    joinDate: '2020-07-01',
-    contractType: 'Không xác định thời hạn',
-    contractStartDate: '2020-07-01',
-    status: 'active',
-    bankAccount: {
-      bankName: 'Techcombank',
-      accountNumber: '19034567891234',
-      branch: 'Trung Hòa'
-    },
-    salary: {
-      baseSalary: 38000000,
-      allowanceResponsibility: 4000000,
-      allowanceLunch: 1500000,
-      allowanceGas: 1000000,
-      dependents: 0,
-      taxCode: '8091234572',
-      insuranceBookNumber: '7912345683'
-    }
+    contracts: [
+      {
+        id: 'c-02-1',
+        contractNumber: 'HĐLĐ-2017/MISA-042',
+        contractType: 'Hợp đồng xác định thời hạn 36 tháng',
+        signDate: '2017-06-15',
+        startDate: '2017-06-15',
+        endDate: '2020-06-15',
+        signerName: 'Trịnh Văn Cường',
+        signerTitle: 'Tổng Giám Đốc',
+        salaryInsurance: 35000000,
+        status: 'expired',
+        notes: 'Hợp đồng tuyển dụng ban đầu Trưởng khối Tech'
+      },
+      {
+        id: 'c-02-2',
+        contractNumber: 'HĐLĐ-2020/MISA-042/KTH',
+        contractType: 'Không xác định thời hạn',
+        signDate: '2020-06-15',
+        startDate: '2020-06-15',
+        signerName: 'Trịnh Văn Cường',
+        signerTitle: 'Tổng Giám Đốc',
+        salaryInsurance: 55000000,
+        status: 'active',
+        notes: 'Chuyển sang HĐ vô thời hạn kiêm bổ nhiệm Phó TGĐ Kỹ thuật'
+      }
+    ],
+    workHistory: [
+      {
+        id: 'wh-02-1',
+        decisionNumber: 'QĐ-NS/2017/120',
+        effectiveDate: '2017-06-15',
+        type: 'appointment',
+        title: 'Tiếp nhận Trưởng khối Kỹ thuật phần mềm',
+        departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+        positionTitle: 'Trưởng Khối Công Nghệ',
+        salaryAfter: 35000000,
+        signDate: '2017-06-10'
+      },
+      {
+        id: 'wh-02-2',
+        decisionNumber: 'QĐ-BGD/2020/88',
+        effectiveDate: '2020-06-15',
+        type: 'promotion',
+        title: 'Thăng chức Phó Tổng Giám Đốc Kỹ Thuật (CTO)',
+        departmentName: 'Ban Giám Đốc',
+        positionTitle: 'Phó Tổng Giám Đốc Kỹ Thuật',
+        salaryBefore: 42000000,
+        salaryAfter: 55000000,
+        signDate: '2020-06-01',
+        notes: 'Quyết định bổ nhiệm Phó TGĐ phụ trách toàn bộ R&D'
+      }
+    ],
+    rewardsDisciplines: [
+      {
+        id: 'rd-02-1',
+        decisionNumber: 'QĐ-KT/2024/09',
+        date: '2024-12-25',
+        type: 'reward',
+        title: 'Cúp Sáng tạo Công nghệ AMIS Cloud 2024',
+        reason: 'Thiết kế kiến trúc chịu tải 500.000 doanh nghiệp đồng thời',
+        amount: 15000000,
+        signBy: 'Tổng Giám Đốc'
+      }
+    ],
+    dependentsList: [
+      {
+        id: 'dep-02-1',
+        fullName: 'Vũ Minh Khang',
+        relationship: 'Con cái',
+        dob: '2018-05-18',
+        idCardOrBirthCert: '001218005678',
+        taxCode: '8501234509',
+        deductionStart: '2018-06-01'
+      }
+    ],
+    documents: [
+      { id: 'doc-02-1', name: 'CCCD_VuQuocThai.pdf', category: 'CCCD', fileSize: '1.8 MB', uploadDate: '2021-08-25', fileType: 'application/pdf' },
+      { id: 'doc-02-2', name: 'BangKySu_DHBK_HaNoi.pdf', category: 'Bằng cấp', fileSize: '4.1 MB', uploadDate: '2017-06-15', fileType: 'application/pdf' },
+      { id: 'doc-02-3', name: 'ChungChi_AWS_Solutions_Architect.pdf', category: 'Chứng chỉ', fileSize: '850 KB', uploadDate: '2023-04-10', fileType: 'application/pdf' }
+    ]
   },
   {
     id: 'emp-07',
     code: 'MISA-0007',
     fullName: 'Phạm Thị Hương Ly',
     gender: 'Nữ',
-    dob: '1996-09-15', // Sinh nhật tháng 9!
+    dob: '1996-09-15',
     idCard: '001196008899',
     idCardDate: '2023-02-14',
     idCardPlace: 'Cục Cảnh sát QLHC về TTXH',
@@ -310,7 +309,7 @@ export const initialEmployees: Employee[] = [
     joinDate: '2021-10-01',
     contractType: 'Hợp đồng xác định thời hạn 36 tháng',
     contractStartDate: '2021-10-01',
-    contractEndDate: '2024-10-01', // Sắp hết hạn hợp đồng!
+    contractEndDate: '2024-10-01',
     status: 'active',
     bankAccount: {
       bankName: 'Vietcombank',
@@ -325,7 +324,79 @@ export const initialEmployees: Employee[] = [
       dependents: 0,
       taxCode: '8091234573',
       insuranceBookNumber: '7912345684'
-    }
+    },
+    contracts: [
+      {
+        id: 'c-07-1',
+        contractNumber: 'HĐTV-2021/MISA-089',
+        contractType: 'Hợp đồng thử việc',
+        signDate: '2021-08-01',
+        startDate: '2021-08-01',
+        endDate: '2021-10-01',
+        signerName: 'Đặng Mai Lan',
+        signerTitle: 'Trưởng phòng Nhân sự',
+        salaryInsurance: 16000000,
+        status: 'expired',
+        notes: 'Thử việc 2 tháng đạt loại Xuất sắc'
+      },
+      {
+        id: 'c-07-2',
+        contractNumber: 'HĐLĐ-2021/MISA-089/36T',
+        contractType: 'Hợp đồng xác định thời hạn 36 tháng',
+        signDate: '2021-10-01',
+        startDate: '2021-10-01',
+        endDate: '2024-10-01',
+        signerName: 'Vũ Quốc Thái',
+        signerTitle: 'Phó Tổng Giám Đốc Kỹ Thuật',
+        salaryInsurance: 25000000,
+        status: 'active',
+        notes: 'Sắp đến hạn tái ký Hợp đồng vô thời hạn'
+      }
+    ],
+    workHistory: [
+      {
+        id: 'wh-07-1',
+        decisionNumber: 'QĐ-TD/2021/115',
+        effectiveDate: '2021-10-01',
+        type: 'probation_pass',
+        title: 'Tiếp nhận chính thức Lập trình viên Frontend',
+        departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+        positionTitle: 'Lập trình viên Frontend (React)',
+        salaryAfter: 19000000,
+        signDate: '2021-09-28'
+      },
+      {
+        id: 'wh-07-2',
+        decisionNumber: 'QĐ-TL/2023/45',
+        effectiveDate: '2023-07-01',
+        type: 'salary_raise',
+        title: 'Điều chỉnh nâng bậc lương định kỳ đợt 1/2023',
+        departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+        positionTitle: 'Lập trình viên Frontend (React)',
+        salaryBefore: 19000000,
+        salaryAfter: 25000000,
+        signDate: '2023-06-25',
+        notes: 'Đánh giá hoàn thành xuất sắc dự án AMIS HRM Mobile'
+      }
+    ],
+    rewardsDisciplines: [
+      {
+        id: 'rd-07-1',
+        decisionNumber: 'QĐ-KT/2024/02',
+        date: '2024-03-08',
+        type: 'reward',
+        title: 'Khen thưởng Nhân viên Nữ tiêu biểu MISA 2024',
+        reason: 'Có nhiều đóng góp phát triển UI/UX giao diện hệ thống',
+        amount: 3000000,
+        signBy: 'Tổng Giám Đốc'
+      }
+    ],
+    dependentsList: [],
+    documents: [
+      { id: 'doc-07-1', name: 'CCCD_PhamThiHuongLy.pdf', category: 'CCCD', fileSize: '2.1 MB', uploadDate: '2023-02-15', fileType: 'application/pdf' },
+      { id: 'doc-07-2', name: 'BangCuNhan_DHQGHN.pdf', category: 'Bằng cấp', fileSize: '3.5 MB', uploadDate: '2021-08-01', fileType: 'application/pdf' },
+      { id: 'doc-07-3', name: 'HopDongLaoDong_2021_Signed.pdf', category: 'Hợp đồng scan', fileSize: '4.2 MB', uploadDate: '2021-10-05', fileType: 'application/pdf' }
+    ]
   },
   {
     id: 'emp-08',

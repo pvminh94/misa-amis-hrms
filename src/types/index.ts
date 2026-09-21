@@ -32,6 +32,65 @@ export interface EmployeeSalary {
   insuranceBookNumber: string;
 }
 
+export interface ContractItem {
+  id: string;
+  contractNumber: string;
+  contractType: string;
+  signDate: string;
+  startDate: string;
+  endDate?: string;
+  signerName: string;
+  signerTitle: string;
+  salaryInsurance: number;
+  status: 'active' | 'expired' | 'renewed';
+  notes?: string;
+}
+
+export interface WorkHistoryItem {
+  id: string;
+  decisionNumber: string;
+  effectiveDate: string;
+  type: 'appointment' | 'promotion' | 'transfer' | 'salary_raise' | 'probation_pass';
+  title: string;
+  departmentName: string;
+  positionTitle: string;
+  salaryBefore?: number;
+  salaryAfter?: number;
+  signDate: string;
+  notes?: string;
+}
+
+export interface RewardDisciplineItem {
+  id: string;
+  decisionNumber: string;
+  date: string;
+  type: 'reward' | 'discipline';
+  title: string;
+  reason: string;
+  amount?: number;
+  signBy: string;
+}
+
+export interface DependentItem {
+  id: string;
+  fullName: string;
+  relationship: 'Con cái' | 'Vợ/Chồng' | 'Cha mẹ ruột' | 'Cha mẹ vợ/chồng' | 'Người giám hộ';
+  dob: string;
+  idCardOrBirthCert: string;
+  taxCode?: string;
+  deductionStart: string;
+  deductionEnd?: string;
+}
+
+export interface DocumentItem {
+  id: string;
+  name: string;
+  category: 'CCCD' | 'Bằng cấp' | 'Hợp đồng scan' | 'Chứng chỉ' | 'Khác';
+  fileSize: string;
+  uploadDate: string;
+  fileType: string;
+}
+
 export interface Employee {
   id: string;
   code: string;
@@ -59,6 +118,11 @@ export interface Employee {
   managerId?: string;
   bankAccount: BankAccount;
   salary: EmployeeSalary;
+  contracts?: ContractItem[];
+  workHistory?: WorkHistoryItem[];
+  rewardsDisciplines?: RewardDisciplineItem[];
+  dependentsList?: DependentItem[];
+  documents?: DocumentItem[];
 }
 
 export interface AttendanceRecord {

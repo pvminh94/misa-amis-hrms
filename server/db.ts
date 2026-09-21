@@ -150,6 +150,122 @@ class DatabaseStore {
     return true;
   }
 
+  // Employee Sub-entities (Contracts, Work History, Rewards, Dependents, Documents)
+  addContract(employeeId: string, contract: any) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp) return null;
+    if (!emp.contracts) emp.contracts = [];
+    
+    const newContract = {
+      ...contract,
+      id: `c-${Date.now().toString().slice(-6)}`,
+      status: contract.status || 'active'
+    };
+    emp.contracts.unshift(newContract);
+    
+    // Update employee current contract
+    emp.contractType = newContract.contractType;
+    emp.contractStartDate = newContract.startDate;
+    emp.contractEndDate = newContract.endDate;
+    
+    this.saveData();
+    return newContract;
+  }
+
+  addWorkHistory(employeeId: string, history: any) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp) return null;
+    if (!emp.workHistory) emp.workHistory = [];
+
+    const newHistory = {
+      ...history,
+      id: `wh-${Date.now().toString().slice(-6)}`
+    };
+    emp.workHistory.unshift(newHistory);
+
+    // If salary changed, update employee salary
+    if (history.salaryAfter && history.salaryAfter > 0) {
+      emp.salary.baseSalary = history.salaryAfter;
+      // recalculate payroll
+      const payIdx = this.data.payroll.findIndex(p => p.employeeId === employeeId && p.period === '2026-09');
+      if (payIdx !== -1) {
+        this.data.payroll[payIdx] = calculateVietnamesePayroll(emp, this.data.payroll[payIdx].actualWorkDays, 0);
+      }
+    }
+
+    this.saveData();
+    return newHistory;
+  }
+
+  addRewardDiscipline(employeeId: string, item: any) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp) return null;
+    if (!emp.rewardsDisciplines) emp.rewardsDisciplines = [];
+
+    const newItem = {
+      ...item,
+      id: `rd-${Date.now().toString().slice(-6)}`
+    };
+    emp.rewardsDisciplines.unshift(newItem);
+    this.saveData();
+    return newItem;
+  }
+
+  addDependent(employeeId: string, dependent: any) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp) return null;
+    if (!emp.dependentsList) emp.dependentsList = [];
+
+    const newDep = {
+      ...dependent,
+      id: `dep-${Date.now().toString().slice(-6)}`
+    };
+    emp.dependentsList.push(newDep);
+
+    // Automatically update dependents count and recalculate payroll!
+    emp.salary.dependents = emp.dependentsList.length;
+    const payIdx = this.data.payroll.findIndex(p => p.employeeId === employeeId && p.period === '2026-09');
+    if (payIdx !== -1) {
+      this.data.payroll[payIdx] = calculateVietnamesePayroll(emp, this.data.payroll[payIdx].actualWorkDays, 0);
+    }
+
+    this.saveData();
+    return newDep;
+  }
+
+  deleteDependent(employeeId: string, depId: string) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp || !emp.dependentsList) return false;
+
+    const initialLen = emp.dependentsList.length;
+    emp.dependentsList = emp.dependentsList.filter(d => d.id !== depId);
+    if (emp.dependentsList.length === initialLen) return false;
+
+    emp.salary.dependents = emp.dependentsList.length;
+    const payIdx = this.data.payroll.findIndex(p => p.employeeId === employeeId && p.period === '2026-09');
+    if (payIdx !== -1) {
+      this.data.payroll[payIdx] = calculateVietnamesePayroll(emp, this.data.payroll[payIdx].actualWorkDays, 0);
+    }
+
+    this.saveData();
+    return true;
+  }
+
+  addDocument(employeeId: string, doc: any) {
+    const emp = this.getEmployeeById(employeeId);
+    if (!emp) return null;
+    if (!emp.documents) emp.documents = [];
+
+    const newDoc = {
+      ...doc,
+      id: `doc-${Date.now().toString().slice(-6)}`,
+      uploadDate: '2026-09-21'
+    };
+    emp.documents.unshift(newDoc);
+    this.saveData();
+    return newDoc;
+  }
+
   // Departments
   getDepartments() {
     return this.data.departments;

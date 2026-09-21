@@ -252,8 +252,9 @@ function MainApp() {
       {/* Modals */}
       {selectedEmployee && (
         <EmployeeDetailModal
-          employee={selectedEmployee}
+          employee={employees.find((e) => e.id === selectedEmployee.id) || selectedEmployee}
           onClose={() => setSelectedEmployee(null)}
+          onReload={loadData}
           onEdit={(emp) => {
             setSelectedEmployee(null);
             setEditingEmployee(emp);

@@ -140,4 +140,69 @@ router.delete('/:id', (req, res) => {
   }
 });
 
+// SUB-ENTITIES: Contracts
+router.post('/:id/contracts', (req, res) => {
+  try {
+    const contract = db.addContract(req.params.id, req.body);
+    if (!contract) return res.status(404).json({ success: false, message: 'Không tìm thấy nhân viên' });
+    res.status(201).json({ success: true, data: contract, message: 'Thêm hợp đồng lao động thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi thêm hợp đồng' });
+  }
+});
+
+// SUB-ENTITIES: Work History
+router.post('/:id/work-history', (req, res) => {
+  try {
+    const history = db.addWorkHistory(req.params.id, req.body);
+    if (!history) return res.status(404).json({ success: false, message: 'Không tìm thấy nhân viên' });
+    res.status(201).json({ success: true, data: history, message: 'Thêm quá trình công tác thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi thêm quá trình công tác' });
+  }
+});
+
+// SUB-ENTITIES: Rewards & Disciplines
+router.post('/:id/rewards', (req, res) => {
+  try {
+    const item = db.addRewardDiscipline(req.params.id, req.body);
+    if (!item) return res.status(404).json({ success: false, message: 'Không tìm thấy nhân viên' });
+    res.status(201).json({ success: true, data: item, message: 'Thêm quyết định khen thưởng / kỷ luật thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi thêm quyết định' });
+  }
+});
+
+// SUB-ENTITIES: Dependents
+router.post('/:id/dependents', (req, res) => {
+  try {
+    const dep = db.addDependent(req.params.id, req.body);
+    if (!dep) return res.status(404).json({ success: false, message: 'Không tìm thấy nhân viên' });
+    res.status(201).json({ success: true, data: dep, message: 'Đăng ký người phụ thuộc giảm trừ gia cảnh thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi thêm người phụ thuộc' });
+  }
+});
+
+router.delete('/:id/dependents/:depId', (req, res) => {
+  try {
+    const success = db.deleteDependent(req.params.id, req.params.depId);
+    if (!success) return res.status(404).json({ success: false, message: 'Không tìm thấy người phụ thuộc' });
+    res.json({ success: true, message: 'Xóa người phụ thuộc thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi xóa người phụ thuộc' });
+  }
+});
+
+// SUB-ENTITIES: Documents
+router.post('/:id/documents', (req, res) => {
+  try {
+    const doc = db.addDocument(req.params.id, req.body);
+    if (!doc) return res.status(404).json({ success: false, message: 'Không tìm thấy nhân viên' });
+    res.status(201).json({ success: true, data: doc, message: 'Tải lên chứng từ thành công' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải lên chứng từ' });
+  }
+});
+
 export default router;

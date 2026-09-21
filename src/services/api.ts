@@ -70,6 +70,70 @@ export const api = {
     if (!data.success) throw new Error(data.message);
   },
 
+  // Employee Sub-entities API
+  async addEmployeeContract(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/employees/${id}/contracts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async addEmployeeWorkHistory(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/employees/${id}/work-history`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async addEmployeeReward(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/employees/${id}/rewards`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async addEmployeeDependent(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/employees/${id}/dependents`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async deleteEmployeeDependent(id: string, depId: string): Promise<void> {
+    const res = await fetch(`${API_BASE}/employees/${id}/dependents/${depId}`, {
+      method: 'DELETE'
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+  },
+
+  async addEmployeeDocument(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/employees/${id}/documents`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
   // Attendance
   async getAttendance(date = '2026-09-21', departmentId?: string): Promise<AttendanceRecord[]> {
     const query = new URLSearchParams({ date });
