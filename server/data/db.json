@@ -15,7 +15,7 @@
       "name": "Khối Công Nghệ & Kỹ Thuật",
       "managerId": "emp-02",
       "managerName": "Vũ Quốc Thái",
-      "employeeCount": 7,
+      "employeeCount": 9,
       "description": "Nghiên cứu, phát triển sản phẩm phần mềm SaaS HRM"
     },
     {
@@ -973,10 +973,12 @@
       "duration": 2,
       "unit": "ngày",
       "reason": "Giải quyết việc cá nhân gia đình tại quê nhà",
-      "status": "pending",
+      "status": "approved",
       "approverId": "emp-02",
       "approverName": "Vũ Quốc Thái",
-      "createdAt": "2026-09-20 09:30:00"
+      "createdAt": "2026-09-20 09:30:00",
+      "reviewedAt": "2026-09-21 09:15:00",
+      "reviewNotes": "Đồng ý duyệt theo nguyện vọng"
     },
     {
       "id": "leave-02",
@@ -1071,12 +1073,12 @@
       "departmentName": "Ban Giám Đốc",
       "positionTitle": "Tổng Giám Đốc",
       "standardWorkDays": 22,
-      "actualWorkDays": 21.5,
+      "actualWorkDays": 21,
       "paidLeaveDays": 1,
       "baseSalary": 65000000,
       "allowanceTotal": 19500000,
       "otPay": 0,
-      "grossSalary": 83022727,
+      "grossSalary": 81545455,
       "bhxh": 3744000,
       "bhyt": 702000,
       "bhtn": 468000,
@@ -1084,11 +1086,11 @@
       "dependents": 2,
       "dependentDeduction": 8800000,
       "personalDeduction": 11000000,
-      "taxableIncome": 57578727,
-      "personalIncomeTax": 11423618,
+      "taxableIncome": 56101455,
+      "personalIncomeTax": 10980437,
       "bonus": 0,
       "deductionsOther": 0,
-      "netSalary": 66685109,
+      "netSalary": 65651018,
       "status": "approved",
       "paidDate": "2026-10-05"
     },
@@ -1759,10 +1761,10 @@
           "date": "2026-09-15",
           "status": "X",
           "workHours": 8,
-          "checkIn": "07:50",
-          "checkOut": "17:35",
+          "checkIn": "08:00",
+          "checkOut": "17:30",
           "shiftCode": "CA-HC",
-          "notes": "Đi làm đủ công"
+          "notes": "Bổ sung đủ công"
         },
         "16": {
           "day": 16,

@@ -19,8 +19,9 @@
 4. [Các lệnh vận hành (NPM Scripts)](#-4-các-lệnh-vận-hành-npm-scripts)
 5. [Cấu trúc thư mục dự án](#-5-cấu-trúc-thư-mục-dự-án)
 6. [Tổng quan các phân hệ chức năng](#-6-tổng-quan-các-phân-hệ-chức-năng)
-7. [Hướng dẫn triển khai Production](#-7-hướng-dẫn-triển-khai-production)
-8. [Khắc phục sự cố thường gặp (FAQ)](#-8-khắc-phục-sự-cố-thường-gặp-faq)
+7. [Hệ thống kiểm thử tự động & CI/CD](#-7-hệ-thống-kiểm-thử-tự-động--cicd-quality-gate)
+8. [Hướng dẫn triển khai Production](#-8-hướng-dẫn-triển-khai-production)
+9. [Khắc phục sự cố thường gặp (FAQ)](#-9-khắc-phục-sự-cố-thường-gặp-faq)
 
 ---
 
@@ -114,6 +115,8 @@ Trong file `package.json`, các lệnh quản trị được định nghĩa rõ 
 | Lệnh | Ý nghĩa chức năng |
 | :--- | :--- |
 | `npm run dev` | **(Khuyến nghị)** Khởi chạy đồng thời cả Backend Express (kèm tự động tải lại `tsx watch`) và Frontend Vite (`port 3000`). |
+| `npm test` | **Chạy toàn bộ 23 bài kiểm thử tự động (Unit & Integration Tests) bằng Vitest.** |
+| `npm run test:watch` | Chạy kiểm thử ở chế độ theo dõi thay đổi mã nguồn (Watch mode). |
 | `npm run server` | Chỉ khởi chạy riêng Backend API trên cổng `5000`. |
 | `npm run client` | Chỉ khởi chạy riêng Frontend Vite trên cổng `3000`. |
 | `npm run build` | Biên dịch toàn bộ mã nguồn TypeScript & đóng gói sản phẩm ra thư mục `/dist` cho môi trường Production. |
@@ -222,7 +225,42 @@ misa-amis-hrms/
 
 ---
 
-## 🚢 7. Hướng dẫn Triển khai Production
+## 🧪 7. Hệ Thống Kiểm Thử Tự Động & CI/CD (Quality Gate)
+
+Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **23 bài test tự động** đạt tỷ lệ thành công 100%:
+
+1. **Kiểm thử Thuế TNCN & Tiền lương (`tests/payroll.test.ts`):**
+   * Đóng BHXH bắt buộc 10.5% (8% BHXH + 1.5% BHYT + 1% BHTN).
+   * Mức trần đóng BHXH (tối đa 20 lần lương cơ sở = 46.800.000 VNĐ).
+   * Miễn thuế phụ cấp ăn trưa hợp lệ (tối đa 730.000 VNĐ).
+   * Giảm trừ gia cảnh bản thân (11tr) và người phụ thuộc (4.4tr/người).
+   * Biểu thuế lũy tiến từng phần 7 bậc theo luật thuế Việt Nam.
+   * Tính lương tăng ca (OT 150%).
+   * Cân đối kế toán: `Lương thực lĩnh = Gross - BHXH - Thuế TNCN`.
+
+2. **Kiểm thử Nghiệp vụ Chấm công (`tests/attendance.test.ts`):**
+   * Danh mục ca làm việc (Ca hành chính 8h, Ca đêm phụ cấp hệ số 1.3).
+   * Phân loại Đúng giờ vs Đi muộn (> 08:30).
+   * Tính giờ công làm việc thực tế trừ giờ nghỉ trưa.
+   * Điểm Geofencing GPS và danh sách WiFi BSSID hợp lệ.
+
+3. **Kiểm thử DataStore & Liên kết Nghiệp vụ (`tests/db.test.ts`):**
+   * Đọc danh sách nhân viên và kiểm tra tính toàn vẹn dữ liệu.
+   * Thêm nhân viên mới và tự động sinh bản ghi lương tương ứng.
+   * Thêm người phụ thuộc và tự động cập nhật giảm trừ trên bảng lương.
+   * Phê duyệt đơn nghỉ phép trực tuyến.
+   * Sửa ô công ma trận 30 ngày và tự động liên kết tính lại bảng lương.
+
+4. **Kiểm thử RESTful API Endpoints (`tests/api.test.ts`):**
+   * Kiểm thử tích hợp toàn bộ các endpoint Express (`/api/dashboard/stats`, `/api/employees`, `/api/attendance/shifts`, `/api/leaves`, `/api/payroll`, `/api/departments`, `/api/settings`, `/api/health`).
+
+### 🛡️ Git Pre-Push Hook & GitHub Actions CI
+* **Pre-Push Hook:** File script `.git/hooks/pre-push` được thiết lập sẵn. Khi bất kỳ ai gõ `git push`, hệ thống tự động chạy `npm test` và `npm run build`. Nếu có bất kỳ bài test nào thất bại hoặc lỗi TypeScript, thao tác đẩy mã nguồn sẽ lập tức bị chặn.
+* **GitHub Actions Workflow:** File cấu hình `.github/workflows/ci.yml` tự động kích hoạt mỗi khi có `push` hoặc `pull_request` lên nhánh `main`, đảm bảo kiểm thử và build độc lập trên máy chủ ảo GitHub.
+
+---
+
+## 🚢 8. Hướng dẫn Triển khai Production
 
 ### Cách 1: Chạy trực tiếp trên VPS/Server với PM2
 Nếu bạn muốn triển khai hệ thống lên máy chủ Linux/Ubuntu:
@@ -265,7 +303,7 @@ docker run -p 3000:3000 -p 5000:5000 amis-hrms
 
 ---
 
-## ❓ 8. Khắc phục Sự cố Thường gặp (FAQ)
+## ❓ 9. Khắc phục Sự cố Thường gặp (FAQ)
 
 #### Q1: Tôi gặp lỗi `Error: listen EADDRINUSE: address already in use :::3000` hoặc `:::5000`?
 * **Nguyên nhân:** Cổng 3000 hoặc 5000 đang bị một ứng dụng khác chiếm dụng trên máy bạn.

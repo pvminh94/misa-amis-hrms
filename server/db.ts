@@ -115,7 +115,8 @@ class DatabaseStore {
     const id = `emp-${Date.now().toString().slice(-6)}`;
     const newEmployee: Employee = {
       ...employeeData,
-      id
+      id,
+      code: employeeData.code || `AMIS-${String(this.data.employees.length + 1).padStart(4, '0')}`
     };
     this.data.employees.unshift(newEmployee);
     
@@ -409,6 +410,10 @@ class DatabaseStore {
   // Payroll
   getPayroll(period = '2026-09') {
     return this.data.payroll.filter((p) => p.period === period);
+  }
+
+  getPayrollRecordByEmployeeId(employeeId: string, period = '2026-09') {
+    return this.data.payroll.find((p) => p.employeeId === employeeId && p.period === period);
   }
 
   getPayrollById(id: string) {
