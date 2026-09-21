@@ -202,6 +202,7 @@ function MainApp() {
             <AttendanceView
               attendanceList={attendanceList}
               departments={departments}
+              employees={employees}
               loading={loading}
               onRefresh={loadData}
             />

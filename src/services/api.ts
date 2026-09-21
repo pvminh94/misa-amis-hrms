@@ -167,6 +167,135 @@ export const api = {
     return data.data;
   },
 
+  // Advanced Attendance & Shifts API
+  async getShifts(): Promise<any[]> {
+    const res = await fetch(`${API_BASE}/attendance/shifts`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async createShift(payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/shifts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async updateShift(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/shifts/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async getMonthlyTimesheets(params?: { period?: string; departmentName?: string; search?: string }): Promise<any[]> {
+    const query = new URLSearchParams();
+    if (params?.period) query.append('period', params.period);
+    if (params?.departmentName) query.append('departmentName', params.departmentName);
+    if (params?.search) query.append('search', params.search);
+
+    const res = await fetch(`${API_BASE}/attendance/monthly?${query.toString()}`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async updateTimesheetCell(employeeId: string, day: number, cellUpdates: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/monthly/cell`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ employeeId, day, cellUpdates })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async getShiftSwaps(): Promise<any[]> {
+    const res = await fetch(`${API_BASE}/attendance/swaps`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async createShiftSwap(payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/swaps`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async updateShiftSwapStatus(id: string, status: 'approved' | 'rejected', approverName?: string): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/swaps/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, approverName })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async getRegularizations(): Promise<any[]> {
+    const res = await fetch(`${API_BASE}/attendance/regularizations`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async createRegularization(payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/regularizations`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async updateRegularizationStatus(id: string, status: 'approved' | 'rejected', approverName?: string): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/regularizations/${id}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, approverName })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async getGeofenceLocations(): Promise<any[]> {
+    const res = await fetch(`${API_BASE}/attendance/locations`);
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
+  async updateGeofenceLocation(id: string, payload: any): Promise<any> {
+    const res = await fetch(`${API_BASE}/attendance/locations/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    return data.data;
+  },
+
   // Leaves & Approval
   async getLeaves(params?: { status?: string; type?: string; employeeId?: string }): Promise<LeaveRequest[]> {
     const query = new URLSearchParams();

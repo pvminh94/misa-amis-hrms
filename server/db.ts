@@ -8,7 +8,13 @@ import {
   AttendanceRecord,
   LeaveRequest,
   PayrollRecord,
-  CompanySetting
+  CompanySetting,
+  ShiftDefinition,
+  MonthlyTimesheetEmployee,
+  ShiftSwapRequest,
+  AttendanceRegularization,
+  GeofenceLocation,
+  DayTimesheetCell
 } from './types';
 import {
   initialDepartments,
@@ -18,6 +24,11 @@ import {
   initialLeaveRequests,
   initialPayrollList,
   initialCompanySettings,
+  initialShifts,
+  initialMonthlyTimesheets,
+  initialShiftSwaps,
+  initialRegularizations,
+  initialGeofenceLocations,
   calculateVietnamesePayroll
 } from './data/seedData';
 
@@ -29,6 +40,11 @@ interface DatabaseSchema {
   leaves: LeaveRequest[];
   payroll: PayrollRecord[];
   settings: CompanySetting;
+  shifts: ShiftDefinition[];
+  monthlyTimesheets: MonthlyTimesheetEmployee[];
+  shiftSwaps: ShiftSwapRequest[];
+  regularizations: AttendanceRegularization[];
+  geofenceLocations: GeofenceLocation[];
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -46,7 +62,14 @@ class DatabaseStore {
     try {
       if (fs.existsSync(DB_FILE)) {
         const fileContent = fs.readFileSync(DB_FILE, 'utf-8');
-        return JSON.parse(fileContent);
+        const parsed = JSON.parse(fileContent);
+        // Ensure new collections exist even if loaded from older db.json
+        if (!parsed.shifts) parsed.shifts = initialShifts;
+        if (!parsed.monthlyTimesheets) parsed.monthlyTimesheets = initialMonthlyTimesheets;
+        if (!parsed.shiftSwaps) parsed.shiftSwaps = initialShiftSwaps;
+        if (!parsed.regularizations) parsed.regularizations = initialRegularizations;
+        if (!parsed.geofenceLocations) parsed.geofenceLocations = initialGeofenceLocations;
+        return parsed;
       }
     } catch (err) {
       console.error('Failed to read db.json, initializing from seed...', err);
@@ -59,7 +82,12 @@ class DatabaseStore {
       attendance: initialAttendanceList,
       leaves: initialLeaveRequests,
       payroll: initialPayrollList,
-      settings: initialCompanySettings
+      settings: initialCompanySettings,
+      shifts: initialShifts,
+      monthlyTimesheets: initialMonthlyTimesheets,
+      shiftSwaps: initialShiftSwaps,
+      regularizations: initialRegularizations,
+      geofenceLocations: initialGeofenceLocations
     };
     this.saveData(defaultData);
     return defaultData;
@@ -407,6 +435,183 @@ class DatabaseStore {
     this.data.settings = { ...this.data.settings, ...settings };
     this.saveData();
     return this.data.settings;
+  }
+
+  // ADVANCED ATTENDANCE & SHIFTS
+  getShifts() {
+    return this.data.shifts;
+  }
+
+  createShift(shift: Omit<ShiftDefinition, 'id'>) {
+    const newShift: ShiftDefinition = {
+      ...shift,
+      id: `shift-${Date.now().toString().slice(-4)}`
+    };
+    this.data.shifts.push(newShift);
+    this.saveData();
+    return newShift;
+  }
+
+  updateShift(id: string, updates: Partial<ShiftDefinition>) {
+    const idx = this.data.shifts.findIndex((s) => s.id === id);
+    if (idx === -1) return null;
+    this.data.shifts[idx] = { ...this.data.shifts[idx], ...updates };
+    this.saveData();
+    return this.data.shifts[idx];
+  }
+
+  getMonthlyTimesheets(period = '2026-09') {
+    return this.data.monthlyTimesheets.filter((m) => m.period === period);
+  }
+
+  updateTimesheetCell(employeeId: string, day: number, cellUpdates: Partial<DayTimesheetCell>) {
+    const row = this.data.monthlyTimesheets.find((m) => m.employeeId === employeeId && m.period === '2026-09');
+    if (!row || !row.days[day]) return null;
+
+    row.days[day] = { ...row.days[day], ...cellUpdates };
+
+    // Recalculate totals
+    let workDays = 0;
+    let paidLeaves = 0;
+    let unpaidLeaves = 0;
+    let lateTimes = 0;
+    let lateMinutes = 0;
+    let otHours = 0;
+
+    Object.values(row.days).forEach((cell) => {
+      if (cell.status === 'X' || cell.status === 'L' || cell.status === 'CT') {
+        workDays += 1;
+      } else if (cell.status === 'OT') {
+        workDays += 1;
+        otHours += Math.max(0, cell.workHours - 8);
+      } else if (cell.status === 'P') {
+        paidLeaves += 1;
+      } else if (cell.status === 'KP') {
+        unpaidLeaves += 1;
+      }
+
+      if (cell.status === 'L' && cell.lateMinutes) {
+        lateTimes += 1;
+        lateMinutes += cell.lateMinutes;
+      }
+    });
+
+    row.totalWorkDays = workDays;
+    row.totalPaidLeaves = paidLeaves;
+    row.totalUnpaidLeaves = unpaidLeaves;
+    row.totalLateTimes = lateTimes;
+    row.totalLateMinutes = lateMinutes;
+    row.totalOTHours = otHours;
+
+    // Trigger payroll actualWorkDays recalculation!
+    const emp = this.getEmployeeById(employeeId);
+    if (emp) {
+      const payIdx = this.data.payroll.findIndex((p) => p.employeeId === employeeId && p.period === '2026-09');
+      if (payIdx !== -1) {
+        this.data.payroll[payIdx] = calculateVietnamesePayroll(emp, workDays, otHours);
+      }
+    }
+
+    this.saveData();
+    return row;
+  }
+
+  getShiftSwaps() {
+    return this.data.shiftSwaps;
+  }
+
+  createShiftSwap(data: Omit<ShiftSwapRequest, 'id' | 'code' | 'status' | 'createdAt'>) {
+    const id = `swap-${Date.now().toString().slice(-6)}`;
+    const code = `ĐCA-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const newSwap: ShiftSwapRequest = {
+      ...data,
+      id,
+      code,
+      status: 'pending',
+      createdAt: '2026-09-21 08:30:00'
+    };
+    this.data.shiftSwaps.unshift(newSwap);
+    this.saveData();
+    return newSwap;
+  }
+
+  updateShiftSwapStatus(id: string, status: 'approved' | 'rejected', approverName = 'Vũ Quốc Thái') {
+    const swap = this.data.shiftSwaps.find((s) => s.id === id);
+    if (!swap) return null;
+
+    swap.status = status;
+    swap.approverName = approverName;
+    swap.reviewedAt = '2026-09-21 09:15:00';
+
+    this.saveData();
+    return swap;
+  }
+
+  getRegularizations() {
+    return this.data.regularizations;
+  }
+
+  createRegularization(data: Omit<AttendanceRegularization, 'id' | 'code' | 'status' | 'createdAt'>) {
+    const id = `reg-${Date.now().toString().slice(-6)}`;
+    const code = `GTC-2026-${Math.floor(100 + Math.random() * 900)}`;
+    const newReg: AttendanceRegularization = {
+      ...data,
+      id,
+      code,
+      status: 'pending',
+      createdAt: '2026-09-21 08:45:00'
+    };
+    this.data.regularizations.unshift(newReg);
+    this.saveData();
+    return newReg;
+  }
+
+  updateRegularizationStatus(id: string, status: 'approved' | 'rejected', approverName = 'Vũ Quốc Thái') {
+    const reg = this.data.regularizations.find((r) => r.id === id);
+    if (!reg) return null;
+
+    reg.status = status;
+    reg.approverName = approverName;
+    reg.reviewedAt = '2026-09-21 09:20:00';
+
+    // If approved, fix the daily record and monthly cell!
+    if (status === 'approved') {
+      const todayRecord = this.data.attendance.find((a) => a.employeeId === reg.employeeId && a.date === reg.date);
+      if (todayRecord) {
+        if (reg.suggestedCheckIn) todayRecord.checkIn = reg.suggestedCheckIn;
+        if (reg.suggestedCheckOut) todayRecord.checkOut = reg.suggestedCheckOut;
+        todayRecord.status = 'present';
+        todayRecord.workHours = 8.0;
+        todayRecord.notes = `Đã duyệt giải trình: ${reg.reason}`;
+      }
+
+      // Also adjust cell in monthly timesheet
+      const dayNum = Number(reg.date.split('-')[2]);
+      if (dayNum) {
+        this.updateTimesheetCell(reg.employeeId, dayNum, {
+          status: 'X',
+          workHours: 8,
+          checkIn: reg.suggestedCheckIn || '08:00',
+          checkOut: reg.suggestedCheckOut || '17:30',
+          notes: `Đã duyệt giải trình: ${reg.reason}`
+        });
+      }
+    }
+
+    this.saveData();
+    return reg;
+  }
+
+  getGeofenceLocations() {
+    return this.data.geofenceLocations;
+  }
+
+  updateGeofenceLocation(id: string, updates: Partial<GeofenceLocation>) {
+    const idx = this.data.geofenceLocations.findIndex((g) => g.id === id);
+    if (idx === -1) return null;
+    this.data.geofenceLocations[idx] = { ...this.data.geofenceLocations[idx], ...updates };
+    this.saveData();
+    return this.data.geofenceLocations[idx];
   }
 
   // Dashboard Stats

@@ -246,3 +246,97 @@ export interface DashboardStats {
 }
 
 export type UserRole = 'admin' | 'manager' | 'employee';
+
+// ADVANCED SHIFT & ATTENDANCE MODULE TYPES
+export interface ShiftDefinition {
+  id: string;
+  code: string;
+  name: string;
+  startTime: string;
+  endTime: string;
+  breakStartTime: string;
+  breakEndTime: string;
+  workHours: number;
+  coefficient: number;
+  color: string;
+  description: string;
+}
+
+export interface DayTimesheetCell {
+  day: number;
+  date: string;
+  status: 'X' | 'P' | 'L' | 'KP' | 'OFF' | 'OT' | 'CT';
+  workHours: number;
+  checkIn?: string;
+  checkOut?: string;
+  lateMinutes?: number;
+  shiftCode: string;
+  notes?: string;
+}
+
+export interface MonthlyTimesheetEmployee {
+  employeeId: string;
+  employeeCode: string;
+  employeeName: string;
+  departmentName: string;
+  positionTitle: string;
+  period: string;
+  days: { [day: number]: DayTimesheetCell };
+  totalWorkDays: number;
+  totalPaidLeaves: number;
+  totalUnpaidLeaves: number;
+  totalLateTimes: number;
+  totalLateMinutes: number;
+  totalOTHours: number;
+}
+
+export interface ShiftSwapRequest {
+  id: string;
+  code: string;
+  employeeId: string;
+  employeeName: string;
+  employeeCode: string;
+  targetEmployeeId: string;
+  targetEmployeeName: string;
+  targetEmployeeCode: string;
+  swapDate: string;
+  fromShiftCode: string;
+  fromShiftName: string;
+  toShiftCode: string;
+  toShiftName: string;
+  reason: string;
+  status: 'pending' | 'approved' | 'rejected';
+  approverName?: string;
+  createdAt: string;
+  reviewedAt?: string;
+}
+
+export interface AttendanceRegularization {
+  id: string;
+  code: string;
+  employeeId: string;
+  employeeName: string;
+  employeeCode: string;
+  departmentName: string;
+  date: string;
+  type: 'forgot_checkin' | 'forgot_checkout' | 'system_error' | 'client_meeting';
+  suggestedCheckIn?: string;
+  suggestedCheckOut?: string;
+  reason: string;
+  attachmentName?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  approverName?: string;
+  createdAt: string;
+  reviewedAt?: string;
+}
+
+export interface GeofenceLocation {
+  id: string;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  radiusMeters: number;
+  allowedWifiBSSID: string[];
+  isActive: boolean;
+}

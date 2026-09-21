@@ -982,3 +982,285 @@ export const initialAttendanceList: AttendanceRecord[] = initialEmployees.map((e
     notes: status === 'late' ? 'Tắc đường Phạm Hùng' : (status === 'leave' ? 'Nghỉ phép năm có phép' : 'Đúng giờ')
   };
 });
+
+// SEED: Shift Definitions
+export const initialShifts: ShiftDefinition[] = [
+  {
+    id: 'shift-hc',
+    code: 'CA-HC',
+    name: 'Ca Hành Chính Tiêu Chuẩn',
+    startTime: '08:00',
+    endTime: '17:30',
+    breakStartTime: '12:00',
+    breakEndTime: '13:30',
+    workHours: 8.0,
+    coefficient: 1.0,
+    color: '#0072BC',
+    description: 'Ca làm việc tiêu chuẩn khối văn phòng từ Thứ Hai đến Thứ Sáu'
+  },
+  {
+    id: 'shift-sang',
+    code: 'CA-SANG',
+    name: 'Ca Buổi Sáng',
+    startTime: '08:00',
+    endTime: '12:00',
+    breakStartTime: '',
+    breakEndTime: '',
+    workHours: 4.0,
+    coefficient: 0.5,
+    color: '#10B981',
+    description: 'Ca làm việc 0.5 công buổi sáng'
+  },
+  {
+    id: 'shift-chieu',
+    code: 'CA-CHIEU',
+    name: 'Ca Buổi Chiều',
+    startTime: '13:30',
+    endTime: '17:30',
+    breakStartTime: '',
+    breakEndTime: '',
+    workHours: 4.0,
+    coefficient: 0.5,
+    color: '#8B5CF6',
+    description: 'Ca làm việc 0.5 công buổi chiều'
+  },
+  {
+    id: 'shift-dem',
+    code: 'CA-DEM',
+    name: 'Ca Trực Đêm Hệ Thống (R&D/DevOps)',
+    startTime: '22:00',
+    endTime: '06:00',
+    breakStartTime: '02:00',
+    breakEndTime: '03:00',
+    workHours: 8.0,
+    coefficient: 1.3,
+    color: '#F59E0B',
+    description: 'Ca trực ca đêm có hưởng phụ cấp làm đêm 30% theo luật'
+  }
+];
+
+// Helper to generate 30 days of September 2026
+export function generateMonthlyTimesheet(employees: Employee[]): MonthlyTimesheetEmployee[] {
+  const weekendDays = new Set([5, 6, 12, 13, 19, 20, 26, 27]); // Sat, Sun in Sep 2026
+  const holidayDay = 2; // 2/9 Quốc Khánh
+
+  return employees.map((emp, empIdx) => {
+    const days: { [day: number]: DayTimesheetCell } = {};
+    let totalWorkDays = 0;
+    let totalPaidLeaves = 1; // Holiday 2/9 is paid
+    let totalUnpaidLeaves = 0;
+    let totalLateTimes = 0;
+    let totalLateMinutes = 0;
+    let totalOTHours = 0;
+
+    for (let day = 1; day <= 30; day++) {
+      const dateStr = `2026-09-${day < 10 ? '0' + day : day}`;
+
+      if (weekendDays.has(day)) {
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'OFF',
+          workHours: 0,
+          shiftCode: 'OFF',
+          notes: 'Nghỉ cuối tuần'
+        };
+      } else if (day === holidayDay) {
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'P',
+          workHours: 8,
+          shiftCode: 'CA-HC',
+          notes: 'Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)'
+        };
+      } else if (empIdx === 6 && day === 18) {
+        // Emp 7 sick leave
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'P',
+          workHours: 8,
+          shiftCode: 'CA-HC',
+          notes: 'Nghỉ ốm hưởng BHXH'
+        };
+        totalPaidLeaves += 1;
+      } else if (empIdx === 5 && day === 22) {
+        // Long LH overtime
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'OT',
+          workHours: 11.5,
+          checkIn: '07:55',
+          checkOut: '21:30',
+          shiftCode: 'CA-HC',
+          notes: 'Làm thêm OT 3.5h triển khai release'
+        };
+        totalWorkDays += 1;
+        totalOTHours += 3.5;
+      } else if (day === 21 && (empIdx === 3 || empIdx === 7)) {
+        // Late today for emp 4 and 8
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'L',
+          workHours: 7.5,
+          checkIn: '08:35',
+          checkOut: '17:35',
+          lateMinutes: 20,
+          shiftCode: 'CA-HC',
+          notes: 'Đi muộn 20 phút'
+        };
+        totalWorkDays += 1;
+        totalLateTimes += 1;
+        totalLateMinutes += 20;
+      } else {
+        // Normal work day
+        days[day] = {
+          day,
+          date: dateStr,
+          status: 'X',
+          workHours: 8,
+          checkIn: '07:50',
+          checkOut: '17:35',
+          shiftCode: 'CA-HC',
+          notes: 'Đi làm đủ công'
+        };
+        totalWorkDays += 1;
+      }
+    }
+
+    return {
+      employeeId: emp.id,
+      employeeCode: emp.code,
+      employeeName: emp.fullName,
+      departmentName: emp.departmentName,
+      positionTitle: emp.positionTitle,
+      period: '2026-09',
+      days,
+      totalWorkDays,
+      totalPaidLeaves,
+      totalUnpaidLeaves,
+      totalLateTimes,
+      totalLateMinutes,
+      totalOTHours
+    };
+  });
+}
+
+export const initialMonthlyTimesheets: MonthlyTimesheetEmployee[] = generateMonthlyTimesheet(initialEmployees);
+
+// SEED: Shift Swaps
+export const initialShiftSwaps: ShiftSwapRequest[] = [
+  {
+    id: 'swap-01',
+    code: 'ĐCA-2026-001',
+    employeeId: 'emp-05',
+    employeeName: 'Lập trình viên Frontend (React)',
+    employeeCode: 'AMIS-0007',
+    targetEmployeeId: 'emp-10',
+    targetEmployeeName: 'Đỗ Anh Tuấn',
+    targetEmployeeCode: 'AMIS-0010',
+    swapDate: '2026-09-24',
+    fromShiftCode: 'CA-HC',
+    fromShiftName: 'Ca Hành Chính',
+    toShiftCode: 'CA-CHIEU',
+    toShiftName: 'Ca Buổi Chiều',
+    reason: 'Bận việc gia đình buổi sáng tại quê',
+    status: 'pending',
+    createdAt: '2026-09-21 08:15:00'
+  },
+  {
+    id: 'swap-02',
+    code: 'ĐCA-2026-002',
+    employeeId: 'emp-08',
+    employeeName: 'Trần Gia Bảo',
+    employeeCode: 'AMIS-0008',
+    targetEmployeeId: 'emp-06',
+    targetEmployeeName: 'Lê Hoàng Long',
+    targetEmployeeCode: 'AMIS-0006',
+    swapDate: '2026-09-19',
+    fromShiftCode: 'CA-DEM',
+    fromShiftName: 'Ca Trực Đêm',
+    toShiftCode: 'CA-HC',
+    toShiftName: 'Ca Hành Chính',
+    reason: 'Đổi ca trực đêm hỗ trợ trực cơ sở dữ liệu cloud',
+    status: 'approved',
+    approverName: 'Vũ Quốc Thái',
+    createdAt: '2026-09-18 14:00:00',
+    reviewedAt: '2026-09-18 16:30:00'
+  }
+];
+
+// SEED: Attendance Regularization
+export const initialRegularizations: AttendanceRegularization[] = [
+  {
+    id: 'reg-01',
+    code: 'GTC-2026-001',
+    employeeId: 'emp-12',
+    employeeName: 'Lương Minh Quang',
+    employeeCode: 'AMIS-0012',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    date: '2026-09-21',
+    type: 'client_meeting',
+    suggestedCheckIn: '08:00',
+    suggestedCheckOut: '17:30',
+    reason: 'Gặp gỡ khách hàng ký hợp đồng phần mềm tại Hòa Lạc từ đầu giờ sáng',
+    attachmentName: 'BienBanLamViec_HoaLac.jpg',
+    status: 'pending',
+    createdAt: '2026-09-21 08:45:00'
+  },
+  {
+    id: 'reg-02',
+    code: 'GTC-2026-002',
+    employeeId: 'emp-07',
+    employeeName: 'Phạm Thị Hương Ly',
+    employeeCode: 'AMIS-0007',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    date: '2026-09-16',
+    type: 'forgot_checkout',
+    suggestedCheckIn: '07:55',
+    suggestedCheckOut: '17:40',
+    reason: 'Vội về đi khám bệnh nên quên quẹt thẻ chấm công ra lúc tan ca',
+    status: 'approved',
+    approverName: 'Vũ Quốc Thái',
+    createdAt: '2026-09-17 08:00:00',
+    reviewedAt: '2026-09-17 09:10:00'
+  }
+];
+
+// SEED: Geofence Locations
+export const initialGeofenceLocations: GeofenceLocation[] = [
+  {
+    id: 'geo-01',
+    name: 'Trụ sở AMIS Hà Nội (Tòa Technosoft Duy Tân)',
+    address: 'Tầng 9, Tòa Technosoft, Phố Duy Tân, Cầu Giấy, Hà Nội',
+    latitude: 21.0315,
+    longitude: 105.7832,
+    radiusMeters: 100,
+    allowedWifiBSSID: ['AMIS_CORP_5G', 'AMIS_GUEST', 'MISA_TECH_WIFI'],
+    isActive: true
+  },
+  {
+    id: 'geo-02',
+    name: 'Văn phòng Chi nhánh TP. Hồ Chí Minh',
+    address: 'Tòa nhà Bitexco, Bến Nghé, Quận 1, TP. Hồ Chí Minh',
+    latitude: 10.7719,
+    longitude: 106.7044,
+    radiusMeters: 150,
+    allowedWifiBSSID: ['AMIS_HCM_CORP', 'AMIS_HCM_5G'],
+    isActive: true
+  },
+  {
+    id: 'geo-03',
+    name: 'Văn phòng Chi nhánh Đà Nẵng',
+    address: 'Đường Nguyễn Văn Linh, Hải Châu, Đà Nẵng',
+    latitude: 16.0678,
+    longitude: 108.2208,
+    radiusMeters: 80,
+    allowedWifiBSSID: ['AMIS_DNG_WIFI'],
+    isActive: true
+  }
+];
+

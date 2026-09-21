@@ -1251,12 +1251,12 @@
       "departmentName": "Khối Công Nghệ & Kỹ Thuật",
       "positionTitle": "Lập trình viên Frontend (React)",
       "standardWorkDays": 22,
-      "actualWorkDays": 20,
+      "actualWorkDays": 21,
       "paidLeaveDays": 1,
       "baseSalary": 25000000,
       "allowanceTotal": 4300000,
       "otPay": 0,
-      "grossSalary": 27027273,
+      "grossSalary": 28163636,
       "bhxh": 2000000,
       "bhyt": 375000,
       "bhtn": 250000,
@@ -1264,11 +1264,11 @@
       "dependents": 1,
       "dependentDeduction": 4400000,
       "personalDeduction": 11000000,
-      "taxableIncome": 8272273,
-      "personalIncomeTax": 577227,
+      "taxableIncome": 9408636,
+      "personalIncomeTax": 690864,
       "bonus": 0,
       "deductionsOther": 0,
-      "netSalary": 23825046,
+      "netSalary": 24847772,
       "status": "approved",
       "paidDate": "2026-10-05"
     },
@@ -1560,5 +1560,3753 @@
     "bhtnRate": 1,
     "personalDeduction": 11000000,
     "dependentDeduction": 4400000
-  }
+  },
+  "shifts": [
+    {
+      "id": "shift-hc",
+      "code": "CA-HC",
+      "name": "Ca Hành Chính Tiêu Chuẩn",
+      "startTime": "08:00",
+      "endTime": "17:30",
+      "breakStartTime": "12:00",
+      "breakEndTime": "13:30",
+      "workHours": 8,
+      "coefficient": 1,
+      "color": "#0072BC",
+      "description": "Ca làm việc tiêu chuẩn khối văn phòng từ Thứ Hai đến Thứ Sáu"
+    },
+    {
+      "id": "shift-sang",
+      "code": "CA-SANG",
+      "name": "Ca Buổi Sáng",
+      "startTime": "08:00",
+      "endTime": "12:00",
+      "breakStartTime": "",
+      "breakEndTime": "",
+      "workHours": 4,
+      "coefficient": 0.5,
+      "color": "#10B981",
+      "description": "Ca làm việc 0.5 công buổi sáng"
+    },
+    {
+      "id": "shift-chieu",
+      "code": "CA-CHIEU",
+      "name": "Ca Buổi Chiều",
+      "startTime": "13:30",
+      "endTime": "17:30",
+      "breakStartTime": "",
+      "breakEndTime": "",
+      "workHours": 4,
+      "coefficient": 0.5,
+      "color": "#8B5CF6",
+      "description": "Ca làm việc 0.5 công buổi chiều"
+    },
+    {
+      "id": "shift-dem",
+      "code": "CA-DEM",
+      "name": "Ca Trực Đêm Hệ Thống (R&D/DevOps)",
+      "startTime": "22:00",
+      "endTime": "06:00",
+      "breakStartTime": "02:00",
+      "breakEndTime": "03:00",
+      "workHours": 8,
+      "coefficient": 1.3,
+      "color": "#F59E0B",
+      "description": "Ca trực ca đêm có hưởng phụ cấp làm đêm 30% theo luật"
+    }
+  ],
+  "monthlyTimesheets": [
+    {
+      "employeeId": "emp-01",
+      "employeeCode": "AMIS-0001",
+      "employeeName": "Trịnh Văn Cường",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Tổng Giám Đốc",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-02",
+      "employeeCode": "AMIS-0002",
+      "employeeName": "Vũ Quốc Thái",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Phó Tổng Giám Đốc Kỹ Thuật",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-07",
+      "employeeCode": "AMIS-0007",
+      "employeeName": "Phạm Thị Hương Ly",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Lập trình viên Frontend (React)",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đã đi làm bù công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-08",
+      "employeeCode": "AMIS-0008",
+      "employeeName": "Trần Gia Bảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Lập trình viên Backend (Node/Go)",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "L",
+          "workHours": 7.5,
+          "checkIn": "08:35",
+          "checkOut": "17:35",
+          "lateMinutes": 20,
+          "shiftCode": "CA-HC",
+          "notes": "Đi muộn 20 phút"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 1,
+      "totalLateMinutes": 20,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-09",
+      "employeeCode": "AMIS-0009",
+      "employeeName": "Bùi Thanh Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Trưởng nhóm Kiểm thử QA/QC",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-10",
+      "employeeCode": "AMIS-0010",
+      "employeeName": "Đỗ Anh Tuấn",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Lập trình viên Frontend (React)",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "OT",
+          "workHours": 11.5,
+          "checkIn": "07:55",
+          "checkOut": "21:30",
+          "shiftCode": "CA-HC",
+          "notes": "Làm thêm OT 3.5h triển khai release"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 3.5
+    },
+    {
+      "employeeId": "emp-11",
+      "employeeCode": "AMIS-0011",
+      "employeeName": "Ngô Hải Yến",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "positionTitle": "Trưởng nhóm Digital Marketing",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ ốm hưởng BHXH"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 20,
+      "totalPaidLeaves": 2,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-12",
+      "employeeCode": "AMIS-0012",
+      "employeeName": "Lương Minh Quang",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "positionTitle": "Chuyên viên Kinh doanh B2B",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "L",
+          "workHours": 7.5,
+          "checkIn": "08:35",
+          "checkOut": "17:35",
+          "lateMinutes": 20,
+          "shiftCode": "CA-HC",
+          "notes": "Đi muộn 20 phút"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 1,
+      "totalLateMinutes": 20,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-13",
+      "employeeCode": "AMIS-0013",
+      "employeeName": "Hoàng Kim Chi",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "positionTitle": "Chuyên viên C&B (Lương & Thưởng)",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-14",
+      "employeeCode": "AMIS-0014",
+      "employeeName": "Dương Thị Cẩm Tú",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "positionTitle": "Chuyên viên Tuyển dụng & Đào tạo",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-15",
+      "employeeCode": "AMIS-0015",
+      "employeeName": "Chu Văn Hùng",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "positionTitle": "Kế toán tổng hợp",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    },
+    {
+      "employeeId": "emp-16",
+      "employeeCode": "AMIS-0016",
+      "employeeName": "Lê Thùy Dung",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "positionTitle": "Chuyên viên Kinh doanh B2B",
+      "period": "2026-09",
+      "days": {
+        "1": {
+          "day": 1,
+          "date": "2026-09-01",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "2": {
+          "day": 2,
+          "date": "2026-09-02",
+          "status": "P",
+          "workHours": 8,
+          "shiftCode": "CA-HC",
+          "notes": "Nghỉ Quốc khánh 2/9 (Hưởng nguyên lương)"
+        },
+        "3": {
+          "day": 3,
+          "date": "2026-09-03",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "4": {
+          "day": 4,
+          "date": "2026-09-04",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "5": {
+          "day": 5,
+          "date": "2026-09-05",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "day": 6,
+          "date": "2026-09-06",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "day": 7,
+          "date": "2026-09-07",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "8": {
+          "day": 8,
+          "date": "2026-09-08",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "9": {
+          "day": 9,
+          "date": "2026-09-09",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "10": {
+          "day": 10,
+          "date": "2026-09-10",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "11": {
+          "day": 11,
+          "date": "2026-09-11",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "12": {
+          "day": 12,
+          "date": "2026-09-12",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "day": 13,
+          "date": "2026-09-13",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "day": 14,
+          "date": "2026-09-14",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "15": {
+          "day": 15,
+          "date": "2026-09-15",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "16": {
+          "day": 16,
+          "date": "2026-09-16",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "17": {
+          "day": 17,
+          "date": "2026-09-17",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "18": {
+          "day": 18,
+          "date": "2026-09-18",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "19": {
+          "day": 19,
+          "date": "2026-09-19",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "day": 20,
+          "date": "2026-09-20",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "day": 21,
+          "date": "2026-09-21",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "22": {
+          "day": 22,
+          "date": "2026-09-22",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "23": {
+          "day": 23,
+          "date": "2026-09-23",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "24": {
+          "day": 24,
+          "date": "2026-09-24",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "25": {
+          "day": 25,
+          "date": "2026-09-25",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "26": {
+          "day": 26,
+          "date": "2026-09-26",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "day": 27,
+          "date": "2026-09-27",
+          "status": "OFF",
+          "workHours": 0,
+          "shiftCode": "OFF",
+          "notes": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "day": 28,
+          "date": "2026-09-28",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "29": {
+          "day": 29,
+          "date": "2026-09-29",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        },
+        "30": {
+          "day": 30,
+          "date": "2026-09-30",
+          "status": "X",
+          "workHours": 8,
+          "checkIn": "07:50",
+          "checkOut": "17:35",
+          "shiftCode": "CA-HC",
+          "notes": "Đi làm đủ công"
+        }
+      },
+      "totalWorkDays": 21,
+      "totalPaidLeaves": 1,
+      "totalUnpaidLeaves": 0,
+      "totalLateTimes": 0,
+      "totalLateMinutes": 0,
+      "totalOTHours": 0
+    }
+  ],
+  "shiftSwaps": [
+    {
+      "id": "swap-01",
+      "code": "ĐCA-2026-001",
+      "employeeId": "emp-05",
+      "employeeName": "Lập trình viên Frontend (React)",
+      "employeeCode": "AMIS-0007",
+      "targetEmployeeId": "emp-10",
+      "targetEmployeeName": "Đỗ Anh Tuấn",
+      "targetEmployeeCode": "AMIS-0010",
+      "swapDate": "2026-09-24",
+      "fromShiftCode": "CA-HC",
+      "fromShiftName": "Ca Hành Chính",
+      "toShiftCode": "CA-CHIEU",
+      "toShiftName": "Ca Buổi Chiều",
+      "reason": "Bận việc gia đình buổi sáng tại quê",
+      "status": "pending",
+      "createdAt": "2026-09-21 08:15:00"
+    },
+    {
+      "id": "swap-02",
+      "code": "ĐCA-2026-002",
+      "employeeId": "emp-08",
+      "employeeName": "Trần Gia Bảo",
+      "employeeCode": "AMIS-0008",
+      "targetEmployeeId": "emp-06",
+      "targetEmployeeName": "Lê Hoàng Long",
+      "targetEmployeeCode": "AMIS-0006",
+      "swapDate": "2026-09-19",
+      "fromShiftCode": "CA-DEM",
+      "fromShiftName": "Ca Trực Đêm",
+      "toShiftCode": "CA-HC",
+      "toShiftName": "Ca Hành Chính",
+      "reason": "Đổi ca trực đêm hỗ trợ trực cơ sở dữ liệu cloud",
+      "status": "approved",
+      "approverName": "Vũ Quốc Thái",
+      "createdAt": "2026-09-18 14:00:00",
+      "reviewedAt": "2026-09-18 16:30:00"
+    }
+  ],
+  "regularizations": [
+    {
+      "id": "reg-01",
+      "code": "GTC-2026-001",
+      "employeeId": "emp-12",
+      "employeeName": "Lương Minh Quang",
+      "employeeCode": "AMIS-0012",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "date": "2026-09-21",
+      "type": "client_meeting",
+      "suggestedCheckIn": "08:00",
+      "suggestedCheckOut": "17:30",
+      "reason": "Gặp gỡ khách hàng ký hợp đồng phần mềm tại Hòa Lạc từ đầu giờ sáng",
+      "attachmentName": "BienBanLamViec_HoaLac.jpg",
+      "status": "pending",
+      "createdAt": "2026-09-21 08:45:00"
+    },
+    {
+      "id": "reg-02",
+      "code": "GTC-2026-002",
+      "employeeId": "emp-07",
+      "employeeName": "Phạm Thị Hương Ly",
+      "employeeCode": "AMIS-0007",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "date": "2026-09-16",
+      "type": "forgot_checkout",
+      "suggestedCheckIn": "07:55",
+      "suggestedCheckOut": "17:40",
+      "reason": "Vội về đi khám bệnh nên quên quẹt thẻ chấm công ra lúc tan ca",
+      "status": "approved",
+      "approverName": "Vũ Quốc Thái",
+      "createdAt": "2026-09-17 08:00:00",
+      "reviewedAt": "2026-09-17 09:10:00"
+    }
+  ],
+  "geofenceLocations": [
+    {
+      "id": "geo-01",
+      "name": "Trụ sở AMIS Hà Nội (Tòa Technosoft Duy Tân)",
+      "address": "Tầng 9, Tòa Technosoft, Phố Duy Tân, Cầu Giấy, Hà Nội",
+      "latitude": 21.0315,
+      "longitude": 105.7832,
+      "radiusMeters": 100,
+      "allowedWifiBSSID": [
+        "AMIS_CORP_5G",
+        "AMIS_GUEST",
+        "MISA_TECH_WIFI"
+      ],
+      "isActive": true
+    },
+    {
+      "id": "geo-02",
+      "name": "Văn phòng Chi nhánh TP. Hồ Chí Minh",
+      "address": "Tòa nhà Bitexco, Bến Nghé, Quận 1, TP. Hồ Chí Minh",
+      "latitude": 10.7719,
+      "longitude": 106.7044,
+      "radiusMeters": 150,
+      "allowedWifiBSSID": [
+        "AMIS_HCM_CORP",
+        "AMIS_HCM_5G"
+      ],
+      "isActive": true
+    },
+    {
+      "id": "geo-03",
+      "name": "Văn phòng Chi nhánh Đà Nẵng",
+      "address": "Đường Nguyễn Văn Linh, Hải Châu, Đà Nẵng",
+      "latitude": 16.0678,
+      "longitude": 108.2208,
+      "radiusMeters": 80,
+      "allowedWifiBSSID": [
+        "AMIS_DNG_WIFI"
+      ],
+      "isActive": true
+    }
+  ]
 }

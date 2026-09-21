@@ -192,10 +192,14 @@ misa-amis-hrms/
   7. *Lương & Ngân hàng:* Cơ cấu thu nhập, phụ cấp ăn trưa, xăng xe, trách nhiệm, số tài khoản ngân hàng chi trả lương.
 * **In Sơ yếu lý lịch:** Hỗ trợ xem và in sơ yếu lý lịch chuẩn phục vụ thanh kiểm tra.
 
-### 3. AMIS Chấm công & Điểm danh (Time & Attendance)
-* Giả lập chấm công trực tuyến qua vị trí GPS (văn phòng Cầu Giấy bán kính 15m) và Wifi công ty (`AMIS_CORP_5G`).
-* Nút "Vào ca" và "Ra ca" tiện dụng trên thanh Topbar. Tự động xác định trạng thái đi đúng giờ (trước 08:15) hoặc đi muộn.
-* Bảng theo dõi điểm danh ngày hôm nay (21/09/2026): Giờ vào, giờ ra, tổng thời gian làm việc thực tế, ghi chú giải trình.
+### 3. AMIS Chấm công & Quản lý Ca kíp Chuyên sâu (Time & Attendance Engine)
+* **Bảng chấm công tổng hợp tháng (Ma trận 30 ngày):** Theo dõi công chi tiết 30 ngày của toàn bộ nhân sự theo các ký hiệu chuẩn: `X` (Đủ công 8h), `L` (Đi muộn), `P` (Nghỉ phép/Lễ có lương), `KP` (Nghỉ không lương), `OT` (Tăng ca), `CT` (Công tác), `OFF` (Nghỉ tuần).
+* **Kiểm tra & Hiệu chỉnh ô công tức thì (Timesheet Inspector):** Nhấp chuột vào bất kỳ ô công nào để xem giờ check-in, check-out thực tế hoặc sửa công. **Hệ thống tự động liên kết cập nhật lại bảng lương của nhân sự ngay lập tức!**
+* **Quản lý danh mục Ca làm việc (Shift Definitions):** Định nghĩa linh hoạt Ca hành chính (08:00 - 17:30), Ca sáng (4h), Ca chiều (4h), Ca đêm (22:00 - 06:00, hệ số 1.3 có phụ cấp làm đêm 30% theo luật lao động).
+* **Đăng ký & Phê duyệt Đổi ca làm việc (Shift Swap Requests):** Nhân viên đăng ký đổi ca trực với đồng nghiệp, Quản lý phê duyệt trực tuyến 1-click.
+* **Đơn giải trình Chấm công / Bù công (Attendance Regularization):** Giải trình quên quẹt thẻ, lỗi thiết bị hoặc đi công tác ngoại tỉnh kèm ảnh minh chứng. Khi duyệt sẽ tự động bù đủ công.
+* **Cấu hình vị trí GPS Geofencing & Wifi:** Thiết lập bán kính cho phép quẹt thẻ (100m, 150m) tại các trụ sở Hà Nội, TP.HCM, Đà Nẵng và danh sách Wifi BSSID hợp lệ.
+* **Xuất Bảng chấm công 30 ngày ra file Excel (CSV).**
 
 ### 4. AMIS Đơn từ & Phê duyệt trực tuyến (Approval Workflow)
 * Hỗ trợ đầy đủ các loại đơn: *Nghỉ phép năm, Làm thêm giờ (OT 150%), Đi muộn/về sớm, Nghỉ ốm hưởng BHXH, Nghỉ không lương*.
