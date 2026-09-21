@@ -18,7 +18,7 @@ export interface Position {
 
 export interface ContractItem {
   id: string;
-  contractNumber: string; // e.g. "HĐLĐ-2023/MISA-01"
+  contractNumber: string; // e.g. "HĐLĐ-2023/AMIS-01"
   contractType: string; // "Hợp đồng thử việc", "Hợp đồng xác định thời hạn 12 tháng", "Hợp đồng xác định thời hạn 36 tháng", "Không xác định thời hạn"
   signDate: string;
   startDate: string;

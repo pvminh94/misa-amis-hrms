@@ -28,7 +28,7 @@ export const PayslipModal: React.FC<PayslipModalProps> = ({
         <div className="bg-[#0072BC] text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5" />
-            <h2 className="font-bold text-base">Phiếu Lương Điện Tử (MISA AMIS Payslip)</h2>
+            <h2 className="font-bold text-base">Phiếu Lương Điện Tử (AMIS Payslip)</h2>
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -53,7 +53,7 @@ export const PayslipModal: React.FC<PayslipModalProps> = ({
           <div className="flex items-start justify-between border-b border-slate-200 pb-4">
             <div>
               <div className="font-black text-sm text-[#0072BC] uppercase tracking-wide">
-                CÔNG TY CỔ PHẦN CÔNG NGHỆ VÀ TRUYỀN THÔNG MISA
+                CÔNG TY CỔ PHẦN CÔNG NGHỆ AMIS VIỆT NAM
               </div>
               <div className="text-[11px] text-slate-500 mt-0.5">
                 Tòa nhà Technosoft, Phố Duy Tân, Cầu Giấy, Hà Nội | MST: 0101243150

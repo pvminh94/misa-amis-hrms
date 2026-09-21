@@ -62,7 +62,7 @@ router.post('/', (req, res) => {
     const pos = positions.find((p) => p.id === data.positionId);
 
     const newEmp = db.createEmployee({
-      code: data.code || `MISA-${Math.floor(1000 + Math.random() * 9000)}`,
+      code: data.code || `AMIS-${Math.floor(1000 + Math.random() * 9000)}`,
       fullName: data.fullName,
       gender: data.gender || 'Nam',
       dob: data.dob || '1995-01-01',

@@ -109,7 +109,7 @@ export const PayrollView: React.FC<PayrollViewProps> = ({
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `Bang_luong_MISA_09_2026.csv`);
+    link.setAttribute('download', `Bang_luong_AMIS_09_2026.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

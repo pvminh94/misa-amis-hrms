@@ -92,12 +92,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="h-16 flex items-center px-4 border-b border-slate-800 justify-between">
         <div className="flex items-center gap-3 overflow-hidden cursor-pointer" onClick={() => onSelectTab('dashboard')}>
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#0072BC] to-sky-400 flex items-center justify-center font-black text-white text-lg shadow-lg flex-shrink-0">
-            M
+            A
           </div>
           {!collapsed && (
             <div className="leading-tight">
               <div className="font-extrabold text-sm tracking-tight text-white flex items-center gap-1.5">
-                MISA AMIS <span className="text-[10px] bg-[#0072BC] px-1.5 py-0.5 rounded text-white font-medium">HRM</span>
+                AMIS <span className="text-[10px] bg-[#0072BC] px-1.5 py-0.5 rounded text-white font-medium">HRM</span>
               </div>
               <div className="text-[10px] text-slate-400 font-medium">Quản trị Nhân sự 4.0</div>
             </div>
@@ -177,7 +177,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="bg-slate-800/60 rounded-xl p-3 border border-slate-700/60">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-200">
               <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>Tiêu chuẩn MISA 2026</span>
+              <span>Tiêu chuẩn AMIS 2026</span>
             </div>
             <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
               Tích hợp Luật Lao động & Quy định Thuế TNCN - BHXH hiện hành.

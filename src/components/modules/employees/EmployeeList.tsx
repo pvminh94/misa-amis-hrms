@@ -94,7 +94,7 @@ export const EmployeeList: React.FC<EmployeeListProps> = ({
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `Danh_sach_nhan_su_MISA_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `Danh_sach_nhan_su_AMIS_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

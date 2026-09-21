@@ -91,7 +91,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
             Bảng Chấm Công & Điểm Danh Trực Tuyến Hôm Nay (21/09/2026)
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Hỗ trợ ghi nhận GPS, Wifi văn phòng MISA, nhận diện ca làm việc 08:00 - 17:30
+            Hỗ trợ ghi nhận GPS, Wifi văn phòng AMIS, nhận diện ca làm việc 08:00 - 17:30
           </p>
         </div>
 
@@ -100,12 +100,12 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           <div className="space-y-1">
             <div className="flex items-center gap-1.5 text-xs text-slate-700 font-semibold">
               <MapPin className="w-3.5 h-3.5 text-rose-500" />
-              <span>Văn phòng MISA Cầu Giấy (Hà Nội)</span>
+              <span>Văn phòng AMIS Cầu Giấy (Hà Nội)</span>
             </div>
             <div className="flex items-center gap-2 text-[11px] text-slate-500">
               <span className="flex items-center gap-1 text-emerald-600 font-medium">
                 <Wifi className="w-3 h-3" />
-                MISA_CORP_5G
+                AMIS_CORP_5G
               </span>
               <span>•</span>
               <span className="text-slate-600">Bán kính: 15m (Hợp lệ)</span>

@@ -1,128 +1,290 @@
-# TỔNG QUAN KIẾN TRÚC HỆ THỐNG MISA AMIS HRM CLONE
-## Nền Tảng Quản Trị Nguồn Nhân Lực Doanh Nghiệp Toàn Diện
+# AMIS HRM - Nền Tảng Quản Trị Nguồn Nhân Lực Toàn Diện
+
+> **AMIS HRM Enterprise** là giải pháp phần mềm quản lý nhân sự chuyên nghiệp bằng tiếng Việt, được thiết kế chuẩn mực theo mô hình SaaS quản trị doanh nghiệp hiện đại. Phần mềm tích hợp đầy đủ các phân hệ cốt lõi: Hồ sơ nhân sự chuyên sâu, Chấm công ca kíp, Đơn từ phê duyệt online, Tiền lương chuẩn luật Thuế & BHXH Việt Nam, Cơ cấu tổ chức và Thiết lập hệ thống.
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Express](https://img.shields.io/badge/Node.js-Express_5-000000?logo=express&logoColor=white)](https://expressjs.com/)
 
 ---
 
-### I. PHÂN TÍCH YÊU CẦU & LỰA CHỌN CÔNG NGHỆ (TECH STACK)
+## 📋 MỤC LỤC
 
-Để xây dựng một phần mềm quản lý nhân sự (HRMS) chuẩn hóa theo mô hình **MISA AMIS HRM** — bộ giải pháp SaaS doanh nghiệp phổ biến nhất tại Việt Nam — hệ thống cần đáp ứng các tiêu chí cốt lõi:
-1. **Đặc thù pháp lý & nghiệp vụ Việt Nam:** Tính lương Gross/Net, trích nộp BHXH (8%), BHYT (1.5%), BHTN (1%), mức giảm trừ gia cảnh thuế TNCN (Bản thân 11.000.000 VNĐ, người phụ thuộc 4.400.000 VNĐ/người) và biểu thuế lũy tiến từng phần.
-2. **Trải nghiệm giao diện chuẩn Enterprise ERP:** Tone màu nhận diện MISA Blue (`#0072BC`), giao diện gọn gàng, hệ thống bảng dữ liệu mật độ cao (Data Grid), bộ lọc đa tiêu chí, modal đa tab và phiếu lương điện tử có thể in ấn.
-3. **Khả năng mở rộng theo từng module độc lập:** Kiến trúc phân tầng rõ ràng giúp đội ngũ phát triển dễ dàng phát triển sâu từng tính năng con (Hồ sơ, Chấm công, Tiền lương, Đơn từ, Đánh giá, Tuyển dụng).
-
-#### Bộ công nghệ được lựa chọn:
-* **Frontend:** 
-  * `React 18` + `TypeScript`: Đảm bảo độ tin cậy về kiểu dữ liệu (Type-Safety) cho các mô hình nhân sự phức tạp.
-  * `Vite v8`: Tốc độ khởi động siêu nhanh (<500ms), Hot-Module-Replacement tức thì.
-  * `Tailwind CSS v4`: Hệ thống class tiện ích linh hoạt, dễ dàng tùy biến theo chuẩn Design System MISA.
-  * `Lucide React`: Thư viện icon đồng bộ, chuẩn ứng dụng quản trị doanh nghiệp.
-* **Backend:** 
-  * `Node.js` + `Express` (RESTful API): Kiến trúc phân tách theo domain (Employees, Attendance, Leaves, Payroll, Departments, Settings).
-  * `tsx`: Thực thi TypeScript trực tiếp không cần build trung gian.
-* **Database & Persistence:**
-  * Engine lưu trữ file JSON có cấu trúc (`server/data/db.json`) kèm bộ dữ liệu mẫu (Seed Data) phong phú, chân thực gồm 16+ cán bộ nhân viên, bảng chấm công tháng 09/2026, các loại hợp đồng lao động và bảng lương tự động. Dễ dàng chuyển dịch sang PostgreSQL/MySQL/Prisma.
+1. [Yêu cầu môi trường](#-1-yêu-cầu-môi-trường)
+2. [Hướng dẫn tải về và cài đặt](#-2-hướng-dẫn-tải-về-và-cài-đặt-chi-tiết)
+3. [Tài khoản kiểm thử có sẵn](#-3-tài-khoản-kiểm-thử-có-sẵn)
+4. [Các lệnh vận hành (NPM Scripts)](#-4-các-lệnh-vận-hành-npm-scripts)
+5. [Cấu trúc thư mục dự án](#-5-cấu-trúc-thư-mục-dự-án)
+6. [Tổng quan các phân hệ chức năng](#-6-tổng-quan-các-phân-hệ-chức-năng)
+7. [Hướng dẫn triển khai Production](#-7-hướng-dẫn-triển-khai-production)
+8. [Khắc phục sự cố thường gặp (FAQ)](#-8-khắc-phục-sự-cố-thường-gặp-faq)
 
 ---
 
-### II. HỆ THỐNG PHÂN HỆ ĐÃ ĐƯỢC XÂY DỰNG HOÀN CHỈNH
+## 💻 1. Yêu cầu Môi trường
 
-Hệ thống nền tảng hiện tại bao gồm đầy đủ 7 phân hệ chính mô phỏng theo **MISA AMIS HRM**:
+Trước khi cài đặt, vui lòng đảm bảo máy tính của bạn đã cài đặt các công cụ sau:
 
-#### 1. Tổng quan Nhân sự (HR Dashboard)
-* Thống kê quân số: Tổng số nhân sự, số lượng nhân sự chính thức, số lượng thử việc.
-* Thống kê chấm công thời gian thực: Tỷ lệ chuyên cần trong ngày, số người đúng giờ, đi muộn, nghỉ phép.
-* Cảnh báo tự động:
-  * Nhân sự sắp hết hạn hợp đồng lao động / thử việc (kèm nút tái ký nhanh).
-  * Danh sách sinh nhật nhân sự trong tháng (tháng 9 & 10/2026).
-* Biểu đồ cơ cấu nhân sự theo Phòng ban & Khối chuyên môn.
-* Tổng quỹ lương thực chi trong tháng.
-
-#### 2. AMIS Thông tin nhân sự (HR Records)
-* Danh bạ hồ sơ nhân sự dạng lưới (Data Grid) trực quan với Avatar, Mã NV, Phòng ban, Vị trí, Số điện thoại, Email, Loại hợp đồng, Trạng thái làm việc.
-* Thanh công cụ tìm kiếm tức thì và bộ lọc kết hợp theo Phòng ban & Trạng thái (Đang làm việc, Thử việc, Nghỉ chế độ, Đã nghỉ).
-* Modal chi tiết hồ sơ nhân sự (Dossier) chia làm 4 tab chuyên sâu:
-  1. **Sơ yếu lý lịch:** Họ tên, Giới tính, Ngày sinh, Học vấn, CCCD 12 số, Ngày cấp, Nơi cấp, SĐT, Email công ty, Địa chỉ thường trú, Quê quán.
-  2. **Vị trí & Hợp đồng:** Mã NV, Đơn vị trực thuộc, Chức danh, Ngày vào làm việc, Loại HĐLĐ (vô thời hạn, 12 tháng, 36 tháng, thử việc), Thời hạn HĐ.
-  3. **Lương, Thuế & BHXH:** Mức lương cơ bản đóng BHXH, Phụ cấp trách nhiệm, Phụ cấp ăn trưa, Phụ cấp xăng xe, Số người phụ thuộc, MST cá nhân, Số sổ BHXH.
-  4. **Tài khoản ngân hàng:** Số tài khoản nhận lương, Ngân hàng, Chi nhánh.
-* Thêm mới / Chỉnh sửa hồ sơ nhân sự với form nhập liệu đầy đủ validation.
-* Xuất dữ liệu nhân sự ra file Excel (CSV chuẩn UTF-8).
-
-#### 3. AMIS Chấm công (Time & Attendance)
-* Công cụ giả lập chấm công trực tuyến:
-  * Nhận diện văn phòng MISA Cầu Giấy (bán kính GPS 15m, Wifi nội bộ `MISA_CORP_5G`).
-  * Nút "Vào ca" và "Ra ca" nhanh ngay trên Navbar và trong phân hệ chấm công.
-  * Tự động xác định trạng thái: Đi đúng giờ (trước 08:15) hoặc Đi muộn (sau 08:15).
-* Bảng theo dõi điểm danh ngày hôm nay (21/09/2026): Giờ check-in, Giờ check-out, Tổng giờ làm việc thực tế, Trạng thái và Ghi chú giải trình.
-* Bộ lọc theo phòng ban và tìm kiếm nhân viên.
-
-#### 4. AMIS Đơn từ & Phê duyệt (Approval Workflow)
-* Hỗ trợ các loại hình đơn từ doanh nghiệp:
-  * Đơn xin nghỉ phép năm (Hưởng nguyên lương).
-  * Đơn đăng ký làm thêm giờ (OT 150%).
-  * Đơn giải trình Đi muộn / Về sớm.
-  * Đơn xin nghỉ ốm đau (Hưởng trợ cấp BHXH).
-  * Đơn xin nghỉ việc riêng không hưởng lương.
-* Bộ lọc trạng thái đơn: Tất cả, Chờ phê duyệt, Đã phê duyệt, Đã từ chối.
-* Phê duyệt trực tuyến: Quản lý hoặc Admin có thể duyệt nhanh hoặc từ chối kèm ghi chú.
-* Form gửi đơn mới thân thiện, trực quan.
-
-#### 5. AMIS Tiền lương & Thuế TNCN (Payroll & Payslip)
-* Bảng tính lương tự động tháng 09/2026:
-  * Lương Gross = (Lương cơ bản / 22 ngày công * Công thực tế) + Tổng phụ cấp + Lương OT.
-  * Trích nộp BHXH bắt buộc theo luật Việt Nam: BHXH 8%, BHYT 1.5%, BHTN 1% = 10.5%.
-  * Giảm trừ thuế TNCN: Bản thân 11.000.000 VNĐ + 4.400.000 VNĐ x Số người phụ thuộc.
-  * Biểu thuế lũy tiến từng phần theo đúng 7 bậc thuế thu nhập cá nhân Việt Nam.
-  * Lương thực lĩnh (Net) minh bạch.
-* Thao tác nghiệp vụ:
-  * "Khóa & Chốt bảng lương"
-  * "Xác nhận chi trả lương"
-  * "Xuất bảng lương ra Excel (CSV)"
-* Phiếu lương điện tử (Payslip): Hiển thị chi tiết từng khoản mục Thu nhập, Giảm trừ, Thuế TNCN, Thực lĩnh, hỗ trợ nút "In phiếu lương" theo mẫu chứng từ chuẩn.
-
-#### 6. Cơ cấu tổ chức (Organization Structure)
-* Sơ đồ phân cấp các Khối/Phòng ban trong doanh nghiệp: Ban Giám Đốc, Khối Công Nghệ & Kỹ Thuật, Khối Kinh Doanh, Khối Nhân Sự & Vận Hành, Phòng Kế Toán.
-* Khung vị trí chức danh công việc tiêu chuẩn kèm định biên cấp bậc (Director, Manager, Leader, Senior, Middle).
-* Chức năng thêm mới phòng ban vào sơ đồ tổ chức.
-
-#### 7. Thiết lập hệ thống (System Settings)
-* Cấu hình thông tin pháp nhân doanh nghiệp (Tên công ty, MST, Địa chỉ trụ sở, Hotline, Email, Website).
-* Cấu hình giờ làm việc hành chính: 08:00 - 17:30, Nghỉ trưa 12:00 - 13:30, Ngày công chuẩn 22 ngày.
-* Cấu hình tỷ lệ trích nộp bảo hiểm và mức giảm trừ gia cảnh thuế TNCN.
-* Ma trận phân quyền 3 cấp độ:
-  * **Admin (Quản trị viên):** Toàn quyền kiểm soát hệ thống, phê duyệt bảng lương, cài đặt.
-  * **Manager (Trưởng phòng):** Theo dõi công và duyệt đơn từ của nhân viên trực thuộc.
-  * **Employee (Nhân viên):** Chấm công cá nhân, nộp đơn từ, tra cứu phiếu lương cá nhân.
-* Bộ chuyển đổi góc nhìn vai trò (Role Switcher) ngay trên thanh công cụ để trải nghiệm trực tiếp góc nhìn của từng đối tượng người dùng.
+* **Node.js**: Phiên bản **>= 18.0.0** (Khuyến nghị dùng bản LTS: Node.js 20.x hoặc 22.x).
+  * Kiểm tra phiên bản: `node -v`
+* **NPM**: Phiên bản **>= 9.0.0** (đi kèm Node.js).
+  * Kiểm tra phiên bản: `npm -v`
+* **Git**: Dùng để tải mã nguồn.
+  * Kiểm tra phiên bản: `git -v`
+* **Hệ điều hành hỗ trợ**: Windows 10/11, macOS, Linux (Ubuntu, Debian, CentOS...).
 
 ---
 
-### III. KẾ HOẠCH MỞ RỘNG TỪNG MODULE CHI TIẾT (ROADMAP)
+## 🚀 2. Hướng dẫn Tải về và Cài đặt Chi tiết
 
-Đúng theo định hướng yêu cầu của bạn ("còn từng tính năng module chi tiết thì mình sẽ làm sau từ chức năng một"), hệ thống đã được kiến trúc hóa sẵn sàng để chúng ta đi sâu vào từng tính năng cụ thể tiếp theo:
+Chỉ với **4 bước đơn giản**, bạn có thể tải về và chạy ứng dụng cục bộ trên máy tính:
 
-1. **Giai đoạn 1: Chuyên sâu AMIS Thông tin nhân sự**
-   * Quản lý hợp đồng lao động điện tử (Tạo phụ lục hợp đồng, cảnh báo hợp đồng sắp đáo hạn tự động qua email).
-   * Lịch sử quá trình công tác: Quyết định bổ nhiệm, thăng chức, điều chuyển phòng ban, tăng lương định kỳ.
-   * Hồ sơ đính kèm: Upload tài liệu số (File scan CCCD, bằng đại học, chứng chỉ chuyên môn, sơ yếu lý lịch có công chứng).
-   * Khen thưởng & Kỷ luật theo quyết định ban giám đốc.
+### Bước 1: Clone (Tải) mã nguồn từ GitHub về máy
+Mở Terminal / PowerShell / Command Prompt trên máy tính của bạn và chạy lệnh:
 
-2. **Giai đoạn 2: Chuyên sâu AMIS Chấm công & Ca kíp**
-   * Quản lý phân ca làm việc phức tạp (Ca xoay 3 ca 4 kíp, ca gãy, ca đêm có phụ cấp ca đêm 30%).
-   * Tích hợp đồng bộ dữ liệu từ máy chấm công vân tay / khuôn mặt (ZKTeco, Ronald Jack qua TCP/IP hoặc REST API).
-   * Cơ chế đăng ký đổi ca giữa các nhân viên và giải trình công có đính kèm ảnh chụp hiện trường.
+```bash
+git clone https://github.com/pvminh94/misa-amis-hrms.git
+```
 
-3. **Giai đoạn 3: Chuyên sâu AMIS Tiền lương & Thuế**
-   * Trình thiết kế công thức lương động (Formula Builder giống Excel: hỗ trợ hàm IF, SUM, LOOKUP, KPI bonus).
-   * Quản lý tạm ứng lương giữa tháng và tự động cấn trừ khi chốt bảng lương cuối tháng.
-   * Quyết toán thuế TNCN cuối năm (Tờ khai quyết toán thuế TNCN mẫu 05/QTT-TNCN theo quy định Tổng cục Thuế).
-   * Xuất file ủy nhiệm chi thanh toán lương qua ngân hàng (Vietcombank, Techcombank, BIDV, MB Bank theo định dạng file chuẩn của từng ngân hàng).
+Sau khi clone xong, chuyển vào thư mục dự án:
 
-4. **Giai đoạn 4: AMIS Đánh giá hiệu suất & KPI / OKRs**
-   * Thiết lập chu kỳ đánh giá (Đánh giá tháng, quý, năm hoặc 360 độ).
-   * Giao chỉ tiêu KPI/OKR từ cấp công ty xuống phòng ban và từng cá nhân.
-   * Tính toán điểm đánh giá tự động liên kết trực tiếp vào hệ số thưởng lương.
+```bash
+cd misa-amis-hrms
+```
 
-5. **Giai đoạn 5: AMIS Tuyển dụng (Recruitment)**
-   * Quản lý tin tuyển dụng và chiến dịch thu hút nhân tài.
-   * Phễu ứng viên (Ứng tuyển -> Sơ loại hồ sơ -> Phỏng vấn vòng 1 -> Phỏng vấn chuyên môn -> Offer -> Tiếp nhận nhân sự mới (Onboarding)).
+---
+
+### Bước 2: Cài đặt các thư viện phụ thuộc (Dependencies)
+Cài đặt toàn bộ các gói thư viện frontend và backend:
+
+```bash
+npm install
+```
+
+> **Mẹo:** Quá trình cài đặt thường mất khoảng 30 - 60 giây tùy thuộc tốc độ mạng internet của bạn.
+
+---
+
+### Bước 3: Khởi chạy môi trường phát triển (Development)
+Chạy lệnh duy nhất để khởi động đồng thời cả Backend API và Frontend Dev Server:
+
+```bash
+npm run dev
+```
+
+Khi chạy thành công, Terminal sẽ hiển thị:
+```text
+[0] [HRMS Backend] Server listening on http://0.0.0.0:5000
+[1] VITE v8.x.x  ready in 400 ms
+[1] ➜  Local:   http://localhost:3000/
+[1] ➜  Network: http://...:3000/
+```
+
+---
+
+### Bước 4: Mở trình duyệt và trải nghiệm
+Mở trình duyệt web bất kỳ (Chrome, Edge, Firefox, Safari) và truy cập:
+
+👉 **[http://localhost:3000](http://localhost:3000)**
+
+* Frontend chạy tại: `http://localhost:3000`
+* Backend API tự động chạy ngầm tại: `http://localhost:5000` (được cấu hình proxy tự động qua Vite `/api`).
+
+---
+
+## 👥 3. Tài khoản Kiểm thử Có sẵn
+
+Hệ thống đã tích hợp sẵn tính năng **Chuyển đổi vai trò (Role Switcher)** ngay góc trên bên phải thanh Menu:
+
+| Vai trò | Người dùng đại diện | Mã NV | Mô tả quyền hạn |
+| :--- | :--- | :--- | :--- |
+| **Quản trị viên (Admin)** | Trịnh Văn Cường | `AMIS-0001` | **Toàn quyền:** Quản lý tất cả hồ sơ, ký hợp đồng, duyệt đơn, chốt và chi trả bảng lương, cấu hình công ty. |
+| **Trưởng phòng (Manager)** | Vũ Quốc Thái | `AMIS-0002` | **Quản lý bộ phận:** Xem danh bạ nhân sự, phê duyệt/từ chối đơn xin nghỉ phép, OT, xem công của nhóm. |
+| **Nhân viên (Employee)** | Phạm Thị Hương Ly | `AMIS-0007` | **Cá nhân:** Chấm công GPS/Wifi, xem hồ sơ cá nhân, nộp đơn xin nghỉ/OT, tra cứu phiếu lương cá nhân. |
+
+---
+
+## 🛠 4. Các Lệnh Vận hành (NPM Scripts)
+
+Trong file `package.json`, các lệnh quản trị được định nghĩa rõ ràng:
+
+| Lệnh | Ý nghĩa chức năng |
+| :--- | :--- |
+| `npm run dev` | **(Khuyến nghị)** Khởi chạy đồng thời cả Backend Express (kèm tự động tải lại `tsx watch`) và Frontend Vite (`port 3000`). |
+| `npm run server` | Chỉ khởi chạy riêng Backend API trên cổng `5000`. |
+| `npm run client` | Chỉ khởi chạy riêng Frontend Vite trên cổng `3000`. |
+| `npm run build` | Biên dịch toàn bộ mã nguồn TypeScript & đóng gói sản phẩm ra thư mục `/dist` cho môi trường Production. |
+| `npm run preview` | Chạy thử nghiệm sản phẩm đã được build trong thư mục `/dist`. |
+
+---
+
+## 📂 5. Cấu trúc Thư mục Dự án
+
+```text
+misa-amis-hrms/
+├── server/                    # MÃ NGUỒN BACKEND (NODE.JS + EXPRESS + TYPESCRIPT)
+│   ├── data/
+│   │   ├── db.json            # Cơ sở dữ liệu JSON lưu trữ bền vững (Tự động cập nhật)
+│   │   └── seedData.ts        # Bộ dữ liệu khởi tạo phong phú (16+ nhân sự mẫu, bảng lương, chấm công)
+│   ├── routes/                # Các Router RESTful API tách theo domain nghiệp vụ
+│   │   ├── employees.ts       # API hồ sơ nhân sự, hợp đồng, thăng tiến, người phụ thuộc
+│   │   ├── attendance.ts      # API chấm công vào/ra ca, bảng điểm danh
+│   │   ├── leaves.ts          # API đơn từ & luồng phê duyệt trực tuyến
+│   │   ├── payroll.ts         # API tính lương tự động, thuế TNCN, BHXH, phiếu lương
+│   │   ├── departments.ts     # API cơ cấu phòng ban & chức danh
+│   │   ├── settings.ts        # API cấu hình tham số hệ thống
+│   │   └── dashboard.ts       # API số liệu thống kê & cảnh báo
+│   ├── db.ts                  # Data Store Engine (CRUD, Transaction, tự động tính thuế/công)
+│   ├── index.ts               # File khởi chạy Express Server (Port 5000)
+│   └── types.ts               # TypeScript interfaces định nghĩa cấu trúc dữ liệu Backend
+│
+├── src/                       # MÃ NGUỒN FRONTEND (REACT 18 + TYPESCRIPT + VITE)
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx     # Thanh điều hướng trên cùng (Đồng hồ, Điểm danh nhanh, Thông báo, Đổi vai trò)
+│   │   │   └── Sidebar.tsx    # Thanh menu bên trái (Có thể thu gọn/mở rộng, huy hiệu thông báo)
+│   │   └── modules/           # CÁC PHÂN HỆ QUẢN TRỊ NGHIỆP VỤ
+│   │       ├── dashboard/     # Phân hệ Tổng quan: KPI, biểu đồ cơ cấu, sinh nhật, cảnh báo HĐLĐ
+│   │       ├── employees/     # Phân hệ Hồ sơ nhân sự: Danh bạ, Form thêm mới, Modal Dossier 7 tabs
+│   │       ├── attendance/    # Phân hệ Chấm công: Giả lập GPS/Wifi, bảng công thời gian thực
+│   │       ├── leaves/        # Phân hệ Đơn từ: Nghỉ phép, OT 150%, Đi muộn, Modal duyệt
+│   │       ├── payroll/       # Phân hệ Tiền lương: Bảng lương tự động, Phiếu lương Payslip (có in)
+│   │       ├── organization/  # Phân hệ Cơ cấu tổ chức: Sơ đồ phòng ban, chức danh
+│   │       └── settings/      # Phân hệ Thiết lập: Giờ làm việc, tỷ lệ BHXH, mức giảm trừ gia cảnh
+│   ├── context/
+│   │   ├── AuthContext.tsx    # Quản lý phiên làm việc & phân quyền (Admin / Manager / Employee)
+│   │   └── ToastContext.tsx   # Hệ thống thông báo nổi (Toast Notification) thời gian thực
+│   ├── services/
+│   │   └── api.ts             # API Client giao tiếp đồng bộ với Backend
+│   ├── types/
+│   │   └── index.ts           # Định nghĩa Typescript toàn bộ ứng dụng Frontend
+│   ├── App.tsx                # Ứng dụng gốc kết nối toàn bộ luồng nghiệp vụ
+│   ├── main.tsx               # Entry point khởi tạo React DOM
+│   └── index.css              # Cấu hình Tailwind CSS v4 & theme AMIS
+│
+├── index.html                 # Trang chủ HTML chuẩn SEO tiếng Việt
+├── package.json               # Cấu hình gói và tập lệnh NPM
+├── tsconfig.json              # Cấu hình TypeScript Compiler
+└── vite.config.ts             # Cấu hình Vite Dev Server & Proxy API
+```
+
+---
+
+## 🌟 6. Tổng quan Các Phân hệ Chức năng
+
+### 1. Tổng quan Nhân sự (HR Dashboard)
+* **Bảng chỉ số KPI điều hành:** Số lượng nhân viên chính thức, thử việc, tỷ lệ chuyên cần hôm nay, đơn chờ duyệt, tổng quỹ lương thực chi trong tháng.
+* **Biểu đồ phân bổ nguồn lực:** Tỷ lệ phần trăm nhân sự trực thuộc các khối phòng ban.
+* **Cảnh báo thông minh:** Nhân sự sắp hết hạn hợp đồng / thử việc (kèm nút tái ký nhanh), sinh nhật trong tháng.
+
+### 2. Quản trị Hồ sơ & Vòng đời Nhân sự (AMIS HR Records)
+* **Danh bạ nhân viên:** Tìm kiếm tức thì, lọc theo phòng ban và trạng thái làm việc, xuất Excel (CSV).
+* **Hồ sơ nhân viên điện tử chuyên sâu (7 Tabs nghiệp vụ):**
+  1. *Sơ yếu lý lịch:* CCCD 12 số, ngày cấp, nơi cấp, ngày sinh, nguyên quán, hộ khẩu thường trú, học vấn.
+  2. *Hợp đồng & Phụ lục (Contracts):* Xem toàn bộ lịch sử hợp đồng lao động qua các thời kỳ, ký mới HĐLĐ hoặc phụ lục điều chỉnh lương trực tuyến.
+  3. *Quá trình công tác (Work History Timeline):* Dòng thời gian thăng tiến, bổ nhiệm, điều chuyển phòng ban, nâng bậc lương. **Tự động cập nhật mức lương mới vào bảng lương**.
+  4. *Người phụ thuộc thuế (Tax Dependents):* Đăng ký người phụ thuộc giảm trừ gia cảnh. **Tự động áp dụng mức giảm trừ 4.400.000 VNĐ/người vào phân hệ Tiền lương**.
+  5. *Sổ Khen thưởng & Kỷ luật:* Lưu vết thành tích thi đua khen thưởng và các chế tài kỷ luật lao động.
+  6. *Kho Chứng từ số hóa:* Lưu trữ bản scan CCCD, bằng cấp, chứng chỉ, hợp đồng gốc có chữ ký.
+  7. *Lương & Ngân hàng:* Cơ cấu thu nhập, phụ cấp ăn trưa, xăng xe, trách nhiệm, số tài khoản ngân hàng chi trả lương.
+* **In Sơ yếu lý lịch:** Hỗ trợ xem và in sơ yếu lý lịch chuẩn phục vụ thanh kiểm tra.
+
+### 3. AMIS Chấm công & Điểm danh (Time & Attendance)
+* Giả lập chấm công trực tuyến qua vị trí GPS (văn phòng Cầu Giấy bán kính 15m) và Wifi công ty (`AMIS_CORP_5G`).
+* Nút "Vào ca" và "Ra ca" tiện dụng trên thanh Topbar. Tự động xác định trạng thái đi đúng giờ (trước 08:15) hoặc đi muộn.
+* Bảng theo dõi điểm danh ngày hôm nay (21/09/2026): Giờ vào, giờ ra, tổng thời gian làm việc thực tế, ghi chú giải trình.
+
+### 4. AMIS Đơn từ & Phê duyệt trực tuyến (Approval Workflow)
+* Hỗ trợ đầy đủ các loại đơn: *Nghỉ phép năm, Làm thêm giờ (OT 150%), Đi muộn/về sớm, Nghỉ ốm hưởng BHXH, Nghỉ không lương*.
+* Bộ lọc trạng thái: *Chờ duyệt, Đã duyệt, Từ chối*.
+* Phê duyệt nhanh kèm ghi chú từ cấp quản lý.
+
+### 5. AMIS Tiền lương & Thuế TNCN (Payroll & Payslip)
+* **Tự động hóa 100% theo Luật Lao động & Thuế Việt Nam:**
+  * Lương Gross = (Lương cơ bản / 22 ngày công * Ngày công thực tế) + Các khoản phụ cấp + Lương làm thêm OT.
+  * Trích nộp BHXH bắt buộc: BHXH 8%, BHYT 1.5%, BHTN 1% = **10.5%**.
+  * Giảm trừ gia cảnh Thuế TNCN: Bản thân **11.000.000 VNĐ** + Người phụ thuộc **4.400.000 VNĐ/người**.
+  * Tính thuế TNCN theo đúng **biểu thuế lũy tiến từng phần 7 bậc**.
+* Nghiệp vụ: Khóa & Chốt bảng lương, Xác nhận chi trả, Xuất bảng lương ra Excel.
+* **Phiếu lương điện tử (Payslip):** Minh bạch từng khoản mục thu nhập, giảm trừ, thực lĩnh nhận về và hỗ trợ nút **In phiếu lương**.
+
+### 6. Cơ cấu tổ chức & Thiết lập hệ thống (Organization & Settings)
+* Sơ đồ phân cấp các Khối / Phòng ban.
+* Khung chức danh và tiêu chuẩn cấp bậc chuyên môn.
+* Cấu hình tham số doanh nghiệp, thời gian ca làm việc hành chính, tỷ lệ bảo hiểm và mức giảm trừ thuế.
+
+---
+
+## 🚢 7. Hướng dẫn Triển khai Production
+
+### Cách 1: Chạy trực tiếp trên VPS/Server với PM2
+Nếu bạn muốn triển khai hệ thống lên máy chủ Linux/Ubuntu:
+
+1. **Build mã nguồn:**
+   ```bash
+   npm run build
+   ```
+2. **Cài đặt PM2 để quản lý tiến trình:**
+   ```bash
+   npm install -g pm2
+   ```
+3. **Khởi chạy Backend với PM2:**
+   ```bash
+   pm2 start "npx tsx server/index.ts" --name "amis-hrms-api"
+   ```
+4. **Cấu hình Nginx reverse proxy** để chuyển tiếp cổng `80/443` vào thư mục tĩnh `/dist` và chuyển tiếp `/api` đến cổng `5000`.
+
+---
+
+### Cách 2: Triển khai với Docker & Docker Compose
+Tạo file `Dockerfile` trong thư mục gốc:
+
+```dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000 5000
+CMD ["npm", "run", "dev"]
+```
+
+Khởi chạy bằng Docker:
+```bash
+docker build -t amis-hrms .
+docker run -p 3000:3000 -p 5000:5000 amis-hrms
+```
+
+---
+
+## ❓ 8. Khắc phục Sự cố Thường gặp (FAQ)
+
+#### Q1: Tôi gặp lỗi `Error: listen EADDRINUSE: address already in use :::3000` hoặc `:::5000`?
+* **Nguyên nhân:** Cổng 3000 hoặc 5000 đang bị một ứng dụng khác chiếm dụng trên máy bạn.
+* **Cách khắc phục:**
+  * Trên Windows (PowerShell):
+    ```powershell
+    Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process
+    Get-Process -Id (Get-NetTCPConnection -LocalPort 5000).OwningProcess | Stop-Process
+    ```
+  * Trên macOS/Linux:
+    ```bash
+    kill -9 $(lsof -t -i:3000)
+    kill -9 $(lsof -t -i:5000)
+    ```
+
+#### Q2: Sau khi chạy `npm run dev`, trình duyệt mở ra trang trắng hoặc báo không tìm thấy API?
+* **Cách khắc phục:** Đảm bảo bạn mở đúng địa chỉ `http://localhost:3000`. Cấu hình proxy trong file `vite.config.ts` sẽ tự động chuyển tiếp tất cả các yêu cầu `/api` sang backend cổng `5000`.
+
+#### Q3: Dữ liệu tôi thêm mới có bị mất khi khởi động lại máy không?
+* **Trả lời:** Không! Tất cả dữ liệu (nhân viên, bảng chấm công, người phụ thuộc, hợp đồng, bảng lương) được lưu trữ bền vững tại file `server/data/db.json` theo cơ chế tự động ghi đồng bộ.
+
+---
+
+## 📄 Bản quyền & Đóng góp
+Dự án được xây dựng và phát triển phục vụ công tác quản trị nguồn nhân lực doanh nghiệp.
+Mọi đóng góp (Pull Request / Issue) vui lòng gửi trực tiếp tại GitHub: [https://github.com/pvminh94/misa-amis-hrms](https://github.com/pvminh94/misa-amis-hrms).

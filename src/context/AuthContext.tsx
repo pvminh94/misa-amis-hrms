@@ -22,7 +22,7 @@ const defaultUsers: Record<UserRole, AuthUser> = {
   admin: {
     id: 'emp-01',
     name: 'Trịnh Văn Cường',
-    code: 'MISA-0001',
+    code: 'AMIS-0001',
     title: 'Tổng Giám Đốc / Admin',
     department: 'Ban Giám Đốc',
     role: 'admin',
@@ -31,7 +31,7 @@ const defaultUsers: Record<UserRole, AuthUser> = {
   manager: {
     id: 'emp-02',
     name: 'Vũ Quốc Thái',
-    code: 'MISA-0002',
+    code: 'AMIS-0002',
     title: 'Phó TGĐ / Trưởng Khối Tech',
     department: 'Khối Công Nghệ & Kỹ Thuật',
     role: 'manager',
@@ -40,7 +40,7 @@ const defaultUsers: Record<UserRole, AuthUser> = {
   employee: {
     id: 'emp-07',
     name: 'Phạm Thị Hương Ly',
-    code: 'MISA-0007',
+    code: 'AMIS-0007',
     title: 'Lập trình viên Frontend',
     department: 'Khối Công Nghệ & Kỹ Thuật',
     role: 'employee',

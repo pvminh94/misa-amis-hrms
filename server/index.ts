@@ -26,7 +26,7 @@ app.use('/api/settings', settingsRoutes);
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    system: 'MISA AMIS HRM Enterprise System API',
+    system: 'AMIS HRM Enterprise System API',
     version: '4.5.0',
     timestamp: new Date().toISOString()
   });

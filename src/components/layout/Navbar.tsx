@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 text-xs font-semibold cursor-pointer hover:bg-slate-100 transition">
           <Building2 className="w-4 h-4 text-[#0072BC]" />
-          <span className="hidden md:inline truncate max-w-[260px]">MISA CORP - HÀ NỘI TRỤ SỞ</span>
+          <span className="hidden md:inline truncate max-w-[260px]">AMIS CORP - TRỤ SỞ HÀ NỘI</span>
           <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
         </div>
 

@@ -467,7 +467,7 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Email công vụ MISA:</span>
+                    <span className="text-slate-400 block text-[11px]">Email công vụ AMIS:</span>
                     <span className="font-semibold text-[#0072BC] flex items-center gap-1.5 mt-0.5">
                       <Mail className="w-3.5 h-3.5 text-slate-400" />
                       {employee.email}
@@ -528,7 +528,7 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
                       <label className="block text-slate-700 font-semibold mb-1">Số hợp đồng</label>
                       <input
                         type="text"
-                        placeholder="HĐLĐ-2026/MISA..."
+                        placeholder="HĐLĐ-2026/AMIS..."
                         value={newContractNumber}
                         onChange={(e) => setNewContractNumber(e.target.value)}
                         className="w-full px-3 py-1.5 bg-white border border-slate-300 rounded-lg"
@@ -1288,7 +1288,7 @@ export const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
         <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
           <span className="text-[11px] text-slate-500 flex items-center gap-1">
             <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            Hồ sơ nhân sự điện tử tích hợp chuẩn MISA AMIS HRM Enterprise
+            Hồ sơ nhân sự điện tử tích hợp chuẩn AMIS HRM Enterprise
           </span>
           <div className="flex items-center gap-2">
             {(role === 'admin' || role === 'manager') && (

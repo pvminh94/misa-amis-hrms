@@ -203,7 +203,7 @@ export const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
                   type="email"
                   value={formData.email || ''}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="ten@misa.vn"
+                  placeholder="ten@amis.vn"
                   className="w-full px-3 py-2 border border-slate-300 rounded-lg"
                 />
               </div>
