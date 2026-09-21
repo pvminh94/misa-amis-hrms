@@ -14,7 +14,12 @@ import {
   ShiftSwapRequest,
   AttendanceRegularization,
   GeofenceLocation,
-  DayTimesheetCell
+  DayTimesheetCell,
+  ShiftRosterEntry,
+  RawPunchLog,
+  AttendancePolicySetting,
+  AttendanceAnalytics,
+  DayRosterSchedule
 } from './types';
 import {
   initialDepartments,
@@ -29,6 +34,9 @@ import {
   initialShiftSwaps,
   initialRegularizations,
   initialGeofenceLocations,
+  initialShiftRosters,
+  initialRawPunchLogs,
+  initialAttendancePolicy,
   calculateVietnamesePayroll
 } from './data/seedData';
 
@@ -45,6 +53,9 @@ interface DatabaseSchema {
   shiftSwaps: ShiftSwapRequest[];
   regularizations: AttendanceRegularization[];
   geofenceLocations: GeofenceLocation[];
+  shiftRosters: ShiftRosterEntry[];
+  rawPunches: RawPunchLog[];
+  attendancePolicy: AttendancePolicySetting;
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -69,6 +80,9 @@ class DatabaseStore {
         if (!parsed.shiftSwaps) parsed.shiftSwaps = initialShiftSwaps;
         if (!parsed.regularizations) parsed.regularizations = initialRegularizations;
         if (!parsed.geofenceLocations) parsed.geofenceLocations = initialGeofenceLocations;
+        if (!parsed.shiftRosters) parsed.shiftRosters = initialShiftRosters;
+        if (!parsed.rawPunches) parsed.rawPunches = initialRawPunchLogs;
+        if (!parsed.attendancePolicy) parsed.attendancePolicy = initialAttendancePolicy;
         return parsed;
       }
     } catch (err) {
@@ -87,7 +101,10 @@ class DatabaseStore {
       monthlyTimesheets: initialMonthlyTimesheets,
       shiftSwaps: initialShiftSwaps,
       regularizations: initialRegularizations,
-      geofenceLocations: initialGeofenceLocations
+      geofenceLocations: initialGeofenceLocations,
+      shiftRosters: initialShiftRosters,
+      rawPunches: initialRawPunchLogs,
+      attendancePolicy: initialAttendancePolicy
     };
     this.saveData(defaultData);
     return defaultData;
@@ -617,6 +634,199 @@ class DatabaseStore {
     this.data.geofenceLocations[idx] = { ...this.data.geofenceLocations[idx], ...updates };
     this.saveData();
     return this.data.geofenceLocations[idx];
+  }
+
+  // Shift Rostering Methods
+  getShiftRosters(period = '2026-09', departmentName?: string, search?: string) {
+    let result = this.data.shiftRosters.filter((r) => r.period === period);
+    if (departmentName && departmentName !== 'all') {
+      result = result.filter((r) => r.departmentName === departmentName);
+    }
+    if (search) {
+      const q = search.toLowerCase();
+      result = result.filter((r) => r.employeeName.toLowerCase().includes(q) || r.employeeCode.toLowerCase().includes(q));
+    }
+    return result;
+  }
+
+  updateShiftRosterCell(employeeId: string, day: number, updates: Partial<DayRosterSchedule>) {
+    const row = this.data.shiftRosters.find((r) => r.employeeId === employeeId && r.period === '2026-09');
+    if (!row) return null;
+    row.schedules[day] = { ...row.schedules[day], ...updates };
+    this.saveData();
+    return row;
+  }
+
+  bulkAssignShiftRoster(params: {
+    departmentName: string;
+    shiftCode: string;
+    shiftName: string;
+    shiftId: string;
+    startDay: number;
+    endDay: number;
+    includeWeekends?: boolean;
+  }) {
+    const { departmentName, shiftCode, shiftName, shiftId, startDay, endDay, includeWeekends } = params;
+    let targets = this.data.shiftRosters;
+    if (departmentName && departmentName !== 'all') {
+      targets = targets.filter((r) => r.departmentName === departmentName);
+    }
+
+    targets.forEach((roster) => {
+      for (let day = startDay; day <= endDay; day++) {
+        const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
+        if (isWeekend && !includeWeekends) continue;
+
+        roster.schedules[day] = {
+          shiftId,
+          shiftCode,
+          shiftName,
+          isCustom: true,
+          notes: `Phân ca hàng loạt (${departmentName})`
+        };
+      }
+    });
+
+    this.saveData();
+    return targets;
+  }
+
+  // Biometric Raw Punch Logs Methods
+  getRawPunchLogs(params?: { date?: string; employeeId?: string; source?: string; search?: string }) {
+    let logs = this.data.rawPunches;
+    if (params?.date) {
+      logs = logs.filter((l) => l.punchDate === params.date);
+    }
+    if (params?.employeeId) {
+      logs = logs.filter((l) => l.employeeId === params.employeeId);
+    }
+    if (params?.source && params.source !== 'all') {
+      logs = logs.filter((l) => l.source === params.source);
+    }
+    if (params?.search) {
+      const q = params.search.toLowerCase();
+      logs = logs.filter((l) => l.employeeName.toLowerCase().includes(q) || l.employeeCode.toLowerCase().includes(q) || l.deviceName.toLowerCase().includes(q));
+    }
+    return logs;
+  }
+
+  syncBiometricLogs() {
+    const now = new Date();
+    const today = '2026-09-21';
+    const currentTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+    // Add simulated checkout punches for employees who haven't checked out yet
+    let newlySyncedCount = 0;
+    this.data.employees.slice(0, 8).forEach((emp, idx) => {
+      const punchId = `punch-sync-${emp.id}-${Date.now().toString().slice(-4)}`;
+      const punchTime = `17:${30 + (idx % 15)}`;
+      const exists = this.data.rawPunches.some((p) => p.employeeId === emp.id && p.pairingType === 'check_out');
+      if (!exists) {
+        this.data.rawPunches.unshift({
+          id: punchId,
+          employeeId: emp.id,
+          employeeCode: emp.code,
+          employeeName: emp.fullName,
+          departmentName: emp.departmentName,
+          timestamp: `${today} ${punchTime}:18`,
+          punchDate: today,
+          punchTime: `${punchTime}:18`,
+          source: idx % 2 === 0 ? 'face_id' : 'fingerprint',
+          deviceName: idx % 2 === 0 ? 'Hikvision FaceID AI DS-K1T671 (Cổng chính)' : 'Ronald Jack RJ-8800 (Tầng 9 HQ)',
+          deviceIp: '192.168.1.201',
+          accuracyScore: 99.3,
+          pairingStatus: 'paired',
+          pairingType: 'check_out'
+        });
+        newlySyncedCount++;
+
+        // Update daily attendance
+        const att = this.data.attendance.find((a) => a.employeeId === emp.id && a.date === today);
+        if (att) {
+          att.checkOut = punchTime;
+          att.workHours = 8.0;
+        }
+      }
+    });
+
+    this.saveData();
+    return {
+      syncedAt: `${today} ${currentTimeStr}`,
+      recordsAdded: newlySyncedCount,
+      totalLogs: this.data.rawPunches.length
+    };
+  }
+
+  // Attendance Policy
+  getAttendancePolicy(): AttendancePolicySetting {
+    return this.data.attendancePolicy;
+  }
+
+  updateAttendancePolicy(updates: Partial<AttendancePolicySetting>) {
+    this.data.attendancePolicy = { ...this.data.attendancePolicy, ...updates };
+    this.saveData();
+    return this.data.attendancePolicy;
+  }
+
+  // Attendance Analytics & Late Leaderboard
+  getAttendanceAnalytics(period = '2026-09'): AttendanceAnalytics {
+    const totalEmployees = this.data.employees.length;
+    const monthly = this.data.monthlyTimesheets.filter((m) => m.period === period);
+
+    // Calculate overall attendance rate
+    const totalPossibleDays = totalEmployees * 22;
+    const totalWorkDaysDone = monthly.reduce((sum, m) => sum + m.totalWorkDays, 0);
+    const overallAttendanceRate = totalPossibleDays > 0 ? Math.round((totalWorkDaysDone / totalPossibleDays) * 100) : 95;
+    const totalWorkHours = monthly.reduce((sum, m) => sum + m.totalWorkDays * 8, 0);
+    const totalOTHours = monthly.reduce((sum, m) => sum + m.totalOTHours, 0);
+
+    // Department rates breakdown
+    const deptMap: { [key: string]: { workDays: number; possibleDays: number; count: number } } = {};
+    monthly.forEach((m) => {
+      if (!deptMap[m.departmentName]) {
+        deptMap[m.departmentName] = { workDays: 0, possibleDays: 0, count: 0 };
+      }
+      deptMap[m.departmentName].workDays += m.totalWorkDays;
+      deptMap[m.departmentName].possibleDays += 22;
+      deptMap[m.departmentName].count += 1;
+    });
+
+    const departmentRates = Object.entries(deptMap).map(([departmentName, stat]) => ({
+      departmentName,
+      count: stat.count,
+      rate: stat.possibleDays > 0 ? Math.round((stat.workDays / stat.possibleDays) * 100) : 95
+    }));
+
+    // Late Leaderboard sorted descending by late minutes & times
+    const lateLeaderboard: LateLeaderboardItem[] = monthly
+      .filter((m) => m.totalLateTimes > 0)
+      .map((m) => {
+        let severity: LateLeaderboardItem['severity'] = 'normal';
+        if (m.totalLateTimes >= 3 || m.totalLateMinutes >= 60) {
+          severity = 'penalty'; // Đề xuất trừ thưởng chuyên cần
+        } else if (m.totalLateTimes >= 1) {
+          severity = 'warning';
+        }
+        return {
+          employeeId: m.employeeId,
+          employeeCode: m.employeeCode,
+          employeeName: m.employeeName,
+          departmentName: m.departmentName,
+          lateTimes: m.totalLateTimes,
+          totalLateMinutes: m.totalLateMinutes,
+          severity
+        };
+      })
+      .sort((a, b) => b.totalLateMinutes - a.totalLateMinutes);
+
+    return {
+      totalEmployees,
+      overallAttendanceRate,
+      totalWorkHours,
+      totalOTHours,
+      departmentRates,
+      lateLeaderboard
+    };
   }
 
   // Dashboard Stats

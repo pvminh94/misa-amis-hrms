@@ -229,4 +229,118 @@ router.put('/locations/:id', (req, res) => {
   }
 });
 
+// -------------------------------------------------------------
+// ENTERPRISE EXTENSIONS: ROSTERING, RAW PUNCHES, POLICY & ANALYTICS
+// -------------------------------------------------------------
+
+// SHIFT ROSTERING (XẾP LỊCH & PHÂN CA)
+router.get('/roster', (req, res) => {
+  try {
+    const { period = '2026-09', departmentName, search } = req.query;
+    const rosters = db.getShiftRosters(
+      typeof period === 'string' ? period : '2026-09',
+      typeof departmentName === 'string' ? departmentName : undefined,
+      typeof search === 'string' ? search : undefined
+    );
+    res.json({ success: true, data: rosters });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải bảng phân ca' });
+  }
+});
+
+router.patch('/roster/cell', (req, res) => {
+  try {
+    const { employeeId, day, shiftData } = req.body;
+    if (!employeeId || day === undefined) {
+      return res.status(400).json({ success: false, message: 'Dữ liệu phân ca không hợp lệ' });
+    }
+    const updated = db.updateShiftRosterCell(employeeId, Number(day), shiftData);
+    if (!updated) return res.status(404).json({ success: false, message: 'Không tìm thấy bản ghi phân ca' });
+    res.json({ success: true, data: updated, message: 'Đã cập nhật ca làm việc ngày' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi cập nhật ca làm việc' });
+  }
+});
+
+router.post('/roster/bulk', (req, res) => {
+  try {
+    const { departmentName, shiftCode, shiftName, shiftId, startDay, endDay, includeWeekends } = req.body;
+    const updatedRosters = db.bulkAssignShiftRoster({
+      departmentName: departmentName || 'all',
+      shiftCode,
+      shiftName,
+      shiftId,
+      startDay: Number(startDay) || 1,
+      endDay: Number(endDay) || 30,
+      includeWeekends: Boolean(includeWeekends)
+    });
+    res.json({
+      success: true,
+      data: updatedRosters,
+      message: `Đã phân ca hàng loạt cho bộ phận ${departmentName || 'toàn công ty'} thành công`
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi phân ca hàng loạt' });
+  }
+});
+
+// BIOMETRIC RAW PUNCH LOGS (DỮ LIỆU THÔ MÁY CHẤM CÔNG)
+router.get('/raw-punches', (req, res) => {
+  try {
+    const { date, employeeId, source, search } = req.query;
+    const logs = db.getRawPunchLogs({
+      date: typeof date === 'string' ? date : undefined,
+      employeeId: typeof employeeId === 'string' ? employeeId : undefined,
+      source: typeof source === 'string' ? source : undefined,
+      search: typeof search === 'string' ? search : undefined
+    });
+    res.json({ success: true, data: logs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải dữ liệu quẹt thẻ thô' });
+  }
+});
+
+router.post('/raw-punches/sync', (req, res) => {
+  try {
+    const syncResult = db.syncBiometricLogs();
+    res.json({
+      success: true,
+      data: syncResult,
+      message: `Đồng bộ máy chấm công thành công lúc ${syncResult.syncedAt} (+${syncResult.recordsAdded} bản ghi mới)`
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi đồng bộ máy chấm công' });
+  }
+});
+
+// ATTENDANCE ANALYTICS & LATE LEADERBOARD
+router.get('/analytics', (req, res) => {
+  try {
+    const { period = '2026-09' } = req.query;
+    const analytics = db.getAttendanceAnalytics(typeof period === 'string' ? period : '2026-09');
+    res.json({ success: true, data: analytics });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải thống kê chuyên cần' });
+  }
+});
+
+// ATTENDANCE POLICY (QUY TẮC CHẤM CÔNG & GRACE PERIOD)
+router.get('/policy', (req, res) => {
+  try {
+    const policy = db.getAttendancePolicy();
+    res.json({ success: true, data: policy });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải quy tắc chấm công' });
+  }
+});
+
+router.put('/policy', (req, res) => {
+  try {
+    const updated = db.updateAttendancePolicy(req.body);
+    res.json({ success: true, data: updated, message: 'Đã cập nhật quy tắc chấm công và thời gian linh hoạt' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi cập nhật quy tắc chấm công' });
+  }
+});
+
 export default router;

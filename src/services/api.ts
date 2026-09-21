@@ -234,6 +234,72 @@ export const api = {
     });
   },
 
+  // Enterprise Shift Rostering & Raw Biometrics API
+  async getShiftRoster(params?: { period?: string; departmentName?: string; search?: string }): Promise<any[]> {
+    const query = new URLSearchParams();
+    if (params?.period) query.append('period', params.period);
+    if (params?.departmentName) query.append('departmentName', params.departmentName);
+    if (params?.search) query.append('search', params.search);
+
+    return fetchJson(`${API_BASE}/attendance/roster?${query.toString()}`);
+  },
+
+  async updateShiftRosterCell(employeeId: string, day: number, shiftData: any): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/roster/cell`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ employeeId, day, shiftData })
+    });
+  },
+
+  async bulkAssignShiftRoster(payload: {
+    departmentName: string;
+    shiftCode: string;
+    shiftName: string;
+    shiftId: string;
+    startDay: number;
+    endDay: number;
+    includeWeekends?: boolean;
+  }): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/roster/bulk`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
+  async getRawPunchLogs(params?: { date?: string; employeeId?: string; source?: string; search?: string }): Promise<any[]> {
+    const query = new URLSearchParams();
+    if (params?.date) query.append('date', params.date);
+    if (params?.employeeId) query.append('employeeId', params.employeeId);
+    if (params?.source) query.append('source', params.source);
+    if (params?.search) query.append('search', params.search);
+
+    return fetchJson(`${API_BASE}/attendance/raw-punches?${query.toString()}`);
+  },
+
+  async syncBiometricLogs(): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/raw-punches/sync`, {
+      method: 'POST'
+    });
+  },
+
+  async getAttendanceAnalytics(period = '2026-09'): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/analytics?period=${period}`);
+  },
+
+  async getAttendancePolicy(): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/policy`);
+  },
+
+  async updateAttendancePolicy(payload: any): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/policy`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  },
+
   // Leaves & Approval
   async getLeaves(params?: { status?: string; type?: string; employeeId?: string }): Promise<LeaveRequest[]> {
     const query = new URLSearchParams();

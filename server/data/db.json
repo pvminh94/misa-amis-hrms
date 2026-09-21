@@ -772,7 +772,7 @@
       "departmentName": "Ban Giám Đốc",
       "date": "2026-09-21",
       "checkIn": "07:50",
-      "checkOut": "17:35",
+      "checkOut": "17:30",
       "workHours": 8,
       "status": "present",
       "notes": "Đúng giờ"
@@ -784,7 +784,7 @@
       "departmentName": "Ban Giám Đốc",
       "date": "2026-09-21",
       "checkIn": "07:51",
-      "checkOut": "17:35",
+      "checkOut": "17:31",
       "workHours": 8,
       "status": "present",
       "notes": "Đúng giờ"
@@ -796,7 +796,7 @@
       "departmentName": "Khối Kinh Doanh & Tiếp Thị",
       "date": "2026-09-21",
       "checkIn": "07:52",
-      "checkOut": "17:35",
+      "checkOut": "17:32",
       "workHours": 8,
       "status": "present",
       "notes": "Đúng giờ"
@@ -808,8 +808,8 @@
       "departmentName": "Khối Nhân Sự & Vận Hành",
       "date": "2026-09-21",
       "checkIn": "08:35",
-      "checkOut": "17:35",
-      "workHours": 7.5,
+      "checkOut": "17:33",
+      "workHours": 8,
       "status": "late",
       "notes": "Tắc đường Phạm Hùng"
     },
@@ -820,7 +820,7 @@
       "departmentName": "Phòng Tài Chính - Kế Toán",
       "date": "2026-09-21",
       "checkIn": "07:54",
-      "checkOut": "17:35",
+      "checkOut": "17:34",
       "workHours": 8,
       "status": "present",
       "notes": "Đúng giờ"
@@ -844,8 +844,8 @@
       "departmentName": "Khối Công Nghệ & Kỹ Thuật",
       "date": "2026-09-21",
       "checkIn": "--:--",
-      "checkOut": "--:--",
-      "workHours": 0,
+      "checkOut": "17:36",
+      "workHours": 8,
       "status": "leave",
       "notes": "Nghỉ phép năm có phép"
     },
@@ -856,7 +856,7 @@
       "departmentName": "Khối Công Nghệ & Kỹ Thuật",
       "date": "2026-09-21",
       "checkIn": "07:57",
-      "checkOut": "17:35",
+      "checkOut": "17:37",
       "workHours": 8,
       "status": "present",
       "notes": "Đúng giờ"
@@ -5310,5 +5310,3082 @@
       ],
       "isActive": true
     }
-  ]
+  ],
+  "shiftRosters": [
+    {
+      "id": "roster-emp-01-2026-09",
+      "employeeId": "emp-01",
+      "employeeCode": "AMIS-0001",
+      "employeeName": "Trịnh Văn Cường",
+      "departmentName": "Ban Giám Đốc",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-02-2026-09",
+      "employeeId": "emp-02",
+      "employeeCode": "AMIS-0002",
+      "employeeName": "Vũ Quốc Thái",
+      "departmentName": "Ban Giám Đốc",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-03-2026-09",
+      "employeeId": "emp-03",
+      "employeeCode": "AMIS-0003",
+      "employeeName": "Nguyễn Thị Thu Hằng",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-04-2026-09",
+      "employeeId": "emp-04",
+      "employeeCode": "AMIS-0004",
+      "employeeName": "Đặng Mai Lan",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-05-2026-09",
+      "employeeId": "emp-05",
+      "employeeCode": "AMIS-0005",
+      "employeeName": "Hoàng Minh Đức",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-06-2026-09",
+      "employeeId": "emp-06",
+      "employeeCode": "AMIS-0006",
+      "employeeName": "Lê Hoàng Long",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-07-2026-09",
+      "employeeId": "emp-07",
+      "employeeCode": "AMIS-0007",
+      "employeeName": "Phạm Thị Hương Ly",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-08-2026-09",
+      "employeeId": "emp-08",
+      "employeeCode": "AMIS-0008",
+      "employeeName": "Trần Gia Bảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-09-2026-09",
+      "employeeId": "emp-09",
+      "employeeCode": "AMIS-0009",
+      "employeeName": "Bùi Thanh Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-10-2026-09",
+      "employeeId": "emp-10",
+      "employeeCode": "AMIS-0010",
+      "employeeName": "Đỗ Anh Tuấn",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-11-2026-09",
+      "employeeId": "emp-11",
+      "employeeCode": "AMIS-0011",
+      "employeeName": "Ngô Hải Yến",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-12-2026-09",
+      "employeeId": "emp-12",
+      "employeeCode": "AMIS-0012",
+      "employeeName": "Lương Minh Quang",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-13-2026-09",
+      "employeeId": "emp-13",
+      "employeeCode": "AMIS-0013",
+      "employeeName": "Hoàng Kim Chi",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-14-2026-09",
+      "employeeId": "emp-14",
+      "employeeCode": "AMIS-0014",
+      "employeeName": "Dương Thị Cẩm Tú",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-15-2026-09",
+      "employeeId": "emp-15",
+      "employeeCode": "AMIS-0015",
+      "employeeName": "Chu Văn Hùng",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-16-2026-09",
+      "employeeId": "emp-16",
+      "employeeCode": "AMIS-0016",
+      "employeeName": "Lê Thùy Dung",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "16": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "17": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "18": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "21": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "22": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "23": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "24": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "25": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ tuần"
+        },
+        "28": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "29": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        },
+        "30": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính (08:00 - 17:30)"
+        }
+      }
+    }
+  ],
+  "rawPunches": [
+    {
+      "id": "punch-sync-emp-08-9506",
+      "employeeId": "emp-08",
+      "employeeCode": "AMIS-0008",
+      "employeeName": "Trần Gia Bảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:37:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:37:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-07-9506",
+      "employeeId": "emp-07",
+      "employeeCode": "AMIS-0007",
+      "employeeName": "Phạm Thị Hương Ly",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:36:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:36:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-06-9506",
+      "employeeId": "emp-06",
+      "employeeCode": "AMIS-0006",
+      "employeeName": "Lê Hoàng Long",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:35:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:35:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-05-9506",
+      "employeeId": "emp-05",
+      "employeeCode": "AMIS-0005",
+      "employeeName": "Hoàng Minh Đức",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "timestamp": "2026-09-21 17:34:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:34:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-04-9506",
+      "employeeId": "emp-04",
+      "employeeCode": "AMIS-0004",
+      "employeeName": "Đặng Mai Lan",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "timestamp": "2026-09-21 17:33:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:33:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-03-9506",
+      "employeeId": "emp-03",
+      "employeeCode": "AMIS-0003",
+      "employeeName": "Nguyễn Thị Thu Hằng",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 17:32:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:32:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-02-9506",
+      "employeeId": "emp-02",
+      "employeeCode": "AMIS-0002",
+      "employeeName": "Vũ Quốc Thái",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 17:31:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:31:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-01-9506",
+      "employeeId": "emp-01",
+      "employeeCode": "AMIS-0001",
+      "employeeName": "Trịnh Văn Cường",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 17:30:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:30:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-01-in",
+      "employeeId": "emp-01",
+      "employeeCode": "AMIS-0001",
+      "employeeName": "Trịnh Văn Cường",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 07:52:14",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:52:14",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng VIP Tầng 9)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.8,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-02-in",
+      "employeeId": "emp-02",
+      "employeeCode": "AMIS-0002",
+      "employeeName": "Vũ Quốc Thái",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:56:45",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:56:45",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Cửa vào Tech Lab)",
+      "deviceIp": "192.168.1.202",
+      "accuracyScore": 98.6,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-03-in",
+      "employeeId": "emp-03",
+      "employeeCode": "AMIS-0003",
+      "employeeName": "Nguyễn Thị Thu Hằng",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 07:58:30",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:58:30",
+      "source": "mobile_gps",
+      "deviceName": "AMIS Mobile App (GPS Geofence HN)",
+      "accuracyScore": 99.1,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-04-in",
+      "employeeId": "emp-04",
+      "employeeCode": "AMIS-0004",
+      "employeeName": "Đặng Mai Lan",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "timestamp": "2026-09-21 08:35:12",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:35:12",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Sảnh chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.4,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-05-in",
+      "employeeId": "emp-05",
+      "employeeCode": "AMIS-0005",
+      "employeeName": "Hoàng Minh Đức",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "timestamp": "2026-09-21 07:49:05",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:49:05",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Cửa Phòng Kế toán)",
+      "deviceIp": "192.168.1.203",
+      "accuracyScore": 99,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-06-in",
+      "employeeId": "emp-06",
+      "employeeCode": "AMIS-0006",
+      "employeeName": "Lê Hoàng Long",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:59:19",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:59:19",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cửa vào Tech Lab)",
+      "deviceIp": "192.168.1.202",
+      "accuracyScore": 99.7,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-07-in",
+      "employeeId": "emp-07",
+      "employeeCode": "AMIS-0007",
+      "employeeName": "Phạm Thị Hương Ly",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:54:33",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:54:33",
+      "source": "mobile_gps",
+      "deviceName": "AMIS Mobile App (GPS Geofence HN)",
+      "accuracyScore": 98.9,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-08-in",
+      "employeeId": "emp-08",
+      "employeeCode": "AMIS-0008",
+      "employeeName": "Trần Gia Bảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:57:11",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:57:11",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Cửa vào Tech Lab)",
+      "deviceIp": "192.168.1.202",
+      "accuracyScore": 98.5,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-09-in",
+      "employeeId": "emp-09",
+      "employeeCode": "AMIS-0009",
+      "employeeName": "Bùi Thanh Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:55:02",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:55:02",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cửa vào Tech Lab)",
+      "deviceIp": "192.168.1.202",
+      "accuracyScore": 99.5,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-10-in",
+      "employeeId": "emp-10",
+      "employeeCode": "AMIS-0010",
+      "employeeName": "Đỗ Anh Tuấn",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 07:51:28",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:51:28",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Cửa vào Tech Lab)",
+      "deviceIp": "192.168.1.202",
+      "accuracyScore": 99.2,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-11-in",
+      "employeeId": "emp-11",
+      "employeeCode": "AMIS-0011",
+      "employeeName": "Ngô Hải Yến",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 07:53:40",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:53:40",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Sảnh chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.1,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-12-in",
+      "employeeId": "emp-12",
+      "employeeCode": "AMIS-0012",
+      "employeeName": "Lương Minh Quang",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 07:59:45",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:59:45",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Sảnh chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 98.7,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-13-in",
+      "employeeId": "emp-13",
+      "employeeCode": "AMIS-0013",
+      "employeeName": "Hoàng Kim Chi",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 07:50:50",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:50:50",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Sảnh chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.6,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-14-in",
+      "employeeId": "emp-14",
+      "employeeCode": "AMIS-0014",
+      "employeeName": "Dương Thị Cẩm Tú",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "timestamp": "2026-09-21 07:56:10",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:56:10",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Sảnh chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-15-in",
+      "employeeId": "emp-15",
+      "employeeCode": "AMIS-0015",
+      "employeeName": "Chu Văn Hùng",
+      "departmentName": "Phòng Tài Chính - Kế Toán",
+      "timestamp": "2026-09-21 07:48:22",
+      "punchDate": "2026-09-21",
+      "punchTime": "07:48:22",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Cửa Phòng Kế toán)",
+      "deviceIp": "192.168.1.203",
+      "accuracyScore": 98.4,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-16-in",
+      "employeeId": "emp-16",
+      "employeeCode": "AMIS-0016",
+      "employeeName": "Lê Thùy Dung",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "timestamp": "2026-09-21 08:00:15",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:00:15",
+      "source": "mobile_gps",
+      "deviceName": "AMIS Mobile App (GPS Geofence HN)",
+      "accuracyScore": 99,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    }
+  ],
+  "attendancePolicy": {
+    "gracePeriodMinutes": 15,
+    "halfDayMinHours": 4,
+    "fullDayMinHours": 7,
+    "overtimeMinMinutes": 30,
+    "maxContinuousDays": 6,
+    "minRestHoursBetweenShifts": 12
+  }
 }

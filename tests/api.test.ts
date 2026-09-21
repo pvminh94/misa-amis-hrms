@@ -72,4 +72,50 @@ describe('AMIS HRMS - Kiểm thử Tích hợp RESTful API Endpoints', () => {
     expect(setRes.body.success).toBe(true);
     expect(setRes.body.data.companyName).toBeDefined();
   });
+
+  it('8. API Shift Rostering: Lấy ma trận phân ca và phân ca hàng loạt', async () => {
+    const rosterRes = await request(app).get('/api/attendance/roster?period=2026-09');
+    expect(rosterRes.status).toBe(200);
+    expect(rosterRes.body.success).toBe(true);
+    expect(rosterRes.body.data.length).toBeGreaterThanOrEqual(16);
+
+    const bulkRes = await request(app)
+      .post('/api/attendance/roster/bulk')
+      .send({
+        departmentName: 'Ban Giám Đốc',
+        shiftCode: 'CA-HC',
+        shiftName: 'Ca Hành Chính',
+        shiftId: 'shift-hc',
+        startDay: 1,
+        endDay: 15,
+        includeWeekends: false
+      });
+    expect(bulkRes.status).toBe(200);
+    expect(bulkRes.body.success).toBe(true);
+  });
+
+  it('9. API Biometric Raw Punches: Lấy nhật ký và đồng bộ máy chấm công', async () => {
+    const punchesRes = await request(app).get('/api/attendance/raw-punches');
+    expect(punchesRes.status).toBe(200);
+    expect(punchesRes.body.success).toBe(true);
+    expect(punchesRes.body.data.length).toBeGreaterThan(0);
+
+    const syncRes = await request(app).post('/api/attendance/raw-punches/sync');
+    expect(syncRes.status).toBe(200);
+    expect(syncRes.body.success).toBe(true);
+    expect(syncRes.body.data.syncedAt).toBeDefined();
+  });
+
+  it('10. API Attendance Analytics & Policy: Thống kê chuyên cần và cấu hình linh hoạt', async () => {
+    const analyticsRes = await request(app).get('/api/attendance/analytics?period=2026-09');
+    expect(analyticsRes.status).toBe(200);
+    expect(analyticsRes.body.success).toBe(true);
+    expect(analyticsRes.body.data.overallAttendanceRate).toBeDefined();
+    expect(Array.isArray(analyticsRes.body.data.lateLeaderboard)).toBe(true);
+
+    const policyRes = await request(app).get('/api/attendance/policy');
+    expect(policyRes.status).toBe(200);
+    expect(policyRes.body.success).toBe(true);
+    expect(policyRes.body.data.gracePeriodMinutes).toBeDefined();
+  });
 });

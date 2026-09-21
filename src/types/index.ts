@@ -340,3 +340,68 @@ export interface GeofenceLocation {
   allowedWifiBSSID: string[];
   isActive: boolean;
 }
+
+// ENTERPRISE EXTENSIONS: ROSTERING, RAW BIOMETRICS, POLICY & ANALYTICS
+export interface DayRosterSchedule {
+  shiftId: string;
+  shiftCode: string; // 'CA-HC' | 'CA-S' | 'CA-C' | 'CA-DEM' | 'OFF'
+  shiftName: string;
+  isCustom?: boolean;
+  notes?: string;
+}
+
+export interface ShiftRosterEntry {
+  id: string;
+  employeeId: string;
+  employeeCode: string;
+  employeeName: string;
+  departmentName: string;
+  period: string; // "2026-09"
+  schedules: { [day: number]: DayRosterSchedule };
+}
+
+export interface RawPunchLog {
+  id: string;
+  employeeId: string;
+  employeeCode: string;
+  employeeName: string;
+  departmentName: string;
+  timestamp: string; // "2026-09-21 07:54:12"
+  punchDate: string; // "2026-09-21"
+  punchTime: string; // "07:54:12"
+  source: 'fingerprint' | 'face_id' | 'mobile_gps' | 'web';
+  deviceName: string; // "Ronald Jack RJ-8800 (Tầng 9 HQ)" | "Hikvision FaceID DS-K1T671" | "AMIS Mobile App GPS"
+  deviceIp?: string;
+  accuracyScore?: number; // e.g. 99.2%
+  pairingStatus: 'paired' | 'unpaired' | 'ignored';
+  pairingType?: 'check_in' | 'check_out';
+}
+
+export interface AttendancePolicySetting {
+  gracePeriodMinutes: number; // e.g. 15 phút đầu giờ được phép đến muộn không phạt
+  halfDayMinHours: number; // 4.0h
+  fullDayMinHours: number; // 7.0h
+  overtimeMinMinutes: number; // 30 phút sau ca
+  maxContinuousDays: number; // 6 ngày liên tục trước ngày nghỉ tuần
+  minRestHoursBetweenShifts: number; // 12 giờ nghỉ ngơi giữa 2 ca theo Điều 110 BLLĐ 2019
+}
+
+export interface LateLeaderboardItem {
+  employeeId: string;
+  employeeCode: string;
+  employeeName: string;
+  departmentName: string;
+  lateTimes: number;
+  totalLateMinutes: number;
+  severity: 'normal' | 'warning' | 'penalty'; // penalty: trừ chuyên cần
+}
+
+export interface AttendanceAnalytics {
+  totalEmployees: number;
+  overallAttendanceRate: number;
+  totalWorkHours: number;
+  totalOTHours: number;
+  departmentRates: { departmentName: string; rate: number; count: number }[];
+  lateLeaderboard: LateLeaderboardItem[];
+}
+

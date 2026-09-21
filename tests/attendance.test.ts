@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { initialShifts, initialGeofenceLocations } from '../server/data/seedData';
+import { initialShifts, initialGeofenceLocations, initialShiftRosters, initialRawPunchLogs, initialAttendancePolicy } from '../server/data/seedData';
+import { db } from '../server/db';
 
 describe('AMIS HRMS - Phân hệ Chấm công & Ca kíp (Time & Attendance Engine)', () => {
   it('1. Đảm bảo cấu hình danh mục ca làm việc chuẩn mực', () => {
@@ -52,5 +53,76 @@ describe('AMIS HRMS - Phân hệ Chấm công & Ca kíp (Time & Attendance Engin
     expect(hanoiSite).toBeDefined();
     expect(hanoiSite?.radiusMeters).toBeGreaterThanOrEqual(100);
     expect(hanoiSite?.allowedWifiBSSID).toContain('AMIS_CORP_5G');
+  });
+
+  it('5. Kiểm tra Kế hoạch phân ca (Shift Rostering 30 ngày) và phân ca hàng loạt', () => {
+    const rosters = db.getShiftRosters('2026-09');
+    expect(rosters.length).toBeGreaterThanOrEqual(16);
+
+    const firstRoster = rosters[0];
+    expect(firstRoster.schedules[1]).toBeDefined();
+    expect(firstRoster.schedules[6]?.shiftCode).toBe('OFF'); // Thứ 7 / CN là ngày nghỉ tuần
+
+    // Phân ca hàng loạt theo bộ phận
+    db.bulkAssignShiftRoster({
+      departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+      shiftCode: 'CA-HC',
+      shiftName: 'Ca Hành Chính',
+      shiftId: 'shift-hc',
+      startDay: 1,
+      endDay: 10,
+      includeWeekends: false
+    });
+
+    const techRosters = db.getShiftRosters('2026-09', 'Khối Công Nghệ & Kỹ Thuật');
+    techRosters.forEach((r) => {
+      expect(r.schedules[1].shiftCode).toBe('CA-HC');
+      expect(r.schedules[2].shiftCode).toBe('CA-HC');
+    });
+  });
+
+  it('6. Kiểm tra Dữ liệu thô máy chấm công & Đồng bộ sinh trắc học (Raw Biometric Punches)', () => {
+    const punches = db.getRawPunchLogs({ date: '2026-09-21' });
+    expect(punches.length).toBeGreaterThan(0);
+
+    // Kiểm tra cấu trúc bản ghi quẹt thẻ
+    const punch = punches[0];
+    expect(punch.id).toBeDefined();
+    expect(punch.timestamp).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/);
+    expect(['fingerprint', 'face_id', 'mobile_gps', 'web']).toContain(punch.source);
+    expect(punch.pairingStatus).toBe('paired');
+
+    // Kiểm tra tính năng đồng bộ máy chấm công
+    const syncRes = db.syncBiometricLogs();
+    expect(syncRes.syncedAt).toBeDefined();
+    expect(syncRes.totalLogs).toBeGreaterThanOrEqual(punches.length);
+  });
+
+  it('7. Kiểm tra Báo cáo chuyên cần & Bảng xếp hạng đi muộn (Late Leaderboard)', () => {
+    const analytics = db.getAttendanceAnalytics('2026-09');
+    expect(analytics.overallAttendanceRate).toBeGreaterThan(60);
+    expect(analytics.totalWorkHours).toBeGreaterThan(0);
+    expect(analytics.departmentRates.length).toBeGreaterThan(0);
+
+    // Kiểm tra bảng xếp hạng đi muộn được sắp xếp giảm dần theo số phút trễ
+    expect(Array.isArray(analytics.lateLeaderboard)).toBe(true);
+    for (let i = 0; i < analytics.lateLeaderboard.length - 1; i++) {
+      expect(analytics.lateLeaderboard[i].totalLateMinutes).toBeGreaterThanOrEqual(
+        analytics.lateLeaderboard[i + 1].totalLateMinutes
+      );
+    }
+  });
+
+  it('8. Kiểm tra Cấu hình quy tắc chấm công & thời gian linh hoạt (Grace Period)', () => {
+    const policy = db.getAttendancePolicy();
+    expect(policy.gracePeriodMinutes).toBe(15); // 15 phút linh hoạt
+    expect(policy.minRestHoursBetweenShifts).toBe(12); // Điều 110 BLLĐ 2019
+
+    // Cập nhật policy
+    const updated = db.updateAttendancePolicy({ gracePeriodMinutes: 20 });
+    expect(updated.gracePeriodMinutes).toBe(20);
+
+    // Reset lại 15
+    db.updateAttendancePolicy({ gracePeriodMinutes: 15 });
   });
 });

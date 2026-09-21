@@ -1,4 +1,20 @@
-import { Department, Position, Employee, AttendanceRecord, LeaveRequest, PayrollRecord, CompanySetting } from '../types';
+import {
+  Department,
+  Position,
+  Employee,
+  AttendanceRecord,
+  LeaveRequest,
+  PayrollRecord,
+  CompanySetting,
+  ShiftDefinition,
+  MonthlyTimesheetEmployee,
+  ShiftSwapRequest,
+  AttendanceRegularization,
+  GeofenceLocation,
+  ShiftRosterEntry,
+  RawPunchLog,
+  AttendancePolicySetting
+} from '../types';
 
 export const initialDepartments: Department[] = [
   {
@@ -1263,4 +1279,320 @@ export const initialGeofenceLocations: GeofenceLocation[] = [
     isActive: true
   }
 ];
+
+// SEED: Shift Rostering (Lập kế hoạch phân ca tháng 09/2026)
+export const initialShiftRosters: ShiftRosterEntry[] = initialEmployees.map((emp) => {
+  const schedules: ShiftRosterEntry['schedules'] = {};
+  for (let day = 1; day <= 30; day++) {
+    const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
+    if (isWeekend) {
+      schedules[day] = {
+        shiftId: 'shift-off',
+        shiftCode: 'OFF',
+        shiftName: 'Nghỉ tuần'
+      };
+    } else {
+      // Rotate for some tech/sales roles, standard office for others
+      if (emp.id === 'emp-06' && day >= 14 && day <= 18) {
+        // Evening shift
+        schedules[day] = {
+          shiftId: 'shift-c',
+          shiftCode: 'CA-C',
+          shiftName: 'Ca Chiều (13:30 - 21:30)'
+        };
+      } else if (emp.id === 'emp-10' && day >= 21 && day <= 25) {
+        // Night shift
+        schedules[day] = {
+          shiftId: 'shift-dem',
+          shiftCode: 'CA-DEM',
+          shiftName: 'Ca Đêm (22:00 - 06:00)'
+        };
+      } else {
+        schedules[day] = {
+          shiftId: 'shift-hc',
+          shiftCode: 'CA-HC',
+          shiftName: 'Ca Hành Chính (08:00 - 17:30)'
+        };
+      }
+    }
+  }
+
+  return {
+    id: `roster-${emp.id}-2026-09`,
+    employeeId: emp.id,
+    employeeCode: emp.code,
+    employeeName: emp.fullName,
+    departmentName: emp.departmentName,
+    period: '2026-09',
+    schedules
+  };
+});
+
+// SEED: Biometric Raw Punch Logs for 2026-09-21
+export const initialRawPunchLogs: RawPunchLog[] = [
+  {
+    id: 'punch-01-in',
+    employeeId: 'emp-01',
+    employeeCode: 'AMIS-0001',
+    employeeName: 'Trịnh Văn Cường',
+    departmentName: 'Ban Giám Đốc',
+    timestamp: '2026-09-21 07:52:14',
+    punchDate: '2026-09-21',
+    punchTime: '07:52:14',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Cổng VIP Tầng 9)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 99.8,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-02-in',
+    employeeId: 'emp-02',
+    employeeCode: 'AMIS-0002',
+    employeeName: 'Vũ Quốc Thái',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:56:45',
+    punchDate: '2026-09-21',
+    punchTime: '07:56:45',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Cửa vào Tech Lab)',
+    deviceIp: '192.168.1.202',
+    accuracyScore: 98.6,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-03-in',
+    employeeId: 'emp-03',
+    employeeCode: 'AMIS-0003',
+    employeeName: 'Nguyễn Thị Thu Hằng',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    timestamp: '2026-09-21 07:58:30',
+    punchDate: '2026-09-21',
+    punchTime: '07:58:30',
+    source: 'mobile_gps',
+    deviceName: 'AMIS Mobile App (GPS Geofence HN)',
+    accuracyScore: 99.1,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-04-in',
+    employeeId: 'emp-04',
+    employeeCode: 'AMIS-0004',
+    employeeName: 'Đặng Mai Lan',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    timestamp: '2026-09-21 08:35:12', // Late
+    punchDate: '2026-09-21',
+    punchTime: '08:35:12',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Sảnh chính)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 99.4,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-05-in',
+    employeeId: 'emp-05',
+    employeeCode: 'AMIS-0005',
+    employeeName: 'Hoàng Minh Đức',
+    departmentName: 'Phòng Tài Chính - Kế Toán',
+    timestamp: '2026-09-21 07:49:05',
+    punchDate: '2026-09-21',
+    punchTime: '07:49:05',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Cửa Phòng Kế toán)',
+    deviceIp: '192.168.1.203',
+    accuracyScore: 99.0,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-06-in',
+    employeeId: 'emp-06',
+    employeeCode: 'AMIS-0006',
+    employeeName: 'Lê Hoàng Long',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:59:19',
+    punchDate: '2026-09-21',
+    punchTime: '07:59:19',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Cửa vào Tech Lab)',
+    deviceIp: '192.168.1.202',
+    accuracyScore: 99.7,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-07-in',
+    employeeId: 'emp-07',
+    employeeCode: 'AMIS-0007',
+    employeeName: 'Phạm Thị Hương Ly',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:54:33',
+    punchDate: '2026-09-21',
+    punchTime: '07:54:33',
+    source: 'mobile_gps',
+    deviceName: 'AMIS Mobile App (GPS Geofence HN)',
+    accuracyScore: 98.9,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-08-in',
+    employeeId: 'emp-08',
+    employeeCode: 'AMIS-0008',
+    employeeName: 'Trần Gia Bảo',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:57:11',
+    punchDate: '2026-09-21',
+    punchTime: '07:57:11',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Cửa vào Tech Lab)',
+    deviceIp: '192.168.1.202',
+    accuracyScore: 98.5,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-09-in',
+    employeeId: 'emp-09',
+    employeeCode: 'AMIS-0009',
+    employeeName: 'Bùi Thanh Thảo',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:55:02',
+    punchDate: '2026-09-21',
+    punchTime: '07:55:02',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Cửa vào Tech Lab)',
+    deviceIp: '192.168.1.202',
+    accuracyScore: 99.5,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-10-in',
+    employeeId: 'emp-10',
+    employeeCode: 'AMIS-0010',
+    employeeName: 'Đỗ Anh Tuấn',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    timestamp: '2026-09-21 07:51:28',
+    punchDate: '2026-09-21',
+    punchTime: '07:51:28',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Cửa vào Tech Lab)',
+    deviceIp: '192.168.1.202',
+    accuracyScore: 99.2,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-11-in',
+    employeeId: 'emp-11',
+    employeeCode: 'AMIS-0011',
+    employeeName: 'Ngô Hải Yến',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    timestamp: '2026-09-21 07:53:40',
+    punchDate: '2026-09-21',
+    punchTime: '07:53:40',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Sảnh chính)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 99.1,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-12-in',
+    employeeId: 'emp-12',
+    employeeCode: 'AMIS-0012',
+    employeeName: 'Lương Minh Quang',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    timestamp: '2026-09-21 07:59:45',
+    punchDate: '2026-09-21',
+    punchTime: '07:59:45',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Sảnh chính)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 98.7,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-13-in',
+    employeeId: 'emp-13',
+    employeeCode: 'AMIS-0013',
+    employeeName: 'Hoàng Kim Chi',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    timestamp: '2026-09-21 07:50:50',
+    punchDate: '2026-09-21',
+    punchTime: '07:50:50',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Sảnh chính)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 99.6,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-14-in',
+    employeeId: 'emp-14',
+    employeeCode: 'AMIS-0014',
+    employeeName: 'Dương Thị Cẩm Tú',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    timestamp: '2026-09-21 07:56:10',
+    punchDate: '2026-09-21',
+    punchTime: '07:56:10',
+    source: 'face_id',
+    deviceName: 'Hikvision FaceID AI DS-K1T671 (Sảnh chính)',
+    deviceIp: '192.168.1.201',
+    accuracyScore: 99.3,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-15-in',
+    employeeId: 'emp-15',
+    employeeCode: 'AMIS-0015',
+    employeeName: 'Chu Văn Hùng',
+    departmentName: 'Phòng Tài Chính - Kế Toán',
+    timestamp: '2026-09-21 07:48:22',
+    punchDate: '2026-09-21',
+    punchTime: '07:48:22',
+    source: 'fingerprint',
+    deviceName: 'Ronald Jack RJ-8800 (Cửa Phòng Kế toán)',
+    deviceIp: '192.168.1.203',
+    accuracyScore: 98.4,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  },
+  {
+    id: 'punch-16-in',
+    employeeId: 'emp-16',
+    employeeCode: 'AMIS-0016',
+    employeeName: 'Lê Thùy Dung',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    timestamp: '2026-09-21 08:00:15',
+    punchDate: '2026-09-21',
+    punchTime: '08:00:15',
+    source: 'mobile_gps',
+    deviceName: 'AMIS Mobile App (GPS Geofence HN)',
+    accuracyScore: 99.0,
+    pairingStatus: 'paired',
+    pairingType: 'check_in'
+  }
+];
+
+// SEED: Attendance Policy
+export const initialAttendancePolicy: AttendancePolicySetting = {
+  gracePeriodMinutes: 15, // 15 phút linh hoạt đầu giờ
+  halfDayMinHours: 4.0,
+  fullDayMinHours: 7.0,
+  overtimeMinMinutes: 30,
+  maxContinuousDays: 6,
+  minRestHoursBetweenShifts: 12
+};
+
 

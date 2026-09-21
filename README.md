@@ -115,7 +115,7 @@ Trong file `package.json`, các lệnh quản trị được định nghĩa rõ 
 | Lệnh | Ý nghĩa chức năng |
 | :--- | :--- |
 | `npm run dev` | **(Khuyến nghị)** Khởi chạy đồng thời cả Backend Express (kèm tự động tải lại `tsx watch`) và Frontend Vite (`port 3000`). |
-| `npm test` | **Chạy toàn bộ 23 bài kiểm thử tự động (Unit & Integration Tests) bằng Vitest.** |
+| `npm test` | **Chạy toàn bộ 30 bài kiểm thử tự động (Unit & Integration Tests) bằng Vitest.** |
 | `npm run test:watch` | Chạy kiểm thử ở chế độ theo dõi thay đổi mã nguồn (Watch mode). |
 | `npm run server` | Chỉ khởi chạy riêng Backend API trên cổng `5000`. |
 | `npm run client` | Chỉ khởi chạy riêng Frontend Vite trên cổng `3000`. |
@@ -195,14 +195,18 @@ misa-amis-hrms/
   7. *Lương & Ngân hàng:* Cơ cấu thu nhập, phụ cấp ăn trưa, xăng xe, trách nhiệm, số tài khoản ngân hàng chi trả lương.
 * **In Sơ yếu lý lịch:** Hỗ trợ xem và in sơ yếu lý lịch chuẩn phục vụ thanh kiểm tra.
 
-### 3. AMIS Chấm công & Quản lý Ca kíp Chuyên sâu (Time & Attendance Engine)
+### 3. AMIS Chấm công & Quản lý Ca kíp Doanh nghiệp Chuyên sâu (Enterprise Time & Attendance Engine)
+* **Xếp lịch & Phân ca tháng/tuần (Shift Rostering Planner):** Lập kế hoạch phân bổ ca làm việc trước cho từng nhân sự trong tháng. Hỗ trợ **Phân ca hàng loạt** theo bộ phận (Áp dụng ca hành chính T2-T6, Xoay ca 3 ca 4 kíp) và tự động kiểm tra **Điều 110 Bộ luật Lao động 2019** (khoảng cách nghỉ giữa 2 ca tối thiểu 12 giờ).
+* **Nhật ký quẹt thẻ thô máy chấm công (Raw Biometric Punch Logs):** Thu thập và lưu vết từng giây quẹt thẻ từ máy vân tay **Ronald Jack**, máy nhận diện khuôn mặt **Hikvision FaceID AI** (tỷ lệ nhận diện 99.4%) và GPS di động. Nút **"Đồng bộ máy chấm công"** thời gian thực kèm thuật toán ghép cặp thông minh (First-in / Last-out).
 * **Bảng chấm công tổng hợp tháng (Ma trận 30 ngày):** Theo dõi công chi tiết 30 ngày của toàn bộ nhân sự theo các ký hiệu chuẩn: `X` (Đủ công 8h), `L` (Đi muộn), `P` (Nghỉ phép/Lễ có lương), `KP` (Nghỉ không lương), `OT` (Tăng ca), `CT` (Công tác), `OFF` (Nghỉ tuần).
 * **Kiểm tra & Hiệu chỉnh ô công tức thì (Timesheet Inspector):** Nhấp chuột vào bất kỳ ô công nào để xem giờ check-in, check-out thực tế hoặc sửa công. **Hệ thống tự động liên kết cập nhật lại bảng lương của nhân sự ngay lập tức!**
+* **Báo cáo Chuyên cần & Bảng xếp hạng đi muộn (Late Leaderboard):** Thống kê tỷ lệ chuyên cần theo phòng ban, tổng quỹ giờ OT và xếp hạng Top nhân sự đi muộn lũy kế kèm mức độ cảnh báo (Nhắc nhở / Trừ thưởng chuyên cần).
+* **Cấu hình Quy tắc Đi muộn Linh hoạt (Grace Period):** Cho phép doanh nghiệp thiết lập thời gian linh hoạt (Grace Period: 15 phút) không bị phạt, ngưỡng tính nửa công (4h) và ngưỡng tính làm thêm giờ OT.
 * **Quản lý danh mục Ca làm việc (Shift Definitions):** Định nghĩa linh hoạt Ca hành chính (08:00 - 17:30), Ca sáng (4h), Ca chiều (4h), Ca đêm (22:00 - 06:00, hệ số 1.3 có phụ cấp làm đêm 30% theo luật lao động).
 * **Đăng ký & Phê duyệt Đổi ca làm việc (Shift Swap Requests):** Nhân viên đăng ký đổi ca trực với đồng nghiệp, Quản lý phê duyệt trực tuyến 1-click.
 * **Đơn giải trình Chấm công / Bù công (Attendance Regularization):** Giải trình quên quẹt thẻ, lỗi thiết bị hoặc đi công tác ngoại tỉnh kèm ảnh minh chứng. Khi duyệt sẽ tự động bù đủ công.
 * **Cấu hình vị trí GPS Geofencing & Wifi:** Thiết lập bán kính cho phép quẹt thẻ (100m, 150m) tại các trụ sở Hà Nội, TP.HCM, Đà Nẵng và danh sách Wifi BSSID hợp lệ.
-* **Xuất Bảng chấm công 30 ngày ra file Excel (CSV).**
+* **Xuất Bảng chấm công & Lịch phân ca 30 ngày ra file Excel (CSV).**
 
 ### 4. AMIS Đơn từ & Phê duyệt trực tuyến (Approval Workflow)
 * Hỗ trợ đầy đủ các loại đơn: *Nghỉ phép năm, Làm thêm giờ (OT 150%), Đi muộn/về sớm, Nghỉ ốm hưởng BHXH, Nghỉ không lương*.
@@ -227,7 +231,7 @@ misa-amis-hrms/
 
 ## 🧪 7. Hệ Thống Kiểm Thử Tự Động & CI/CD (Quality Gate)
 
-Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **23 bài test tự động** đạt tỷ lệ thành công 100%:
+Hệ thống được trang bị bộ kiểm thử tự động toàn diện với **30 bài test tự động** đạt tỷ lệ thành công 100%:
 
 1. **Kiểm thử Thuế TNCN & Tiền lương (`tests/payroll.test.ts`):**
    * Đóng BHXH bắt buộc 10.5% (8% BHXH + 1.5% BHYT + 1% BHTN).
