@@ -148,9 +148,10 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
       setRegularizations(Array.isArray(regRes) ? regRes : []);
       setLocations(Array.isArray(lRes) ? lRes : []);
 
-      if (Array.isArray(payRes) && payRes.length > 0) {
-        const found = payRes.find((p: any) => p.employeeId === currentUser.id);
-        setUserPayslip(found || payRes[0]);
+      const payList = (payRes && typeof payRes === 'object' && 'data' in payRes ? (payRes as any).data : (Array.isArray(payRes) ? payRes : [])) || [];
+      if (payList.length > 0) {
+        const found = payList.find((p: any) => p.employeeId === currentUser?.id || p.employeeCode === currentUser?.code);
+        setUserPayslip(found || payList[0]);
       }
     } catch (err) {
       console.error('Error loading enterprise attendance data:', err);
@@ -1866,7 +1867,8 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           isOpen={isSelfPayslipOpen}
           onClose={() => setIsSelfPayslipOpen(false)}
           record={userPayslip}
-          employee={employees.find((e) => e.id === currentUser.id) || employees[0]}
+          employee={employees.find((e) => e.id === currentUser?.id || e.code === currentUser?.code) || employees[0]}
+          currentUser={currentUser}
         />
       )}
     </div>
