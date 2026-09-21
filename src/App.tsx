@@ -32,6 +32,7 @@ function MainApp() {
   const { isAuthenticated } = useAuth();
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Core Data
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -205,23 +206,32 @@ function MainApp() {
 
   return (
     <div className="flex h-screen bg-[#F4F6F9] overflow-hidden text-slate-900 font-sans">
-      {/* Collapsible Sidebar */}
+      {/* Responsive Collapsible Sidebar & Mobile Drawer */}
       <Sidebar
         currentTab={currentTab}
-        onSelectTab={setCurrentTab}
+        onSelectTab={(tab) => {
+          setCurrentTab(tab);
+          setMobileSidebarOpen(false);
+        }}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
         pendingLeavesCount={pendingLeavesCount}
+        mobileOpen={mobileSidebarOpen}
+        onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
       {/* Main View Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-screen overflow-hidden min-w-0">
         {/* Top Navbar */}
         <Navbar
           pendingLeavesCount={pendingLeavesCount}
           expiringContractsCount={stats?.expiringContracts.length || 0}
           birthdaysCount={stats?.upcomingBirthdays.length || 0}
-          onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
+          onNavigateTab={(tab) => {
+            setCurrentTab(tab as NavTab);
+            setMobileSidebarOpen(false);
+          }}
+          onToggleMobileSidebar={() => setMobileSidebarOpen(!mobileSidebarOpen)}
         />
 
         {/* Connection warning banner if server is down */}

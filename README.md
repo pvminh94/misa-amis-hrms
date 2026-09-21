@@ -196,12 +196,33 @@ misa-amis-hrms/
 * **In Sơ yếu lý lịch:** Hỗ trợ xem và in sơ yếu lý lịch chuẩn phục vụ thanh kiểm tra.
 
 ### 3. AMIS Chấm công & Quản lý Ca kíp Doanh nghiệp Chuyên sâu (Enterprise Time & Attendance Engine)
+* **Đăng ký Sinh trắc Khuôn mặt 3D (Face Biometrics Enrollment):**
+  * Thu thập mẫu khuôn mặt 3 góc độ: *Chính diện (0°)*, *Nghiêng trái (15° - 30°)*, *Nghiêng phải (-15° - -30°)*.
+  * Trích xuất vector đặc trưng sinh trắc học 512 chiều (`VEC-512-XXXXXXXX`) bảo mật mã hóa AES-256.
+  * Danh bạ quản trị hồ sơ FaceID: xem ảnh thumbnail, độ tin cậy nhận diện (99.8%), ngày đăng ký, quét lại hoặc xóa mẫu.
+  * Kiểm tra bắt buộc: nhân viên chưa có hồ sơ sinh trắc sẽ bị chặn bấm công và nhận cảnh báo yêu cầu đăng ký trước.
+* **Thuật toán Chống Giả Mạo & Xác thực Người Thật (Active Liveness Detection):**
+  * Thử thách động tương tác thời gian thực: *Chớp mắt tự nhiên (EAR < 0.2)* và *Xoay đầu 15° (Yaw angle)*.
+  * Bộ lọc vân giao thoa **Moiré** và phát lại qua màn hình phẳng (Screen Replay Attack) qua phân tích phổ tần số FFT.
+  * Phân tích trường sâu quang học 3D (3D Depth Mesh) loại trừ ảnh in giấy phẳng.
+  * Cảm biến con quay hồi chuyển (Gyroscope telemetry) ngăn chặn GPS giả lập (Mock Location).
+* **Trung tâm Bấm công Đa phương thức (Omni-Channel Punch Hub):**
+  * Tích hợp máy nhận diện khuôn mặt **Hikvision DS-K1T671 AI Face Terminal** (nhiệt độ thân nhiệt, nhận diện 0.3s).
+  * Máy quẹt vân tay & thẻ từ **Ronald Jack RJ-8800** (cảm biến SilkID).
+  * Ứng dụng di động **AMIS Mobile App PWA** (GPS Geofence + Selfie Liveness AI).
+* **Cấu hình Luật Chấm Công Doanh Nghiệp Toàn Diện (Attendance Policy):**
+  * Thời gian linh hoạt đi muộn cho phép (*Grace Period*, mặc định 15 phút không phạt).
+  * Thời gian cho phép về sớm tối đa (*Early Leave*, 10 phút).
+  * Ngưỡng tối thiểu tính tăng ca (*Overtime threshold*, 30 phút).
+  * Tiền phạt lũy tiến mỗi phút đi trễ (VND) tự động khấu trừ vào bảng tính lương.
+  * Giới hạn số lần đi muộn tối đa trong tháng trước khi lập biên bản kỷ luật.
+  * Mức độ nghiêm ngặt Liveness Strictness (*Tiêu chuẩn / Nâng cao / Nghiêm ngặt tối đa*).
+  * Bắt buộc kết nối WiFi công ty (`AMIS_CORP_5G`) khi quẹt thẻ.
 * **Xếp lịch & Phân ca tháng/tuần (Shift Rostering Planner):** Lập kế hoạch phân bổ ca làm việc trước cho từng nhân sự trong tháng. Hỗ trợ **Phân ca hàng loạt** theo bộ phận (Áp dụng ca hành chính T2-T6, Xoay ca 3 ca 4 kíp) và tự động kiểm tra **Điều 110 Bộ luật Lao động 2019** (khoảng cách nghỉ giữa 2 ca tối thiểu 12 giờ).
 * **Nhật ký quẹt thẻ thô máy chấm công (Raw Biometric Punch Logs):** Thu thập và lưu vết từng giây quẹt thẻ từ máy vân tay **Ronald Jack**, máy nhận diện khuôn mặt **Hikvision FaceID AI** (tỷ lệ nhận diện 99.4%) và GPS di động. Nút **"Đồng bộ máy chấm công"** thời gian thực kèm thuật toán ghép cặp thông minh (First-in / Last-out).
 * **Bảng chấm công tổng hợp tháng (Ma trận 30 ngày):** Theo dõi công chi tiết 30 ngày của toàn bộ nhân sự theo các ký hiệu chuẩn: `X` (Đủ công 8h), `L` (Đi muộn), `P` (Nghỉ phép/Lễ có lương), `KP` (Nghỉ không lương), `OT` (Tăng ca), `CT` (Công tác), `OFF` (Nghỉ tuần).
 * **Kiểm tra & Hiệu chỉnh ô công tức thì (Timesheet Inspector):** Nhấp chuột vào bất kỳ ô công nào để xem giờ check-in, check-out thực tế hoặc sửa công. **Hệ thống tự động liên kết cập nhật lại bảng lương của nhân sự ngay lập tức!**
 * **Báo cáo Chuyên cần & Bảng xếp hạng đi muộn (Late Leaderboard):** Thống kê tỷ lệ chuyên cần theo phòng ban, tổng quỹ giờ OT và xếp hạng Top nhân sự đi muộn lũy kế kèm mức độ cảnh báo (Nhắc nhở / Trừ thưởng chuyên cần).
-* **Cấu hình Quy tắc Đi muộn Linh hoạt (Grace Period):** Cho phép doanh nghiệp thiết lập thời gian linh hoạt (Grace Period: 15 phút) không bị phạt, ngưỡng tính nửa công (4h) và ngưỡng tính làm thêm giờ OT.
 * **Quản lý danh mục Ca làm việc (Shift Definitions):** Định nghĩa linh hoạt Ca hành chính (08:00 - 17:30), Ca sáng (4h), Ca chiều (4h), Ca đêm (22:00 - 06:00, hệ số 1.3 có phụ cấp làm đêm 30% theo luật lao động).
 * **Đăng ký & Phê duyệt Đổi ca làm việc (Shift Swap Requests):** Nhân viên đăng ký đổi ca trực với đồng nghiệp, Quản lý phê duyệt trực tuyến 1-click.
 * **Đơn giải trình Chấm công / Bù công (Attendance Regularization):** Giải trình quên quẹt thẻ, lỗi thiết bị hoặc đi công tác ngoại tỉnh kèm ảnh minh chứng. Khi duyệt sẽ tự động bù đủ công.

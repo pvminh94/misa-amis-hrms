@@ -55,8 +55,9 @@ import { RegularizationModal } from './RegularizationModal';
 import { BulkRosterModal } from './BulkRosterModal';
 import { RosterCellModal } from './RosterCellModal';
 import { OmniCheckInModal } from './OmniCheckInModal';
+import { FaceEnrollmentModal } from './FaceEnrollmentModal';
 import { SelfPayslipModal } from '../payroll/SelfPayslipModal';
-import { PayrollRecord } from '../../../types';
+import { PayrollRecord, FaceBiometricProfile } from '../../../types';
 
 interface AttendanceViewProps {
   attendanceList: AttendanceRecord[];
@@ -78,13 +79,14 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
 
   // Sub-tabs navigation
   const [activeSubTab, setActiveSubTab] = useState<
-    'roster' | 'monthly' | 'biometrics' | 'analytics' | 'daily' | 'shifts' | 'swaps' | 'geofence'
+    'roster' | 'monthly' | 'biometrics' | 'face_profiles' | 'analytics' | 'daily' | 'shifts' | 'swaps' | 'geofence'
   >('roster');
 
   // Core Data States
   const [rosterData, setRosterData] = useState<ShiftRosterEntry[]>([]);
   const [monthlyData, setMonthlyData] = useState<MonthlyTimesheetEmployee[]>([]);
   const [rawPunches, setRawPunches] = useState<RawPunchLog[]>([]);
+  const [faceBiometrics, setFaceBiometrics] = useState<FaceBiometricProfile[]>([]);
   const [analytics, setAnalytics] = useState<AttendanceAnalytics | null>(null);
   const [policy, setPolicy] = useState<AttendancePolicySetting | null>(null);
   const [shifts, setShifts] = useState<ShiftDefinition[]>([]);
@@ -119,16 +121,18 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [isRegModalOpen, setIsRegModalOpen] = useState(false);
   const [isOmniCheckInOpen, setIsOmniCheckInOpen] = useState(false);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
   const [isSelfPayslipOpen, setIsSelfPayslipOpen] = useState(false);
   const [userPayslip, setUserPayslip] = useState<PayrollRecord | null>(null);
 
   // Load all enterprise attendance module data
   const loadModuleData = async () => {
     try {
-      const [rRes, mRes, pRes, aRes, polRes, sRes, swRes, regRes, lRes, payRes] = await Promise.all([
+      const [rRes, mRes, pRes, fbRes, aRes, polRes, sRes, swRes, regRes, lRes, payRes] = await Promise.all([
         api.getShiftRoster().catch(() => []),
         api.getMonthlyTimesheets().catch(() => []),
         api.getRawPunchLogs().catch(() => []),
+        api.getFaceBiometrics().catch(() => []),
         api.getAttendanceAnalytics().catch(() => null),
         api.getAttendancePolicy().catch(() => null),
         api.getShifts().catch(() => []),
@@ -141,6 +145,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
       setRosterData(Array.isArray(rRes) ? rRes : []);
       setMonthlyData(Array.isArray(mRes) ? mRes : []);
       setRawPunches(Array.isArray(pRes) ? pRes : []);
+      setFaceBiometrics(Array.isArray(fbRes) ? fbRes : []);
       setAnalytics(aRes);
       setPolicy(polRes);
       setShifts(Array.isArray(sRes) ? sRes : []);
@@ -267,6 +272,20 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
       loadModuleData();
     } catch (err: any) {
       showToast(err.message || 'Lỗi lưu ca làm việc', 'error');
+    }
+  };
+
+  // Face Biometric Handlers
+  const handleDeleteFaceBiometric = async (id: string, name: string) => {
+    if (!window.confirm(`Bạn có chắc chắn muốn xóa mẫu khuôn mặt FaceID của ${name}? Sau khi xóa, nhân viên sẽ cần đăng ký lại để chấm công.`)) {
+      return;
+    }
+    try {
+      await api.deleteFaceBiometric(id);
+      showToast(`Đã xóa mẫu sinh trắc khuôn mặt của ${name}`, 'success');
+      loadModuleData();
+    } catch (err: any) {
+      showToast(err.message || 'Lỗi xóa mẫu khuôn mặt', 'error');
     }
   };
 
@@ -397,6 +416,16 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
       (item.employeeCode || '').toLowerCase().includes(search.toLowerCase()) ||
       (item.deviceName || '').toLowerCase().includes(search.toLowerCase());
     return matchesSource && matchesSearch;
+  });
+
+  const filteredFaceProfiles = (faceBiometrics || []).filter((item) => {
+    if (!item) return false;
+    const matchesDept = selectedDept === 'all' || item.departmentName === selectedDept;
+    const matchesSearch =
+      (item.employeeName || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.employeeCode || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.featuresHash || '').toLowerCase().includes(search.toLowerCase());
+    return matchesDept && matchesSearch;
   });
 
   // Cell Badge Class Helpers
@@ -559,6 +588,21 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           <span>Nhật ký quẹt thẻ thô máy vân tay / FaceID</span>
           <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-purple-100 text-purple-800 font-bold">
             {rawPunches.length}
+          </span>
+        </button>
+
+        <button
+          onClick={() => setActiveSubTab('face_profiles')}
+          className={`py-3 px-3.5 border-b-2 flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap ${
+            activeSubTab === 'face_profiles'
+              ? 'border-[#0072BC] text-[#0072BC] font-bold'
+              : 'border-transparent text-slate-500 hover:text-slate-800'
+          }`}
+        >
+          <ScanFace className="w-4 h-4 text-sky-600" />
+          <span>Hồ sơ Sinh trắc FaceID</span>
+          <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-sky-100 text-[#0072BC] font-bold">
+            {faceBiometrics.length}/{employees.length}
           </span>
         </button>
 
@@ -1104,6 +1148,244 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
               <span>Hỗ trợ chuẩn kết nối SDK máy Ronald Jack, ZKTeco, Hikvision FaceID</span>
               <span>Tổng số lượt quẹt ghi nhận: {rawPunches.length}</span>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* TAB: QUẢN TRỊ SINH TRẮC KHUÔN MẶT (FACE BIOMETRICS)     */}
+      {/* ======================================================== */}
+      {activeSubTab === 'face_profiles' && (
+        <div className="space-y-4">
+          {/* Top KPI Summary Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+              <div className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                <ScanFace className="w-4 h-4 text-[#0072BC]" />
+                <span>Hồ sơ FaceID đã đăng ký</span>
+              </div>
+              <div className="text-2xl font-black text-slate-900 mt-1">
+                {faceBiometrics.length}{' '}
+                <span className="text-xs font-normal text-slate-400">/ {employees.length} nhân sự</span>
+              </div>
+              <div className="text-[11px] text-emerald-600 font-semibold mt-1">
+                Đã đồng bộ sang Hikvision Terminal & Mobile AI
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+              <div className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>Tỷ lệ phủ sóng sinh trắc</span>
+              </div>
+              <div className="text-2xl font-black text-emerald-600 mt-1">
+                {Math.round((faceBiometrics.length / (employees.length || 1)) * 100)}%
+              </div>
+              <div className="text-[11px] text-slate-500 mt-1">
+                {employees.length - faceBiometrics.length > 0
+                  ? `Còn ${employees.length - faceBiometrics.length} nhân sự chưa đăng ký`
+                  : '100% nhân sự đã có mẫu khuôn mặt'}
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+              <div className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                <Award className="w-4 h-4 text-purple-600" />
+                <span>Độ chính xác nhận diện AI</span>
+              </div>
+              <div className="text-2xl font-black text-purple-600 mt-1">99.8%</div>
+              <div className="text-[11px] text-slate-500 mt-1">
+                Cosine Similarity ma trận 512-dim embedding
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+              <div className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-amber-500" />
+                <span>Tiêu chuẩn chống giả mạo</span>
+              </div>
+              <div className="text-base font-black text-slate-800 mt-1">ISO/IEC 30107-3</div>
+              <div className="text-[11px] text-slate-500 mt-1">
+                Active Liveness • Chặn ảnh in & video replay
+              </div>
+            </div>
+          </div>
+
+          {/* Action Bar & Filter */}
+          <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="flex items-center gap-3 flex-1 flex-wrap">
+              <div className="relative flex-1 max-w-xs min-w-[200px]">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Tìm nhân sự, mã NV, vector hash..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0072BC]/20"
+                />
+              </div>
+
+              <select
+                value={selectedDept}
+                onChange={(e) => setSelectedDept(e.target.value)}
+                className="px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700"
+              >
+                <option value="all">Tất cả phòng ban</option>
+                {departments.map((d) => (
+                  <option key={d.id} value={d.name}>
+                    {d.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsEnrollModalOpen(true)}
+                className="px-4 py-2 bg-gradient-to-r from-[#0072BC] to-sky-600 hover:from-[#005A96] hover:to-sky-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+              >
+                <ScanFace className="w-4 h-4" />
+                <span>Đăng Ký Mẫu Khuôn Mặt Mới (3 Góc Độ 3D)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Enrolled Profiles Directory Table */}
+          <div className="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider text-[11px]">
+                    <th className="py-3 px-4">Nhân sự</th>
+                    <th className="py-3 px-4">Phòng ban</th>
+                    <th className="py-3 px-4">Trạng thái FaceID</th>
+                    <th className="py-3 px-4">Góc chụp 3D</th>
+                    <th className="py-3 px-4">Mã hóa Vector (512-dim)</th>
+                    <th className="py-3 px-4">Độ tin cậy</th>
+                    <th className="py-3 px-4">Ngày đăng ký</th>
+                    <th className="py-3 px-4 text-right">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {filteredFaceProfiles.length === 0 ? (
+                    <tr>
+                      <td colSpan={8} className="p-8 text-center text-slate-400">
+                        Không tìm thấy hồ sơ sinh trắc khuôn mặt phù hợp
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredFaceProfiles.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-50 transition">
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
+                              {item.photoThumbnail ? (
+                                <img
+                                  src={item.photoThumbnail}
+                                  alt={item.employeeName}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <ScanFace className="w-5 h-5 text-sky-600" />
+                              )}
+                            </div>
+                            <div>
+                              <strong className="text-slate-900 block text-xs">{item.employeeName}</strong>
+                              <span className="text-[10px] text-slate-400 font-mono">{item.employeeCode}</span>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="py-3 px-4 text-slate-600">{item.departmentName}</td>
+
+                        <td className="py-3 px-4">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            Đã Đăng Ký (Active)
+                          </span>
+                        </td>
+
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-1 font-mono text-[10px]">
+                            <span className="px-1.5 py-0.5 rounded bg-blue-50 text-[#0072BC] font-bold">
+                              Front (0°)
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-blue-50 text-[#0072BC] font-bold">
+                              Left (15°)
+                            </span>
+                            <span className="px-1.5 py-0.5 rounded bg-blue-50 text-[#0072BC] font-bold">
+                              Right (-15°)
+                            </span>
+                          </div>
+                        </td>
+
+                        <td className="py-3 px-4 font-mono text-[11px] text-slate-700">
+                          <span className="bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                            {item.featuresHash || 'VEC-512-STANDARD'}
+                          </span>
+                        </td>
+
+                        <td className="py-3 px-4">
+                          <span className="font-bold text-emerald-600 font-mono">
+                            {item.confidenceScore ? `${item.confidenceScore}%` : '99.8%'}
+                          </span>
+                        </td>
+
+                        <td className="py-3 px-4 text-slate-500 text-[11px]">
+                          <div>{item.enrolledAt}</div>
+                          <div className="text-[10px] text-slate-400">{item.enrolledBy}</div>
+                        </td>
+
+                        <td className="py-3 px-4 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setIsEnrollModalOpen(true);
+                              }}
+                              className="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-[#0072BC] font-semibold rounded-lg transition cursor-pointer"
+                              title="Chụp lại để ghi đè mẫu mới"
+                            >
+                              Chụp lại
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteFaceBiometric(item.id, item.employeeName)}
+                              className="px-2 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold rounded-lg transition cursor-pointer"
+                              title="Xóa mẫu khuôn mặt"
+                            >
+                              Xóa mẫu
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Unenrolled employees notice banner */}
+            {employees.some((e) => !faceBiometrics.some((fb) => fb.employeeId === e.id)) && (
+              <div className="p-3 bg-amber-50/70 border-t border-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                <div className="flex items-center gap-2 text-amber-900">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>
+                    Có{' '}
+                    <strong>
+                      {employees.filter((e) => !faceBiometrics.some((fb) => fb.employeeId === e.id)).length}
+                    </strong>{' '}
+                    nhân sự chưa đăng ký mẫu sinh trắc khuôn mặt FaceID.
+                  </span>
+                </div>
+                <button
+                  onClick={() => setIsEnrollModalOpen(true)}
+                  className="px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg transition cursor-pointer shrink-0"
+                >
+                  Đăng ký ngay
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -1713,70 +1995,253 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
       )}
 
       {/* ======================================================== */}
-      {/* TAB 8: GPS GEOFENCING & WIFI CONFIGURATION               */}
+      {/* TAB 8: GPS GEOFENCING, WIFI & ATTENDANCE POLICY          */}
       {/* ======================================================== */}
       {activeSubTab === 'geofence' && (
-        <div className="space-y-4">
-          <div className="pb-2 border-b">
-            <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-rose-600" />
-              <span>Thiết Lập Vị Trí Địa Lý (GPS Geofencing) & Mạng Wifi Chấm Công Hợp Lệ</span>
-            </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Hệ thống chỉ cho phép nhân viên quẹt thẻ vào ca khi nằm trong bán kính quy định hoặc kết nối Wifi văn phòng
-            </p>
-          </div>
+        <div className="space-y-6">
+          {/* Top Geofence Location Cards */}
+          <div className="space-y-3">
+            <div className="pb-2 border-b flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-rose-600" />
+                  <span>Thiết Lập Vị Trí Địa Lý (GPS Geofencing) & Mạng Wifi Chấm Công Hợp Lệ</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Hệ thống chỉ cho phép nhân viên quẹt thẻ vào ca khi nằm trong bán kính quy định hoặc kết nối Wifi văn phòng
+                </p>
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {locations.map((loc) => (
-              <div
-                key={loc.id}
-                className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs hover:border-[#0072BC] transition space-y-3"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
-                      <MapPin className="w-5 h-5" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {locations.map((loc) => (
+                <div
+                  key={loc.id}
+                  className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs hover:border-[#0072BC] transition space-y-3"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 text-xs">{loc.name}</h4>
+                        <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đang hoạt động
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 text-xs">{loc.name}</h4>
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đang hoạt động
+                  </div>
+
+                  <p className="text-slate-600 text-xs leading-relaxed">{loc.address}</p>
+
+                  <div className="pt-2 border-t border-slate-100 space-y-1.5 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-slate-400 text-[11px]">Bán kính GPS hợp lệ:</span>
+                      <span className="font-bold text-slate-800">{loc.radiusMeters} mét</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-400 text-[11px]">Tọa độ:</span>
+                      <span className="font-mono text-[11px] text-slate-700">
+                        {loc.latitude}, {loc.longitude}
                       </span>
                     </div>
-                  </div>
-                </div>
-
-                <p className="text-slate-600 text-xs leading-relaxed">{loc.address}</p>
-
-                <div className="pt-2 border-t border-slate-100 space-y-1.5 text-xs">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400 text-[11px]">Bán kính GPS hợp lệ:</span>
-                    <span className="font-bold text-slate-800">{loc.radiusMeters} mét</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400 text-[11px]">Tọa độ:</span>
-                    <span className="font-mono text-[11px] text-slate-700">
-                      {loc.latitude}, {loc.longitude}
-                    </span>
-                  </div>
-                  <div className="pt-1">
-                    <span className="text-slate-400 text-[11px] block mb-1">Wifi nội bộ được phép:</span>
-                    <div className="flex flex-wrap gap-1">
-                      {loc.allowedWifiBSSID.map((wifi, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-0.5 bg-blue-50 text-[#0072BC] rounded text-[10px] font-mono font-semibold"
-                        >
-                          {wifi}
-                        </span>
-                      ))}
+                    <div className="pt-1">
+                      <span className="text-slate-400 text-[11px] block mb-1">Wifi nội bộ được phép:</span>
+                      <div className="flex flex-wrap gap-1">
+                        {loc.allowedWifiBSSID.map((wifi, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 bg-blue-50 text-[#0072BC] rounded text-[10px] font-mono font-semibold"
+                          >
+                            {wifi}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          {/* Full Professional Attendance Policy Configuration Form */}
+          {policy && (
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+              <div className="pb-3 border-b flex items-start justify-between">
+                <div>
+                  <h3 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                    <Sliders className="w-4 h-4 text-[#0072BC]" />
+                    <span>Chính Sách Chấm Công & Luật Linh Hoạt Doanh Nghiệp (Attendance Policy)</span>
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Tùy biến thời gian linh hoạt (Grace Period), mức phạt đi muộn, chế độ kiểm tra chống giả mạo sinh trắc
+                  </p>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                  Quy định AMIS 2026
+                </span>
+              </div>
+
+              <form onSubmit={handleSavePolicy} className="space-y-5 text-xs">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  {/* Grace period for late arrival */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      1. Thời gian linh hoạt đi muộn (Grace Period):
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        min={0}
+                        max={60}
+                        value={policy.gracePeriodMinutes ?? 15}
+                        onChange={(e) => setPolicy({ ...policy, gracePeriodMinutes: Number(e.target.value) })}
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                      />
+                      <span className="text-slate-600 font-bold">phút</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 block">
+                      Đến muộn dưới {policy.gracePeriodMinutes ?? 15} phút vẫn được tính là ĐÚNG GIỜ.
+                    </span>
+                  </div>
+
+                  {/* Early departure grace */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      2. Cho phép về sớm tối đa (Early Leave):
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        min={0}
+                        max={60}
+                        value={policy.earlyLeaveMinutes ?? 10}
+                        onChange={(e) => setPolicy({ ...policy, earlyLeaveMinutes: Number(e.target.value) })}
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                      />
+                      <span className="text-slate-600 font-bold">phút</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 block">
+                      Về trước giờ kết thúc ca trong khoảng này không bị phạt.
+                    </span>
+                  </div>
+
+                  {/* OT threshold */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      3. Ngưỡng tối thiểu bắt đầu tính OT:
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        min={15}
+                        max={120}
+                        value={policy.overtimeMinMinutes ?? 30}
+                        onChange={(e) => setPolicy({ ...policy, overtimeMinMinutes: Number(e.target.value) })}
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                      />
+                      <span className="text-slate-600 font-bold">phút</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 block">
+                      Làm thêm ít nhất {policy.overtimeMinMinutes ?? 30} phút sau ca để được duyệt công OT.
+                    </span>
+                  </div>
+
+                  {/* Penalty per late minute */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      4. Mức phạt mỗi phút đi trễ (ngoài Grace):
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        step={500}
+                        min={0}
+                        max={50000}
+                        value={policy.latePenaltyAmount ?? 2000}
+                        onChange={(e) => setPolicy({ ...policy, latePenaltyAmount: Number(e.target.value) })}
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                      />
+                      <span className="text-slate-600 font-bold">VNĐ</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 block">
+                      Tự động trích trừ vào bảng tính lương cuối tháng.
+                    </span>
+                  </div>
+
+                  {/* Max late times allowed */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      5. Số lần đi muộn tối đa trong tháng:
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        min={1}
+                        max={10}
+                        value={policy.maxLatePerMonth ?? 3}
+                        onChange={(e) => setPolicy({ ...policy, maxLatePerMonth: Number(e.target.value) })}
+                        className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                      />
+                      <span className="text-slate-600 font-bold">lần</span>
+                    </div>
+                    <span className="text-[11px] text-slate-500 block">
+                      Vượt quá {policy.maxLatePerMonth ?? 3} lần sẽ bị chuyển sang danh sách biên bản kỷ luật.
+                    </span>
+                  </div>
+
+                  {/* Liveness strictness level */}
+                  <div className="space-y-1.5 p-3.5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <label className="text-slate-800 font-bold block">
+                      6. Độ nghiêm ngặt Anti-Spoofing Liveness:
+                    </label>
+                    <select
+                      value={policy.livenessLevel ?? 'strict'}
+                      onChange={(e) => setPolicy({ ...policy, livenessLevel: e.target.value as any })}
+                      className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0072BC]"
+                    >
+                      <option value="standard">Tiêu chuẩn (Chớp mắt tự nhiên EAR)</option>
+                      <option value="strict">Nâng cao (Chớp mắt + Nghiêng đầu + Lưới Moiré)</option>
+                      <option value="maximum">Nghiêm ngặt tối đa (3D Mesh + Sensor Telemetry)</option>
+                    </select>
+                    <span className="text-[11px] text-slate-500 block">
+                      Ngăn chặn triệt để hình ảnh in lại hoặc phát lại qua màn hình khác.
+                    </span>
+                  </div>
+                </div>
+
+                {/* Additional Toggles */}
+                <div className="p-4 bg-blue-50/60 border border-blue-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="space-y-0.5">
+                    <strong className="text-blue-950 text-xs block">Bắt Buộc Phải Kết Nối Đúng WiFi Công Ty Khi Chấm Công</strong>
+                    <p className="text-[11px] text-blue-700">
+                      Khi bật, nhân viên dù nằm trong bán kính GPS vẫn phải kết nối đúng BSSID của công ty để chấm công hợp lệ.
+                    </p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer shrink-0">
+                    <input
+                      type="checkbox"
+                      checked={policy.requireWifi ?? false}
+                      onChange={(e) => setPolicy({ ...policy, requireWifi: e.target.checked })}
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0072BC]"></div>
+                  </label>
+                </div>
+
+                <div className="pt-2 flex justify-end">
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 bg-[#0072BC] hover:bg-[#005A96] text-white font-bold rounded-xl shadow-md transition active:scale-95 cursor-pointer flex items-center gap-2"
+                  >
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Lưu Cấu Hình Quy Tắc Chấm Công</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       )}
 
@@ -1869,6 +2334,19 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           record={userPayslip}
           employee={employees.find((e) => e.id === currentUser?.id || e.code === currentUser?.code) || employees[0]}
           currentUser={currentUser}
+        />
+      )}
+
+      {isEnrollModalOpen && (
+        <FaceEnrollmentModal
+          isOpen={isEnrollModalOpen}
+          onClose={() => setIsEnrollModalOpen(false)}
+          employees={employees}
+          enrolledProfiles={faceBiometrics}
+          onSuccess={() => {
+            loadModuleData();
+            setIsEnrollModalOpen(false);
+          }}
         />
       )}
     </div>

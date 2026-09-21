@@ -12,7 +12,8 @@ import {
   AlertTriangle,
   Cake,
   FileSpreadsheet,
-  Shield
+  Shield,
+  Menu
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
@@ -24,13 +25,15 @@ interface NavbarProps {
   expiringContractsCount?: number;
   birthdaysCount?: number;
   onNavigateTab?: (tab: string) => void;
+  onToggleMobileSidebar?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   pendingLeavesCount = 2,
   expiringContractsCount = 3,
   birthdaysCount = 2,
-  onNavigateTab
+  onNavigateTab,
+  onToggleMobileSidebar
 }) => {
   const { currentUser, role, switchUser, logout } = useAuth();
   const { showToast } = useToast();
@@ -68,20 +71,29 @@ export const Navbar: React.FC<NavbarProps> = ({
   const totalNotifications = pendingLeavesCount + expiringContractsCount + birthdaysCount;
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
-      {/* Left: Organization context & Search */}
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 text-xs font-semibold cursor-pointer hover:bg-slate-100 transition">
-          <Building2 className="w-4 h-4 text-[#0072BC]" />
-          <span className="hidden md:inline truncate max-w-[260px]">AMIS CORP - TRỤ SỞ HÀ NỘI</span>
-          <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+    <header className="h-16 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+      {/* Left: Hamburger for mobile + Organization context & Search */}
+      <div className="flex items-center gap-2 sm:gap-4">
+        {/* Mobile Hamburger Drawer Toggle */}
+        <button
+          onClick={onToggleMobileSidebar}
+          className="md:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition cursor-pointer"
+          title="Mở menu danh mục"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        <div className="flex items-center gap-2 px-2.5 sm:px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 text-xs font-semibold cursor-pointer hover:bg-slate-100 transition">
+          <Building2 className="w-4 h-4 text-[#0072BC] shrink-0" />
+          <span className="truncate max-w-[140px] sm:max-w-[200px] md:max-w-[260px]">AMIS CORP HÀ NỘI</span>
+          <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0 hidden sm:block" />
         </div>
 
-        <div className="relative hidden sm:block w-72">
+        <div className="relative hidden lg:block w-64 xl:w-72">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Tìm kiếm nhân viên, mã NV, phòng ban..."
+            placeholder="Tìm kiếm nhân viên, mã NV..."
             className="w-full pl-9 pr-4 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0072BC]/20 focus:border-[#0072BC] transition"
           />
         </div>

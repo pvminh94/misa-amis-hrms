@@ -1761,13 +1761,103 @@ export const initialRawPunchLogs: RawPunchLog[] = [
 
 // SEED: Attendance Policy
 export const initialAttendancePolicy: AttendancePolicySetting = {
-  gracePeriodMinutes: 15, // 15 phút linh hoạt đầu giờ
+  gracePeriodMinutes: 15, // 15 phút linh hoạt đầu giờ (đến trước 08:15 không tính trễ)
+  earlyLeaveMinutes: 15, // Về trước 17:15 tính là về sớm
+  maxLatePerMonth: 3, // Cho phép tối đa 3 lần trễ/tháng
+  latePenaltyAmount: 50000, // Phạt 50.000đ sau lần trễ thứ 3
   halfDayMinHours: 4.0,
   fullDayMinHours: 7.0,
-  overtimeMinMinutes: 30,
+  overtimeMinMinutes: 30, // Phải làm thêm ít nhất 30 phút mới tính OT
   maxContinuousDays: 6,
-  minRestHoursBetweenShifts: 12
+  minRestHoursBetweenShifts: 12, // Điều 110 BLLĐ 2019
+  requireGps: true,
+  gpsRadiusMeters: 100,
+  requireWifi: true,
+  livenessLevel: 'strict',
+  facialRecognitionEnabled: true
 };
+
+// SEED: Face Biometrics Registry
+export const initialFaceBiometrics: FaceBiometricProfile[] = [
+  {
+    id: 'face-01',
+    employeeId: 'emp-01',
+    employeeCode: 'AMIS-0001',
+    employeeName: 'Trịnh Văn Cường',
+    departmentName: 'Ban Giám Đốc',
+    status: 'enrolled',
+    enrolledAt: '2026-08-15 09:30:12',
+    enrolledBy: 'Quản trị viên Hệ thống',
+    featuresHash: 'VEC-512-9A8B7C6D5E4F3A2B1C0D',
+    confidenceScore: 99.8,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  },
+  {
+    id: 'face-02',
+    employeeId: 'emp-02',
+    employeeCode: 'AMIS-0002',
+    employeeName: 'Vũ Quốc Thái',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    status: 'enrolled',
+    enrolledAt: '2026-08-15 10:15:45',
+    enrolledBy: 'Quản trị viên Hệ thống',
+    featuresHash: 'VEC-512-1F2E3D4C5B6A79887766',
+    confidenceScore: 99.6,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  },
+  {
+    id: 'face-03',
+    employeeId: 'emp-03',
+    employeeCode: 'AMIS-0003',
+    employeeName: 'Nguyễn Thị Thu Hằng',
+    departmentName: 'Khối Kinh Doanh & Tiếp Thị',
+    status: 'enrolled',
+    enrolledAt: '2026-08-16 11:20:00',
+    enrolledBy: 'Trưởng phòng Nhân sự',
+    featuresHash: 'VEC-512-5544332211AABBCCDDEE',
+    confidenceScore: 99.4,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  },
+  {
+    id: 'face-04',
+    employeeId: 'emp-04',
+    employeeCode: 'AMIS-0004',
+    employeeName: 'Đặng Mai Lan',
+    departmentName: 'Khối Nhân Sự & Vận Hành',
+    status: 'enrolled',
+    enrolledAt: '2026-08-16 14:00:22',
+    enrolledBy: 'Trưởng phòng Nhân sự',
+    featuresHash: 'VEC-512-6677889900FFEEDDCCBB',
+    confidenceScore: 99.7,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  },
+  {
+    id: 'face-07',
+    employeeId: 'emp-07',
+    employeeCode: 'AMIS-0007',
+    employeeName: 'Phạm Thị Hương Ly',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    status: 'enrolled',
+    enrolledAt: '2026-08-18 08:45:10',
+    enrolledBy: 'Trưởng phòng Nhân sự',
+    featuresHash: 'VEC-512-44332211009988776655',
+    confidenceScore: 99.5,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  },
+  {
+    id: 'face-08',
+    employeeId: 'emp-08',
+    employeeCode: 'AMIS-0008',
+    employeeName: 'Trần Gia Bảo',
+    departmentName: 'Khối Công Nghệ & Kỹ Thuật',
+    status: 'enrolled',
+    enrolledAt: '2026-08-18 10:12:33',
+    enrolledBy: 'Trưởng phòng Nhân sự',
+    featuresHash: 'VEC-512-33221100998877665544',
+    confidenceScore: 99.2,
+    anglesCaptured: { frontal: true, left: true, right: true }
+  }
+];
 
 // ========================================================
 // SEED: ENTERPRISE RBAC & SYSTEM ADMINISTRATION

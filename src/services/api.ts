@@ -6,7 +6,9 @@ import {
   LeaveRequest,
   PayrollRecord,
   CompanySetting,
-  DashboardStats
+  DashboardStats,
+  FaceBiometricProfile,
+  AttendancePolicySetting
 } from '../types';
 
 const API_BASE = '/api';
@@ -288,15 +290,38 @@ export const api = {
     return fetchJson(`${API_BASE}/attendance/analytics?period=${period}`);
   },
 
-  async getAttendancePolicy(): Promise<any> {
-    return fetchJson(`${API_BASE}/attendance/policy`);
+  async getAttendancePolicy(): Promise<AttendancePolicySetting> {
+    const res = await fetchJson(`${API_BASE}/attendance/policy`);
+    return res.data || res;
   },
 
-  async updateAttendancePolicy(payload: any): Promise<any> {
-    return fetchJson(`${API_BASE}/attendance/policy`, {
+  async updateAttendancePolicy(payload: Partial<AttendancePolicySetting>): Promise<AttendancePolicySetting> {
+    const res = await fetchJson(`${API_BASE}/attendance/policy`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
+    });
+    return res.data || res;
+  },
+
+  // Face Biometrics Management
+  async getFaceBiometrics(): Promise<FaceBiometricProfile[]> {
+    const res = await fetchJson(`${API_BASE}/attendance/face-biometrics`);
+    return res.data || [];
+  },
+
+  async enrollFaceBiometric(payload: Partial<FaceBiometricProfile>): Promise<FaceBiometricProfile> {
+    const res = await fetchJson(`${API_BASE}/attendance/face-biometrics/enroll`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.data || res;
+  },
+
+  async deleteFaceBiometric(id: string): Promise<any> {
+    return fetchJson(`${API_BASE}/attendance/face-biometrics/${id}`, {
+      method: 'DELETE'
     });
   },
 

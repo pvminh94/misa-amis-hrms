@@ -6,7 +6,7 @@
       "name": "Ban Giám Đốc",
       "managerId": "emp-01",
       "managerName": "Trịnh Văn Cường",
-      "employeeCount": 3,
+      "employeeCount": 5,
       "description": "Điều hành chiến lược toàn công ty"
     },
     {
@@ -154,6 +154,262 @@
     }
   ],
   "employees": [
+    {
+      "code": "AMIS-5616",
+      "fullName": "Trần Thị Thu Thảo",
+      "gender": "Nữ",
+      "dob": "1997-08-20",
+      "idCard": "001097008899",
+      "idCardDate": "2021-05-10",
+      "idCardPlace": "Cục Cảnh sát QLHC về TTXH",
+      "phone": "0988 123 789",
+      "email": "onboard_1790003310118@amis.vn",
+      "address": "Cầu Giấy, Hà Nội",
+      "hometown": "Bắc Ninh",
+      "education": "Đại học Ngoại Thương",
+      "departmentId": "dept-02",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionId": "pos-03",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "joinDate": "2026-09-21",
+      "contractType": "Hợp đồng thử việc 02 tháng",
+      "status": "probation",
+      "bankAccount": {
+        "bankName": "Vietcombank",
+        "accountNumber": "001100998877",
+        "branch": "Sở Giao Dịch"
+      },
+      "salary": {
+        "baseSalary": 16000000,
+        "allowanceResponsibility": 1000000,
+        "allowanceLunch": 730000,
+        "allowanceGas": 500000,
+        "dependents": 0,
+        "taxCode": "8091887766",
+        "insuranceBookNumber": "7912887766"
+      },
+      "id": "emp-310118",
+      "contracts": [
+        {
+          "id": "ctr-310118",
+          "contractNumber": "HĐLĐ-2026/AMIS-5616",
+          "contractType": "Hợp đồng thử việc 02 tháng",
+          "signDate": "2026-09-21",
+          "startDate": "2026-09-21",
+          "endDate": "2026-11-21",
+          "signerName": "Trịnh Văn Cường",
+          "signerTitle": "Tổng Giám Đốc",
+          "salaryInsurance": 16000000,
+          "status": "active"
+        }
+      ],
+      "workHistory": [
+        {
+          "id": "wh-310118",
+          "fromDate": "2026-09-21",
+          "toDate": "Hiện tại",
+          "company": "Công ty Cổ phần AMIS HRM",
+          "position": "Chuyên viên Kiểm thử QA",
+          "note": "Tiếp nhận tuyển dụng mới"
+        }
+      ],
+      "rewardsDisciplines": [],
+      "dependentsList": [],
+      "documents": []
+    },
+    {
+      "code": "AMIS-0021",
+      "fullName": "Bùi Văn Hưng",
+      "gender": "Nam",
+      "dob": "1996-05-15",
+      "idCard": "001096001234",
+      "idCardDate": "2022-01-01",
+      "idCardPlace": "Cục Cảnh sát QLHC về TTXH",
+      "phone": "0904 889 112",
+      "email": "hung.buivan.bi@gmail.com",
+      "address": "Hà Nội, Việt Nam",
+      "hometown": "Hà Nội",
+      "education": "Đại học",
+      "departmentId": "dept-bgd",
+      "departmentName": "Ban Giám Đốc",
+      "positionId": "pos-14",
+      "positionTitle": "Kế toán trưởng",
+      "joinDate": "2026-10-05",
+      "contractType": "Hợp đồng thử việc 02 tháng",
+      "contractStartDate": "2026-10-05",
+      "contractEndDate": "2026-12-01",
+      "status": "probation",
+      "bankAccount": {
+        "bankName": "Vietcombank",
+        "accountNumber": "1012345678",
+        "branch": "Sở Giao Dịch"
+      },
+      "salary": {
+        "baseSalary": 24000000,
+        "allowanceResponsibility": 1000000,
+        "allowanceLunch": 730000,
+        "allowanceGas": 500000,
+        "dependents": 0,
+        "taxCode": "",
+        "insuranceBookNumber": ""
+      },
+      "id": "emp-310104",
+      "contracts": [
+        {
+          "id": "ctr-310104",
+          "contractNumber": "HĐLĐ-2026/AMIS-0021",
+          "contractType": "Hợp đồng thử việc 02 tháng",
+          "signDate": "2026-10-05",
+          "startDate": "2026-10-05",
+          "endDate": "2026-12-01",
+          "signerName": "Trịnh Văn Cường",
+          "signerTitle": "Tổng Giám Đốc",
+          "salaryInsurance": 24000000,
+          "status": "active"
+        }
+      ],
+      "workHistory": [
+        {
+          "id": "wh-310104",
+          "fromDate": "2026-10-05",
+          "toDate": "Hiện tại",
+          "company": "Công ty Cổ phần AMIS HRM",
+          "position": "Kế toán trưởng",
+          "note": "Tiếp nhận tuyển dụng mới"
+        }
+      ],
+      "rewardsDisciplines": [],
+      "dependentsList": [],
+      "documents": []
+    },
+    {
+      "code": "AMIS-3620",
+      "fullName": "Trần Thị Thu Thảo",
+      "gender": "Nữ",
+      "dob": "1997-08-20",
+      "idCard": "001097008899",
+      "idCardDate": "2021-05-10",
+      "idCardPlace": "Cục Cảnh sát QLHC về TTXH",
+      "phone": "0988 123 789",
+      "email": "onboard_1790000797424@amis.vn",
+      "address": "Cầu Giấy, Hà Nội",
+      "hometown": "Bắc Ninh",
+      "education": "Đại học Ngoại Thương",
+      "departmentId": "dept-02",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionId": "pos-03",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "joinDate": "2026-09-21",
+      "contractType": "Hợp đồng thử việc 02 tháng",
+      "status": "probation",
+      "bankAccount": {
+        "bankName": "Vietcombank",
+        "accountNumber": "001100998877",
+        "branch": "Sở Giao Dịch"
+      },
+      "salary": {
+        "baseSalary": 16000000,
+        "allowanceResponsibility": 1000000,
+        "allowanceLunch": 730000,
+        "allowanceGas": 500000,
+        "dependents": 0,
+        "taxCode": "8091887766",
+        "insuranceBookNumber": "7912887766"
+      },
+      "id": "emp-797424",
+      "contracts": [
+        {
+          "id": "ctr-797424",
+          "contractNumber": "HĐLĐ-2026/AMIS-3620",
+          "contractType": "Hợp đồng thử việc 02 tháng",
+          "signDate": "2026-09-21",
+          "startDate": "2026-09-21",
+          "endDate": "2026-11-21",
+          "signerName": "Trịnh Văn Cường",
+          "signerTitle": "Tổng Giám Đốc",
+          "salaryInsurance": 16000000,
+          "status": "active"
+        }
+      ],
+      "workHistory": [
+        {
+          "id": "wh-797424",
+          "fromDate": "2026-09-21",
+          "toDate": "Hiện tại",
+          "company": "Công ty Cổ phần AMIS HRM",
+          "position": "Chuyên viên Kiểm thử QA",
+          "note": "Tiếp nhận tuyển dụng mới"
+        }
+      ],
+      "rewardsDisciplines": [],
+      "dependentsList": [],
+      "documents": []
+    },
+    {
+      "code": "AMIS-0019",
+      "fullName": "Nguyễn Thu Trang",
+      "gender": "Nam",
+      "dob": "1996-05-15",
+      "idCard": "001096001234",
+      "idCardDate": "2022-01-01",
+      "idCardPlace": "Cục Cảnh sát QLHC về TTXH",
+      "phone": "0977 221 445",
+      "email": "trang.nguyen.hr@gmail.com",
+      "address": "Hà Nội, Việt Nam",
+      "hometown": "Hà Nội",
+      "education": "Đại học",
+      "departmentId": "dept-bgd",
+      "departmentName": "Ban Giám Đốc",
+      "positionId": "pos-09",
+      "positionTitle": "Chuyên viên Kinh doanh B2B",
+      "joinDate": "2026-09-25",
+      "contractType": "Hợp đồng thử việc 02 tháng",
+      "contractStartDate": "2026-09-25",
+      "contractEndDate": "2026-12-01",
+      "status": "probation",
+      "bankAccount": {
+        "bankName": "Vietcombank",
+        "accountNumber": "1012345678",
+        "branch": "Sở Giao Dịch"
+      },
+      "salary": {
+        "baseSalary": 18500000,
+        "allowanceResponsibility": 1000000,
+        "allowanceLunch": 730000,
+        "allowanceGas": 500000,
+        "dependents": 0,
+        "taxCode": "",
+        "insuranceBookNumber": ""
+      },
+      "id": "emp-797416",
+      "contracts": [
+        {
+          "id": "ctr-797416",
+          "contractNumber": "HĐLĐ-2026/AMIS-0019",
+          "contractType": "Hợp đồng thử việc 02 tháng",
+          "signDate": "2026-09-25",
+          "startDate": "2026-09-25",
+          "endDate": "2026-12-01",
+          "signerName": "Trịnh Văn Cường",
+          "signerTitle": "Tổng Giám Đốc",
+          "salaryInsurance": 18500000,
+          "status": "active"
+        }
+      ],
+      "workHistory": [
+        {
+          "id": "wh-797416",
+          "fromDate": "2026-09-25",
+          "toDate": "Hiện tại",
+          "company": "Công ty Cổ phần AMIS HRM",
+          "position": "Chuyên viên Kinh doanh B2B",
+          "note": "Tiếp nhận tuyển dụng mới"
+        }
+      ],
+      "rewardsDisciplines": [],
+      "dependentsList": [],
+      "documents": []
+    },
     {
       "code": "AMIS-4857",
       "fullName": "Trần Thị Thu Thảo",
@@ -1486,6 +1742,126 @@
     }
   ],
   "payroll": [
+    {
+      "id": "pay-emp-310118-2026-09",
+      "period": "2026-09",
+      "employeeId": "emp-310118",
+      "employeeCode": "AMIS-5616",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "standardWorkDays": 22,
+      "actualWorkDays": 22,
+      "paidLeaveDays": 1,
+      "baseSalary": 16000000,
+      "allowanceTotal": 2230000,
+      "otPay": 0,
+      "grossSalary": 18230000,
+      "bhxh": 1280000,
+      "bhyt": 240000,
+      "bhtn": 160000,
+      "totalInsurance": 1680000,
+      "dependents": 0,
+      "dependentDeduction": 0,
+      "personalDeduction": 11000000,
+      "taxableIncome": 4820000,
+      "personalIncomeTax": 241000,
+      "bonus": 0,
+      "deductionsOther": 0,
+      "netSalary": 16309000,
+      "status": "approved",
+      "paidDate": "2026-10-05"
+    },
+    {
+      "id": "pay-emp-310104-2026-09",
+      "period": "2026-09",
+      "employeeId": "emp-310104",
+      "employeeCode": "AMIS-0021",
+      "employeeName": "Bùi Văn Hưng",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Kế toán trưởng",
+      "standardWorkDays": 22,
+      "actualWorkDays": 22,
+      "paidLeaveDays": 1,
+      "baseSalary": 24000000,
+      "allowanceTotal": 2230000,
+      "otPay": 0,
+      "grossSalary": 26230000,
+      "bhxh": 1920000,
+      "bhyt": 360000,
+      "bhtn": 240000,
+      "totalInsurance": 2520000,
+      "dependents": 0,
+      "dependentDeduction": 0,
+      "personalDeduction": 11000000,
+      "taxableIncome": 11980000,
+      "personalIncomeTax": 1047000,
+      "bonus": 0,
+      "deductionsOther": 0,
+      "netSalary": 22663000,
+      "status": "approved",
+      "paidDate": "2026-10-05"
+    },
+    {
+      "id": "pay-emp-797424-2026-09",
+      "period": "2026-09",
+      "employeeId": "emp-797424",
+      "employeeCode": "AMIS-3620",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "standardWorkDays": 22,
+      "actualWorkDays": 22,
+      "paidLeaveDays": 1,
+      "baseSalary": 16000000,
+      "allowanceTotal": 2230000,
+      "otPay": 0,
+      "grossSalary": 18230000,
+      "bhxh": 1280000,
+      "bhyt": 240000,
+      "bhtn": 160000,
+      "totalInsurance": 1680000,
+      "dependents": 0,
+      "dependentDeduction": 0,
+      "personalDeduction": 11000000,
+      "taxableIncome": 4820000,
+      "personalIncomeTax": 241000,
+      "bonus": 0,
+      "deductionsOther": 0,
+      "netSalary": 16309000,
+      "status": "approved",
+      "paidDate": "2026-10-05"
+    },
+    {
+      "id": "pay-emp-797416-2026-09",
+      "period": "2026-09",
+      "employeeId": "emp-797416",
+      "employeeCode": "AMIS-0019",
+      "employeeName": "Nguyễn Thu Trang",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Chuyên viên Kinh doanh B2B",
+      "standardWorkDays": 22,
+      "actualWorkDays": 22,
+      "paidLeaveDays": 1,
+      "baseSalary": 18500000,
+      "allowanceTotal": 2230000,
+      "otPay": 0,
+      "grossSalary": 20730000,
+      "bhxh": 1480000,
+      "bhyt": 277500,
+      "bhtn": 185000,
+      "totalInsurance": 1942500,
+      "dependents": 0,
+      "dependentDeduction": 0,
+      "personalDeduction": 11000000,
+      "taxableIncome": 7057500,
+      "personalIncomeTax": 455750,
+      "bonus": 0,
+      "deductionsOther": 0,
+      "netSalary": 18331750,
+      "status": "approved",
+      "paidDate": "2026-10-05"
+    },
     {
       "id": "pay-emp-939445-2026-09",
       "period": "2026-09",
@@ -9854,6 +10230,737 @@
       "period": "2026-09",
       "schedules": {
         "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "23": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "24": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "25": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-939445",
+      "employeeId": "emp-939445",
+      "employeeCode": "AMIS-4857",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "15": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "23": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "24": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "25": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-797416",
+      "employeeId": "emp-797416",
+      "employeeCode": "AMIS-0019",
+      "employeeName": "Nguyễn Thu Trang",
+      "departmentName": "Ban Giám Đốc",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "23": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "24": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "25": {
+          "shiftId": "shift-sang",
+          "shiftCode": "CA-S",
+          "shiftName": "Ca Sáng (06:00 - 14:00)",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-797424",
+      "employeeId": "emp-797424",
+      "employeeCode": "AMIS-3620",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "15": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "23": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "24": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "25": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-797618",
+      "employeeId": "emp-797618",
+      "employeeCode": "AMIS-0021",
+      "employeeName": "Vũ Minh Hoàng",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
           "shiftId": "shift-std",
           "shiftCode": "CA-HC",
           "shiftName": "Ca Hành chính (8h)"
@@ -9959,6 +11066,188 @@
           "shiftName": "Ca Hành chính (8h)"
         },
         "22": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "23": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "24": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "25": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-310104",
+      "employeeId": "emp-310104",
+      "employeeCode": "AMIS-0021",
+      "employeeName": "Bùi Văn Hưng",
+      "departmentName": "Ban Giám Đốc",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "11": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "15": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Ban Giám Đốc)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
           "shiftId": "shift-sang",
           "shiftCode": "CA-S",
           "shiftName": "Ca Sáng (06:00 - 14:00)",
@@ -10014,11 +11303,186 @@
       }
     },
     {
-      "id": "roster-emp-939445",
-      "employeeId": "emp-939445",
-      "employeeCode": "AMIS-4857",
+      "id": "roster-emp-310118",
+      "employeeId": "emp-310118",
+      "employeeCode": "AMIS-5616",
       "employeeName": "Trần Thị Thu Thảo",
       "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "period": "2026-09",
+      "schedules": {
+        "1": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "2": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "3": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "4": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "5": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "6": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "7": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "8": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "9": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "10": {
+          "shiftId": "shift-hc",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành Chính",
+          "isCustom": true,
+          "notes": "Phân ca hàng loạt (Khối Công Nghệ & Kỹ Thuật)"
+        },
+        "11": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "12": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "13": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "14": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "15": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "16": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "17": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "18": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "19": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "20": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "21": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "22": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "23": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "24": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "25": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "26": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "27": {
+          "shiftId": "shift-off",
+          "shiftCode": "OFF",
+          "shiftName": "Nghỉ cuối tuần"
+        },
+        "28": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "29": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        },
+        "30": {
+          "shiftId": "shift-std",
+          "shiftCode": "CA-HC",
+          "shiftName": "Ca Hành chính (8h)"
+        }
+      }
+    },
+    {
+      "id": "roster-emp-310894",
+      "employeeId": "emp-310894",
+      "employeeCode": "AMIS-0023",
+      "employeeName": "Vũ Minh Hoàng",
       "period": "2026-09",
       "schedules": {
         "1": {
@@ -10175,6 +11639,166 @@
     }
   ],
   "rawPunches": [
+    {
+      "id": "punch-1790003311099-n6k9",
+      "employeeId": "emp-02",
+      "employeeCode": "NV002",
+      "employeeName": "Trần Thị Mai",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 08:15:30",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:15:30",
+      "source": "mobile_gps",
+      "deviceName": "AMIS HRM Mobile App iOS",
+      "deviceIp": "192.168.1.100",
+      "accuracyScore": 98.5,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-1790003311093-oap0",
+      "employeeId": "emp-01",
+      "employeeCode": "NV001",
+      "employeeName": "Nguyễn Văn An",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 08:02:15",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:02:15",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.100",
+      "accuracyScore": 99.4,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-sync-emp-310104-0481",
+      "employeeId": "emp-310104",
+      "employeeCode": "AMIS-0021",
+      "employeeName": "Bùi Văn Hưng",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 17:31:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:31:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-310118-0481",
+      "employeeId": "emp-310118",
+      "employeeCode": "AMIS-5616",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:30:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:30:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-1790000798032-dcds",
+      "employeeId": "emp-02",
+      "employeeCode": "NV002",
+      "employeeName": "Trần Thị Mai",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 08:15:30",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:15:30",
+      "source": "mobile_gps",
+      "deviceName": "AMIS HRM Mobile App iOS",
+      "deviceIp": "192.168.1.100",
+      "accuracyScore": 98.5,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-1790000798027-ny74",
+      "employeeId": "emp-01",
+      "employeeCode": "NV001",
+      "employeeName": "Nguyễn Văn An",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 08:02:15",
+      "punchDate": "2026-09-21",
+      "punchTime": "08:02:15",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.100",
+      "accuracyScore": 99.4,
+      "pairingStatus": "paired",
+      "pairingType": "check_in"
+    },
+    {
+      "id": "punch-sync-emp-797416-7834",
+      "employeeId": "emp-797416",
+      "employeeCode": "AMIS-0019",
+      "employeeName": "Nguyễn Thu Trang",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 17:31:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:31:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-797424-7834",
+      "employeeId": "emp-797424",
+      "employeeCode": "AMIS-3620",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:30:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:30:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-939437-7032",
+      "employeeId": "emp-939437",
+      "employeeCode": "AMIS-0017",
+      "employeeName": "Đặng Hoàng Long",
+      "departmentName": "Ban Giám Đốc",
+      "timestamp": "2026-09-21 17:31:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:31:18",
+      "source": "fingerprint",
+      "deviceName": "Ronald Jack RJ-8800 (Tầng 9 HQ)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
+    {
+      "id": "punch-sync-emp-939445-7032",
+      "employeeId": "emp-939445",
+      "employeeCode": "AMIS-4857",
+      "employeeName": "Trần Thị Thu Thảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "timestamp": "2026-09-21 17:30:18",
+      "punchDate": "2026-09-21",
+      "punchTime": "17:30:18",
+      "source": "face_id",
+      "deviceName": "Hikvision FaceID AI DS-K1T671 (Cổng chính)",
+      "deviceIp": "192.168.1.201",
+      "accuracyScore": 99.3,
+      "pairingStatus": "paired",
+      "pairingType": "check_out"
+    },
     {
       "id": "punch-1789998939657-5sj6",
       "employeeId": "emp-02",
@@ -10595,7 +12219,12 @@
     "fullDayMinHours": 7,
     "overtimeMinMinutes": 30,
     "maxContinuousDays": 6,
-    "minRestHoursBetweenShifts": 12
+    "minRestHoursBetweenShifts": 12,
+    "earlyLeaveMinutes": 10,
+    "latePenaltyAmount": 2000,
+    "maxLatePerMonth": 3,
+    "livenessLevel": "strict",
+    "requireWifi": true
   },
   "roles": [
     {
@@ -10760,7 +12389,7 @@
       "name": "Chuyên viên C&B (Tiền lương & Chế độ)",
       "description": "Mô tả đã được cập nhật kiểm thử tự động",
       "isSystem": false,
-      "userCount": 3,
+      "userCount": 5,
       "color": "#10B981",
       "dataScope": "all",
       "permissions": {
@@ -10994,7 +12623,7 @@
       "name": "Nhân viên Tiêu chuẩn (Self-Service)",
       "description": "Quyền xem hồ sơ cá nhân, quẹt thẻ chấm công, nộp đơn nghỉ phép/OT và tra cứu phiếu lương cá nhân",
       "isSystem": true,
-      "userCount": 4,
+      "userCount": 10,
       "color": "#64748B",
       "dataScope": "self",
       "permissions": {
@@ -11221,9 +12850,355 @@
       "userCount": 0,
       "createdAt": "2026-09-21",
       "updatedAt": "2026-09-21"
+    },
+    {
+      "name": "Thực tập sinh HR (Intern)",
+      "code": "ROLE_HR_INTERN",
+      "description": "Chỉ xem hồ sơ nhân sự và dashboard, không có quyền tiền lương",
+      "color": "#6366F1",
+      "dataScope": "department",
+      "permissions": {
+        "dashboard": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": true
+        },
+        "employees": {
+          "view": true,
+          "create": true,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "attendance": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "leaves": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "payroll": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "organization": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "admin_rbac": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "settings": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        }
+      },
+      "id": "role-796560",
+      "isSystem": false,
+      "userCount": 0,
+      "createdAt": "2026-09-21",
+      "updatedAt": "2026-09-21"
+    },
+    {
+      "name": "Giám Sát Ca Làm Việc",
+      "code": "ROLE_SHIFT_SUPERVISOR",
+      "description": "Phụ trách duyệt công và ca kíp nhân sự phân xưởng",
+      "isSystem": false,
+      "color": "#0D9488",
+      "dataScope": "department",
+      "permissions": {
+        "dashboard": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "employees": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "attendance": {
+          "view": true,
+          "create": true,
+          "edit": true,
+          "delete": false,
+          "approve": true,
+          "export": true
+        },
+        "leaves": {
+          "view": true,
+          "create": true,
+          "edit": false,
+          "delete": false,
+          "approve": true,
+          "export": false
+        },
+        "payroll": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "organization": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "admin_rbac": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "settings": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        }
+      },
+      "id": "role-796618",
+      "userCount": 0,
+      "createdAt": "2026-09-21",
+      "updatedAt": "2026-09-21"
+    },
+    {
+      "name": "Thực tập sinh HR (Intern)",
+      "code": "ROLE_HR_INTERN",
+      "description": "Chỉ xem hồ sơ nhân sự và dashboard, không có quyền tiền lương",
+      "color": "#6366F1",
+      "dataScope": "department",
+      "permissions": {
+        "dashboard": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": true
+        },
+        "employees": {
+          "view": true,
+          "create": true,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "attendance": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "leaves": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "payroll": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "organization": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "admin_rbac": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "settings": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        }
+      },
+      "id": "role-309613",
+      "isSystem": false,
+      "userCount": 0,
+      "createdAt": "2026-09-21",
+      "updatedAt": "2026-09-21"
+    },
+    {
+      "name": "Giám Sát Ca Làm Việc",
+      "code": "ROLE_SHIFT_SUPERVISOR",
+      "description": "Phụ trách duyệt công và ca kíp nhân sự phân xưởng",
+      "isSystem": false,
+      "color": "#0D9488",
+      "dataScope": "department",
+      "permissions": {
+        "dashboard": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "employees": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "attendance": {
+          "view": true,
+          "create": true,
+          "edit": true,
+          "delete": false,
+          "approve": true,
+          "export": true
+        },
+        "leaves": {
+          "view": true,
+          "create": true,
+          "edit": false,
+          "delete": false,
+          "approve": true,
+          "export": false
+        },
+        "payroll": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "organization": {
+          "view": true,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "admin_rbac": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        },
+        "settings": {
+          "view": false,
+          "create": false,
+          "edit": false,
+          "delete": false,
+          "approve": false,
+          "export": false
+        }
+      },
+      "id": "role-309677",
+      "userCount": 0,
+      "createdAt": "2026-09-21",
+      "updatedAt": "2026-09-21"
     }
   ],
   "userAccounts": [
+    {
+      "id": "usr-310087",
+      "employeeId": "usr-310087",
+      "employeeCode": "AMIS-EXT",
+      "fullName": "Nguyễn Văn Minh",
+      "email": "minhnv.1790003310085@amis.vn",
+      "username": "minhnv_0085",
+      "password": "Amis@123456",
+      "departmentName": "Hệ thống",
+      "positionTitle": "Quản trị viên",
+      "roleId": "role-cb-specialist",
+      "roleName": "Chuyên viên C&B (Tiền lương & Chế độ)",
+      "roleCode": "ROLE_CB_SPECIALIST",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-797402",
+      "employeeId": "usr-797402",
+      "employeeCode": "AMIS-EXT",
+      "fullName": "Nguyễn Văn Minh",
+      "email": "minhnv.1790000797400@amis.vn",
+      "username": "minhnv_7400",
+      "password": "Amis@123456",
+      "departmentName": "Hệ thống",
+      "positionTitle": "Quản trị viên",
+      "roleId": "role-cb-specialist",
+      "roleName": "Chuyên viên C&B (Tiền lương & Chế độ)",
+      "roleCode": "ROLE_CB_SPECIALIST",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
     {
       "id": "usr-939421",
       "employeeId": "usr-939421",
@@ -11254,7 +13229,7 @@
       "roleName": "Quản trị viên Toàn quyền",
       "roleCode": "ROLE_SUPER_ADMIN",
       "status": "active",
-      "lastLogin": "2026-09-21 13:55:39",
+      "lastLogin": "2026-09-21 15:08:30",
       "lastIp": "118.70.124.9",
       "twoFactorEnabled": true,
       "createdAt": "2026-01-01"
@@ -11451,9 +13426,670 @@
       "status": "active",
       "twoFactorEnabled": false,
       "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-797416",
+      "employeeId": "emp-797416",
+      "employeeCode": "AMIS-0019",
+      "fullName": "Nguyễn Thu Trang",
+      "email": "trang.nguyen.hr@gmail.com",
+      "username": "trang.nguyen.hr",
+      "password": "Amis@123456",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Chuyên viên Kinh doanh B2B",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-797424",
+      "employeeId": "emp-797424",
+      "employeeCode": "AMIS-3620",
+      "fullName": "Trần Thị Thu Thảo",
+      "email": "onboard_1790000797424@amis.vn",
+      "username": "thao_7424",
+      "password": "Amis@123456",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-797619",
+      "employeeId": "emp-797618",
+      "employeeCode": "AMIS-0021",
+      "fullName": "Vũ Minh Hoàng",
+      "email": "hoang.vm@amis.corp",
+      "username": "hoang.vm",
+      "password": "Amis@123456",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-310104",
+      "employeeId": "emp-310104",
+      "employeeCode": "AMIS-0021",
+      "fullName": "Bùi Văn Hưng",
+      "email": "hung.buivan.bi@gmail.com",
+      "username": "hung.buivan.bi",
+      "password": "Amis@123456",
+      "departmentName": "Ban Giám Đốc",
+      "positionTitle": "Kế toán trưởng",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-310118",
+      "employeeId": "emp-310118",
+      "employeeCode": "AMIS-5616",
+      "fullName": "Trần Thị Thu Thảo",
+      "email": "onboard_1790003310118@amis.vn",
+      "username": "thao_0118",
+      "password": "Amis@123456",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "positionTitle": "Chuyên viên Kiểm thử QA",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
+    },
+    {
+      "id": "usr-310895",
+      "employeeId": "emp-310894",
+      "employeeCode": "AMIS-0023",
+      "fullName": "Vũ Minh Hoàng",
+      "email": "hoang.vm@amis.corp",
+      "username": "hoang.vm",
+      "password": "Amis@123456",
+      "roleId": "role-employee",
+      "roleName": "Nhân viên Tiêu chuẩn (Self-Service)",
+      "roleCode": "ROLE_EMPLOYEE",
+      "status": "active",
+      "twoFactorEnabled": false,
+      "createdAt": "2026-09-21"
     }
   ],
   "auditLogs": [
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Vũ Minh Hoàng (AMIS-0023) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-310894",
+      "targetName": "Vũ Minh Hoàng",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310895",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "attendance",
+      "action": "DELETE",
+      "description": "Hủy mẫu sinh trắc khuôn mặt FaceID của: Hoàng Thị Dung (AMIS-0005)",
+      "targetId": "face-310695",
+      "targetName": "Hoàng Thị Dung",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310699",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "attendance",
+      "action": "UPDATE",
+      "description": "Đăng ký hồ sơ sinh trắc khuôn mặt FaceID thành công cho: Hoàng Thị Dung (AMIS-0005)",
+      "targetId": "face-310695",
+      "targetName": "Hoàng Thị Dung",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310695",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Trần Thị Thu Thảo (AMIS-5616) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-310118",
+      "targetName": "Trần Thị Thu Thảo",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310118",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Bùi Văn Hưng (AMIS-0021) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-310104",
+      "targetName": "Bùi Văn Hưng",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310104",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Khởi tạo tài khoản người dùng mới: Nguyễn Văn Minh (minhnv_0085) - Gán vai trò Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "usr-310087",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310087",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "LOGIN",
+      "description": "Đăng xuất khỏi phiên làm việc hệ thống: Trịnh Văn Cường",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310083",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "LOGIN",
+      "description": "Đăng nhập thành công vào hệ thống AMIS HRM",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-310061",
+      "timestamp": "2026-09-21 15:08:30"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Cập nhật chính sách an toàn thông tin & bảo mật hệ thống",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309711",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Mở khóa tài khoản người dùng: Nguyễn Văn Minh",
+      "targetId": "usr-797402",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309698",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Khóa tài khoản người dùng: Nguyễn Văn Minh",
+      "targetId": "usr-797402",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309691",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Tạo mới vai trò phân quyền: Giám Sát Ca Làm Việc (ROLE_SHIFT_SUPERVISOR)",
+      "targetId": "role-309677",
+      "targetName": "Giám Sát Ca Làm Việc",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309677",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "emp-01",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "action": "PERM_CHANGE",
+      "module": "admin_rbac",
+      "description": "Kiểm thử ghi nhận log audit bảo mật",
+      "ipAddress": "192.168.1.100",
+      "status": "SUCCESS",
+      "id": "log-309646",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Cập nhật chính sách an toàn thông tin & bảo mật hệ thống",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309642",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Yêu cầu cấp lại mật khẩu tạm thời cho tài khoản minhnv_7400",
+      "targetId": "usr-797402",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309641",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "PERM_CHANGE",
+      "description": "Điều chỉnh vai trò cho Phạm Thị Hương Ly sang: Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "usr-07",
+      "targetName": "Phạm Thị Hương Ly",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309636",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Mở khóa tài khoản người dùng: Vũ Minh Hoàng",
+      "targetId": "usr-797619",
+      "targetName": "Vũ Minh Hoàng",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309632",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Khóa tài khoản người dùng: Vũ Minh Hoàng",
+      "targetId": "usr-797619",
+      "targetName": "Vũ Minh Hoàng",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309628",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "PERM_CHANGE",
+      "description": "Cập nhật cấu hình phân quyền cho vai trò: Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "role-cb-specialist",
+      "targetName": "Chuyên viên C&B (Tiền lương & Chế độ)",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309619",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Tạo mới vai trò phân quyền: Thực tập sinh HR (Intern) (ROLE_HR_INTERN)",
+      "targetId": "role-309613",
+      "targetName": "Thực tập sinh HR (Intern)",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-309614",
+      "timestamp": "2026-09-21 15:08:29"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "attendance",
+      "action": "UPDATE",
+      "description": "Đăng ký hồ sơ sinh trắc khuôn mặt FaceID thành công cho: Hoàng Minh Đức (AMIS-0005)",
+      "targetId": "face-269661",
+      "targetName": "Hoàng Minh Đức",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-269661",
+      "timestamp": "2026-09-21 15:07:49"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Vũ Minh Hoàng (AMIS-0021) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-797618",
+      "targetName": "Vũ Minh Hoàng",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797619",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Trần Thị Thu Thảo (AMIS-3620) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-797424",
+      "targetName": "Trần Thị Thu Thảo",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797424",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "employees",
+      "action": "CREATE",
+      "description": "Tiếp nhận nhân sự mới thành công: Nguyễn Thu Trang (AMIS-0019) - Tự động thiết lập HĐLĐ, Phân ca, Bảng lương và Tài khoản",
+      "targetId": "emp-797416",
+      "targetName": "Nguyễn Thu Trang",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797416",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Khởi tạo tài khoản người dùng mới: Nguyễn Văn Minh (minhnv_7400) - Gán vai trò Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "usr-797402",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797402",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "LOGIN",
+      "description": "Đăng xuất khỏi phiên làm việc hệ thống: Trịnh Văn Cường",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797398",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "LOGIN",
+      "description": "Đăng nhập thành công vào hệ thống AMIS HRM",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-797377",
+      "timestamp": "2026-09-21 14:26:37"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Cập nhật chính sách an toàn thông tin & bảo mật hệ thống",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796655",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Mở khóa tài khoản người dùng: Nguyễn Văn Minh",
+      "targetId": "usr-939421",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796643",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Khóa tài khoản người dùng: Nguyễn Văn Minh",
+      "targetId": "usr-939421",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796636",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Tạo mới vai trò phân quyền: Giám Sát Ca Làm Việc (ROLE_SHIFT_SUPERVISOR)",
+      "targetId": "role-796618",
+      "targetName": "Giám Sát Ca Làm Việc",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796618",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "emp-01",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "action": "PERM_CHANGE",
+      "module": "admin_rbac",
+      "description": "Kiểm thử ghi nhận log audit bảo mật",
+      "ipAddress": "192.168.1.100",
+      "status": "SUCCESS",
+      "id": "log-796591",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Cập nhật chính sách an toàn thông tin & bảo mật hệ thống",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796587",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Yêu cầu cấp lại mật khẩu tạm thời cho tài khoản minhnv_9419",
+      "targetId": "usr-939421",
+      "targetName": "Nguyễn Văn Minh",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796586",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "PERM_CHANGE",
+      "description": "Điều chỉnh vai trò cho Phạm Thị Hương Ly sang: Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "usr-07",
+      "targetName": "Phạm Thị Hương Ly",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796582",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Mở khóa tài khoản người dùng: Trần Thị Thu Thảo",
+      "targetId": "usr-939445",
+      "targetName": "Trần Thị Thu Thảo",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796577",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "UPDATE",
+      "description": "Khóa tài khoản người dùng: Trần Thị Thu Thảo",
+      "targetId": "usr-939445",
+      "targetName": "Trần Thị Thu Thảo",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796573",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "PERM_CHANGE",
+      "description": "Cập nhật cấu hình phân quyền cho vai trò: Chuyên viên C&B (Tiền lương & Chế độ)",
+      "targetId": "role-cb-specialist",
+      "targetName": "Chuyên viên C&B (Tiền lương & Chế độ)",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796565",
+      "timestamp": "2026-09-21 14:26:36"
+    },
+    {
+      "userId": "usr-01",
+      "userCode": "AMIS-0001",
+      "userName": "Trịnh Văn Cường",
+      "roleName": "Quản trị viên Toàn quyền",
+      "module": "admin_rbac",
+      "action": "CREATE",
+      "description": "Tạo mới vai trò phân quyền: Thực tập sinh HR (Intern) (ROLE_HR_INTERN)",
+      "targetId": "role-796560",
+      "targetName": "Thực tập sinh HR (Intern)",
+      "ipAddress": "118.70.124.9",
+      "status": "success",
+      "id": "log-796560",
+      "timestamp": "2026-09-21 14:26:36"
+    },
     {
       "userId": "usr-01",
       "userCode": "AMIS-0001",
@@ -11858,7 +14494,7 @@
       "expectedSalary": 18000000,
       "offerSalary": 18500000,
       "onboardingDate": "2026-09-25",
-      "status": "offer_accepted",
+      "status": "converted_to_employee",
       "source": "LinkedIn Talent Solutions",
       "notes": "Đã nhận Offer Letter, hoàn thành nộp bằng cấp Đại học Ngoại thương và CCCD",
       "createdAt": "2026-09-18"
@@ -11876,11 +14512,115 @@
       "expectedSalary": 23000000,
       "offerSalary": 24000000,
       "onboardingDate": "2026-10-05",
-      "status": "offer_accepted",
+      "status": "converted_to_employee",
       "source": "Nội bộ công ty giới thiệu",
       "notes": "Ứng viên chuyển tiếp từ dự án đối tác tài chính AMIS FinTech",
       "createdAt": "2026-09-20"
     }
   ],
-  "onboardingTasks": []
+  "onboardingTasks": [],
+  "faceBiometrics": [
+    {
+      "id": "face-01",
+      "employeeId": "emp-01",
+      "employeeCode": "AMIS-0001",
+      "employeeName": "Trịnh Văn Cường",
+      "departmentName": "Ban Giám Đốc",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-15 09:30:12",
+      "enrolledBy": "Quản trị viên Hệ thống",
+      "featuresHash": "VEC-512-9A8B7C6D5E4F3A2B1C0D",
+      "confidenceScore": 99.8,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    },
+    {
+      "id": "face-02",
+      "employeeId": "emp-02",
+      "employeeCode": "AMIS-0002",
+      "employeeName": "Vũ Quốc Thái",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-15 10:15:45",
+      "enrolledBy": "Quản trị viên Hệ thống",
+      "featuresHash": "VEC-512-1F2E3D4C5B6A79887766",
+      "confidenceScore": 99.6,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    },
+    {
+      "id": "face-03",
+      "employeeId": "emp-03",
+      "employeeCode": "AMIS-0003",
+      "employeeName": "Nguyễn Thị Thu Hằng",
+      "departmentName": "Khối Kinh Doanh & Tiếp Thị",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-16 11:20:00",
+      "enrolledBy": "Trưởng phòng Nhân sự",
+      "featuresHash": "VEC-512-5544332211AABBCCDDEE",
+      "confidenceScore": 99.4,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    },
+    {
+      "id": "face-04",
+      "employeeId": "emp-04",
+      "employeeCode": "AMIS-0004",
+      "employeeName": "Đặng Mai Lan",
+      "departmentName": "Khối Nhân Sự & Vận Hành",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-16 14:00:22",
+      "enrolledBy": "Trưởng phòng Nhân sự",
+      "featuresHash": "VEC-512-6677889900FFEEDDCCBB",
+      "confidenceScore": 99.7,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    },
+    {
+      "id": "face-07",
+      "employeeId": "emp-07",
+      "employeeCode": "AMIS-0007",
+      "employeeName": "Phạm Thị Hương Ly",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-18 08:45:10",
+      "enrolledBy": "Trưởng phòng Nhân sự",
+      "featuresHash": "VEC-512-44332211009988776655",
+      "confidenceScore": 99.5,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    },
+    {
+      "id": "face-08",
+      "employeeId": "emp-08",
+      "employeeCode": "AMIS-0008",
+      "employeeName": "Trần Gia Bảo",
+      "departmentName": "Khối Công Nghệ & Kỹ Thuật",
+      "status": "enrolled",
+      "enrolledAt": "2026-08-18 10:12:33",
+      "enrolledBy": "Trưởng phòng Nhân sự",
+      "featuresHash": "VEC-512-33221100998877665544",
+      "confidenceScore": 99.2,
+      "anglesCaptured": {
+        "frontal": true,
+        "left": true,
+        "right": true
+      }
+    }
+  ]
 }

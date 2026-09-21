@@ -25,11 +25,16 @@ import {
   HelpCircle,
   ExternalLink,
   Cpu,
-  CreditCard
+  CreditCard,
+  UserX,
+  UserCheck,
+  AlertOctagon,
+  KeyRound
 } from 'lucide-react';
-import { Employee, GeofenceLocation } from '../../../types';
+import { Employee, GeofenceLocation, FaceBiometricProfile } from '../../../types';
 import { api } from '../../../services/api';
 import { useToast } from '../../../context/ToastContext';
+import { FaceEnrollmentModal } from './FaceEnrollmentModal';
 
 interface OmniCheckInModalProps {
   isOpen: boolean;
@@ -56,6 +61,10 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [receipt, setReceipt] = useState<any | null>(null);
 
+  // Face Biometrics state
+  const [biometricProfiles, setBiometricProfiles] = useState<FaceBiometricProfile[]>([]);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
   // Mobile App Simulation States
   const [gpsDistance, setGpsDistance] = useState(18); // 18m from Duy Tan HQ
   const [gpsCoords, setGpsCoords] = useState({ lat: 21.0315, lng: 105.7828 });
@@ -65,12 +74,29 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
   const [blinkCompleted, setBlinkCompleted] = useState(false);
   const [headTurnCompleted, setHeadTurnCompleted] = useState(false);
   const [antiSpoofScore, setAntiSpoofScore] = useState(99.8);
+  const [spoofAttackSimulated, setSpoofAttackSimulated] = useState(false);
 
   // Terminal States
   const [bodyTemp] = useState('36.5°C');
   const [terminalScanning, setTerminalScanning] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Load registered biometrics
+  const loadBiometrics = async () => {
+    try {
+      const data = await api.getFaceBiometrics();
+      setBiometricProfiles(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.warn('Lỗi nạp danh sách sinh trắc:', e);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      loadBiometrics();
+    }
+  }, [isOpen]);
 
   // Live ticking clock
   useEffect(() => {
@@ -99,11 +125,11 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
         osc.start();
         osc.stop(ctx.currentTime + 0.45);
       } else {
-        osc.frequency.setValueAtTime(300, ctx.currentTime);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        osc.frequency.setValueAtTime(220, ctx.currentTime);
+        gain.gain.setValueAtTime(0.4, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
         osc.start();
-        osc.stop(ctx.currentTime + 0.3);
+        osc.stop(ctx.currentTime + 0.4);
       }
     } catch (e) {
       // AudioContext fallback
@@ -135,6 +161,11 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
   if (!isOpen) return null;
 
   const currentEmp = employees.find((e) => e.id === selectedEmpId) || employees[0];
+  const enrolledProfile = biometricProfiles.find(
+    (p) => p.employeeId === currentEmp?.id || p.employeeCode === currentEmp?.code
+  );
+  const isEnrolled = !!enrolledProfile;
+
   const currentLocation = locations[0] || {
     id: 'loc-01',
     name: 'Trụ sở AMIS Hà Nội (Tòa nhà Technosoft)',
@@ -142,8 +173,34 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
     radiusMeters: 100
   };
 
-  // Perform Real Check-in / Check-out
+  // Perform Real Check-in / Check-out with Biometric & Liveness Verification
   const handleExecutePunch = async (direction: 'in' | 'out', source: 'mobile_gps' | 'face_id' | 'fingerprint') => {
+    // 1. If punch method requires Face / Biometric, check registration
+    if ((source === 'mobile_gps' || source === 'face_id') && !isEnrolled) {
+      playChime(false);
+      showToast(
+        `Từ chối chấm công: Nhân viên ${currentEmp.fullName} (${currentEmp.code}) chưa đăng ký mẫu khuôn mặt FaceID! Vui lòng đăng ký trước khi chấm công.`,
+        'error'
+      );
+      return;
+    }
+
+    // 2. Check spoof attack
+    if (spoofAttackSimulated && (source === 'mobile_gps' || source === 'face_id')) {
+      playChime(false);
+      showToast(
+        '🚨 BÁO ĐỘNG GIAN LẬN: AI phát hiện giả mạo khuôn mặt (Screen Replay / Moiré Attack)! Chấm công bị từ chối và ghi log vi phạm.',
+        'error'
+      );
+      return;
+    }
+
+    // 3. Check liveness completion for mobile
+    if (source === 'mobile_gps' && livenessStage !== 'verified') {
+      showToast('Vui lòng hoàn thành 2 bước kiểm tra người thật (Chớp mắt & Nghiêng đầu)', 'warning');
+      return;
+    }
+
     try {
       setSubmitting(true);
       const timeStr = `${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}`;
@@ -168,7 +225,9 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
         location: currentLocation.name,
         gpsDistance: `${gpsDistance}m (Hợp lệ)`,
         wifi: wifiSsid,
-        livenessScore: `${antiSpoofScore}% (Người thật)`,
+        livenessScore: `${antiSpoofScore}% (Người thật 3D)`,
+        faceMatchScore: isEnrolled ? `${enrolledProfile?.confidenceScore || 99.8}% (Khớp Vector)` : 'N/A',
+        featuresHash: enrolledProfile?.featuresHash || 'VEC-AUTH-PASS',
         status: 'Hợp Lệ & Đã Ghi Nhận'
       };
 
@@ -200,7 +259,25 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
     setHeadTurnCompleted(true);
     setLivenessStage('verified');
     setAntiSpoofScore(99.9);
+    setSpoofAttackSimulated(false);
     showToast('AI phát hiện: Góc quay Yaw +15° (Chuyển động 3D ĐẠT)', 'success');
+  };
+
+  const handleSimulateSpoof = () => {
+    setSpoofAttackSimulated(true);
+    setAntiSpoofScore(14.2);
+    setLivenessStage('align');
+    setBlinkCompleted(false);
+    setHeadTurnCompleted(false);
+    showToast('Mô phỏng tấn công: Ảnh 2D từ màn hình điện thoại đưa lên camera! AI phát hiện Moiré pattern và trường sâu phẳng (Flat Depth).', 'error');
+  };
+
+  const handleResetLiveness = () => {
+    setSpoofAttackSimulated(false);
+    setAntiSpoofScore(99.8);
+    setLivenessStage('align');
+    setBlinkCompleted(false);
+    setHeadTurnCompleted(false);
   };
 
   return (
@@ -415,6 +492,55 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                         </div>
                       </div>
 
+                      {/* Biometric Enrollment Status Banner */}
+                      {!isEnrolled ? (
+                        <div className="bg-rose-50 border border-rose-300 rounded-2xl p-3 space-y-2">
+                          <div className="flex items-start gap-2">
+                            <UserX className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                            <div>
+                              <strong className="text-rose-900 text-xs block">Chưa Đăng Ký Sinh Trắc Khuôn Mặt!</strong>
+                              <p className="text-[10px] text-rose-700 leading-tight mt-0.5">
+                                Nhân sự chưa có mẫu FaceID trong hệ thống AMIS. Quy định bắt buộc phải đăng ký khuôn mặt trước khi bấm công.
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setIsEnrollModalOpen(true)}
+                            className="w-full py-2 px-3 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
+                          >
+                            <ScanFace className="w-4 h-4" />
+                            <span>Đăng Ký Khuôn Mặt Ngay (3 Góc 3D)</span>
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-2.5 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
+                              <ShieldCheck className="w-4 h-4" />
+                            </div>
+                            <div>
+                              <div className="font-bold text-[11px] text-emerald-950 flex items-center gap-1">
+                                <span>Đã Đăng Ký FaceID</span>
+                                <span className="px-1.5 py-0.2 bg-emerald-200 text-emerald-800 rounded font-mono text-[9px]">
+                                  {enrolledProfile?.featuresHash?.substring(0, 15)}...
+                                </span>
+                              </div>
+                              <div className="text-[10px] text-emerald-700">
+                                Độ tin cậy mẫu: {enrolledProfile?.confidenceScore || 99.8}% • Chuẩn 3D Mesh
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setIsEnrollModalOpen(true)}
+                            className="text-[10px] text-[#0072BC] hover:underline font-bold px-2 py-1 bg-white border border-blue-200 rounded-lg cursor-pointer"
+                          >
+                            Cập nhật
+                          </button>
+                        </div>
+                      )}
+
                       {/* Camera Viewfinder & Interactive Liveness Face Scanner */}
                       <div className="relative rounded-2xl overflow-hidden bg-slate-900 aspect-4/3 flex items-center justify-center border-2 border-slate-700 shadow-inner group">
                         {/* Live Video or Simulated Canvas */}
@@ -427,42 +553,84 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                         />
 
                         {/* Facial Bounding Box Overlay */}
-                        <div className="absolute inset-4 border-2 border-dashed border-emerald-400/80 rounded-2xl pointer-events-none flex flex-col justify-between p-2">
-                          <div className="flex justify-between items-center text-[10px] text-emerald-300 font-mono">
-                            <span className="bg-black/60 px-2 py-0.5 rounded">Face AI: 99.9%</span>
-                            <span className="bg-black/60 px-2 py-0.5 rounded">3D Mesh OK</span>
+                        <div
+                          className={`absolute inset-4 border-2 border-dashed rounded-2xl pointer-events-none flex flex-col justify-between p-2 transition-colors duration-300 ${
+                            spoofAttackSimulated
+                              ? 'border-rose-500 bg-rose-950/40'
+                              : isEnrolled
+                              ? 'border-emerald-400/80'
+                              : 'border-amber-400/80'
+                          }`}
+                        >
+                          <div className="flex justify-between items-center text-[10px] font-mono">
+                            <span className="bg-black/70 px-2 py-0.5 rounded text-white">
+                              {spoofAttackSimulated ? '⚠️ SPOOF ATTACK' : isEnrolled ? 'Face AI: 99.9%' : 'CHƯA ĐĂNG KÝ'}
+                            </span>
+                            <span className="bg-black/70 px-2 py-0.5 rounded text-sky-300">
+                              {isEnrolled ? 'Match: 99.8%' : 'No Biometrics'}
+                            </span>
                           </div>
 
-                          {/* Animated Scanline */}
-                          <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-pulse shadow-[0_0_8px_#10B981]"></div>
+                          {/* Animated Scanline or Warning Cross */}
+                          {spoofAttackSimulated ? (
+                            <div className="text-center bg-rose-600/90 text-white font-bold p-1 rounded-lg text-xs animate-pulse">
+                              TỪ CHỐI GIAN LẬN: ẢNH 2D / MÀN HÌNH PHẲNG
+                            </div>
+                          ) : (
+                            <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-pulse shadow-[0_0_8px_#10B981]"></div>
+                          )}
 
-                          <div className="flex justify-between items-center text-[10px] text-emerald-300 font-mono">
-                            <span className="bg-black/60 px-2 py-0.5 rounded">Liveness: {livenessStage === 'verified' ? 'PASS' : 'TESTING'}</span>
-                            <span className="bg-black/60 px-2 py-0.5 rounded">Anti-Spoof OK</span>
+                          <div className="flex justify-between items-center text-[10px] font-mono">
+                            <span
+                              className={`px-2 py-0.5 rounded ${
+                                spoofAttackSimulated
+                                  ? 'bg-rose-600 text-white'
+                                  : livenessStage === 'verified'
+                                  ? 'bg-emerald-600 text-white'
+                                  : 'bg-black/70 text-amber-300'
+                              }`}
+                            >
+                              Liveness: {spoofAttackSimulated ? 'FAILED' : livenessStage === 'verified' ? 'PASS (99.9%)' : 'TESTING'}
+                            </span>
+                            <span className="bg-black/70 px-2 py-0.5 rounded text-slate-300">Moire Filter ON</span>
                           </div>
                         </div>
 
                         {/* Anti-Spoofing Badge Overlay */}
                         <div className="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border border-white/10 text-white flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
-                            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                            <span className="text-[10px] font-bold text-emerald-300">
-                              {livenessStage === 'verified' ? 'Xác thực người thật 99.9%' : 'Đang kiểm tra chống giả mạo...'}
+                            {spoofAttackSimulated ? (
+                              <AlertOctagon className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                            ) : (
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                            )}
+                            <span
+                              className={`text-[10px] font-bold ${
+                                spoofAttackSimulated ? 'text-rose-400' : 'text-emerald-300'
+                              }`}
+                            >
+                              {spoofAttackSimulated
+                                ? 'Phát hiện giả mạo! Score: 14.2%'
+                                : livenessStage === 'verified'
+                                ? 'Xác thực người thật 99.9%'
+                                : 'Đang chạy thuật toán Liveness...'}
                             </span>
                           </div>
-                          <span className="text-[9px] font-mono text-slate-300">Moire Filter ON</span>
+                          <span className="text-[9px] font-mono text-slate-300">
+                            {isEnrolled ? 'Vector: OK' : 'No Vector'}
+                          </span>
                         </div>
                       </div>
 
                       {/* Liveness Interactive Challenge Prompts */}
-                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-2.5 space-y-1.5">
+                      <div className="bg-blue-50 border border-blue-200 rounded-xl p-2.5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-[11px] text-blue-900 flex items-center gap-1">
                             <Eye className="w-3.5 h-3.5 text-[#0072BC]" />
-                            <span>Thử thách chống giả mạo (Liveness):</span>
+                            <span>Thử thách chống giả mạo (Active Liveness):</span>
                           </span>
                           <span className="text-[10px] font-bold text-[#0072BC]">
-                            {livenessStage === 'verified' ? 'Hoàn thành' : 'Bước 2/3'}
+                            {spoofAttackSimulated ? 'Vi phạm' : livenessStage === 'verified' ? 'Hoàn thành' : 'Đang kiểm tra'}
                           </span>
                         </div>
 
@@ -493,6 +661,29 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                             <span>2. Nghiêng Đầu 15°</span>
                           </button>
                         </div>
+
+                        {/* Spoof Simulation Tester Controls */}
+                        <div className="pt-1 border-t border-blue-200/60 flex items-center justify-between gap-2">
+                          <span className="text-[10px] text-slate-500">Mô phỏng thử nghiệm AI:</span>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              onClick={handleSimulateSpoof}
+                              className="px-2 py-1 rounded bg-rose-100 hover:bg-rose-200 text-rose-800 text-[10px] font-bold flex items-center gap-1 transition cursor-pointer"
+                              title="Thử đưa ảnh chụp 2D hoặc phát video lại"
+                            >
+                              <AlertTriangle className="w-3 h-3 text-rose-600" />
+                              <span>Thử Ảnh Giả 2D</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handleResetLiveness}
+                              className="px-2 py-1 rounded bg-slate-200 hover:bg-slate-300 text-slate-700 text-[10px] font-semibold transition cursor-pointer"
+                            >
+                              Reset Liveness
+                            </button>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Action Buttons inside Phone */}
@@ -501,20 +692,32 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                           type="button"
                           onClick={() => handleExecutePunch('in', 'mobile_gps')}
                           disabled={submitting}
-                          className="py-3 px-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black rounded-xl shadow-md transition active:scale-95 cursor-pointer text-center"
+                          className={`py-3 px-2 text-white font-black rounded-xl shadow-md transition active:scale-95 cursor-pointer text-center ${
+                            !isEnrolled
+                              ? 'bg-slate-400 hover:bg-slate-500'
+                              : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700'
+                          }`}
                         >
                           <div className="text-xs">BẤM CÔNG VÀO</div>
-                          <div className="text-[9px] font-normal opacity-90 font-mono">GPS + Selfie AI</div>
+                          <div className="text-[9px] font-normal opacity-90 font-mono">
+                            {!isEnrolled ? 'Cần đăng ký FaceID' : 'GPS + Selfie AI'}
+                          </div>
                         </button>
 
                         <button
                           type="button"
                           onClick={() => handleExecutePunch('out', 'mobile_gps')}
                           disabled={submitting}
-                          className="py-3 px-2 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white font-black rounded-xl shadow-md transition active:scale-95 cursor-pointer text-center"
+                          className={`py-3 px-2 text-white font-black rounded-xl shadow-md transition active:scale-95 cursor-pointer text-center ${
+                            !isEnrolled
+                              ? 'bg-slate-400 hover:bg-slate-500'
+                              : 'bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700'
+                          }`}
                         >
                           <div className="text-xs">BẤM CÔNG RA</div>
-                          <div className="text-[9px] font-normal opacity-90 font-mono">Kết Thúc Ca</div>
+                          <div className="text-[9px] font-normal opacity-90 font-mono">
+                            {!isEnrolled ? 'Cần đăng ký FaceID' : 'Kết Thúc Ca'}
+                          </div>
                         </button>
                       </div>
                     </div>
@@ -684,29 +887,49 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
                 {/* Bottom Trigger Controls */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
                   <div className="text-xs text-slate-400">
-                    Nhân viên đứng trước camera trong khoảng 0.3m - 1.5m để nhận diện tự động.
+                    {!isEnrolled ? (
+                      <span className="text-rose-400 font-bold flex items-center gap-1.5">
+                        <AlertTriangle className="w-4 h-4" />
+                        Cảnh báo: Nhân viên {currentEmp.fullName} chưa đăng ký FaceID!
+                      </span>
+                    ) : (
+                      <span>Nhân viên đứng trước camera trong khoảng 0.3m - 1.5m để nhận diện tự động.</span>
+                    )}
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleExecutePunch('in', 'face_id')}
-                      disabled={submitting}
-                      className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5"
-                    >
-                      <ScanFace className="w-4 h-4" />
-                      <span>Xác Nhận Chấm Vào</span>
-                    </button>
+                    {!isEnrolled ? (
+                      <button
+                        type="button"
+                        onClick={() => setIsEnrollModalOpen(true)}
+                        className="px-5 py-2.5 bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-700 hover:to-amber-700 text-white font-bold rounded-xl shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5"
+                      >
+                        <ScanFace className="w-4 h-4" />
+                        <span>Đăng Ký Khuôn Mặt Ngay</span>
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => handleExecutePunch('in', 'face_id')}
+                          disabled={submitting}
+                          className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5"
+                        >
+                          <ScanFace className="w-4 h-4" />
+                          <span>Xác Nhận Chấm Vào</span>
+                        </button>
 
-                    <button
-                      type="button"
-                      onClick={() => handleExecutePunch('out', 'face_id')}
-                      disabled={submitting}
-                      className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5"
-                    >
-                      <ScanFace className="w-4 h-4" />
-                      <span>Xác Nhận Chấm Ra</span>
-                    </button>
+                        <button
+                          type="button"
+                          onClick={() => handleExecutePunch('out', 'face_id')}
+                          disabled={submitting}
+                          className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-lg transition active:scale-95 cursor-pointer flex items-center gap-1.5"
+                        >
+                          <ScanFace className="w-4 h-4" />
+                          <span>Xác Nhận Chấm Ra</span>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -937,6 +1160,21 @@ export const OmniCheckInModal: React.FC<OmniCheckInModalProps> = ({
           )}
         </div>
       </div>
+
+      {/* Face Biometric Enrollment Sub-Modal */}
+      {isEnrollModalOpen && (
+        <FaceEnrollmentModal
+          isOpen={isEnrollModalOpen}
+          onClose={() => setIsEnrollModalOpen(false)}
+          employees={employees}
+          enrolledProfiles={biometricProfiles}
+          onSuccess={() => {
+            loadBiometrics();
+            setIsEnrollModalOpen(false);
+            showToast('Hồ sơ FaceID đã được cập nhật thành công vào hệ thống!', 'success');
+          }}
+        />
+      )}
     </div>
   );
 };

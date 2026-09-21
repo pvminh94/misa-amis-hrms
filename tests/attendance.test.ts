@@ -125,4 +125,61 @@ describe('AMIS HRMS - Phân hệ Chấm công & Ca kíp (Time & Attendance Engin
     // Reset lại 15
     db.updateAttendancePolicy({ gracePeriodMinutes: 15 });
   });
+
+  it('9. Kiểm tra Quản lý hồ sơ sinh trắc khuôn mặt FaceID (Biometric Enrollment & 3D Angles)', () => {
+    // 1. Get initial enrolled face profiles
+    const profiles = db.getFaceBiometrics();
+    expect(profiles.length).toBeGreaterThanOrEqual(6);
+
+    const emp01Profile = db.getFaceBiometricByEmployeeId('emp-01');
+    expect(emp01Profile).toBeDefined();
+    expect(emp01Profile?.employeeCode).toBe('AMIS-0001');
+    expect(emp01Profile?.status).toBe('enrolled');
+    expect(emp01Profile?.confidenceScore).toBeGreaterThanOrEqual(99.0);
+    expect(emp01Profile?.anglesCaptured.frontal).toBe(true);
+    expect(emp01Profile?.anglesCaptured.left).toBe(true);
+    expect(emp01Profile?.anglesCaptured.right).toBe(true);
+    expect(emp01Profile?.featuresHash).toMatch(/^VEC-512-/);
+
+    // 2. Enroll new employee profile
+    const newProfile = db.enrollFaceBiometric({
+      employeeId: 'emp-05',
+      employeeCode: 'AMIS-0005',
+      employeeName: 'Hoàng Thị Dung',
+      departmentName: 'Phòng Tài Chính - Kế Toán',
+      confidenceScore: 99.9,
+      anglesCaptured: { frontal: true, left: true, right: true }
+    });
+
+    expect(newProfile.id).toBeDefined();
+    expect(newProfile.employeeCode).toBe('AMIS-0005');
+    const checked = db.getFaceBiometricByEmployeeId('emp-05');
+    expect(checked).toBeDefined();
+    expect(checked?.employeeName).toBe('Hoàng Thị Dung');
+
+    // 3. Delete profile
+    const deleted = db.deleteFaceBiometric(newProfile.id);
+    expect(deleted).toBe(true);
+    expect(db.getFaceBiometricByEmployeeId('emp-05')).toBeUndefined();
+  });
+
+  it('10. Kiểm tra Cấu hình tham số mở rộng của Chính sách Chấm công Doanh nghiệp', () => {
+    const updatedPolicy = db.updateAttendancePolicy({
+      gracePeriodMinutes: 15,
+      earlyLeaveMinutes: 10,
+      overtimeMinMinutes: 30,
+      latePenaltyAmount: 2000,
+      maxLatePerMonth: 3,
+      livenessLevel: 'strict',
+      requireWifi: true
+    });
+
+    expect(updatedPolicy.gracePeriodMinutes).toBe(15);
+    expect(updatedPolicy.earlyLeaveMinutes).toBe(10);
+    expect(updatedPolicy.overtimeMinMinutes).toBe(30);
+    expect(updatedPolicy.latePenaltyAmount).toBe(2000);
+    expect(updatedPolicy.maxLatePerMonth).toBe(3);
+    expect(updatedPolicy.livenessLevel).toBe('strict');
+    expect(updatedPolicy.requireWifi).toBe(true);
+  });
 });

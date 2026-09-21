@@ -337,13 +337,40 @@ export interface RawPunchLog {
   pairingType?: 'check_in' | 'check_out';
 }
 
+export interface FaceBiometricProfile {
+  id: string;
+  employeeId: string;
+  employeeCode: string;
+  employeeName: string;
+  departmentName: string;
+  status: 'enrolled' | 'pending' | 'rejected';
+  enrolledAt: string;
+  enrolledBy: string;
+  featuresHash: string;
+  photoThumbnail?: string;
+  confidenceScore: number;
+  anglesCaptured: {
+    frontal: boolean;
+    left: boolean;
+    right: boolean;
+  };
+}
+
 export interface AttendancePolicySetting {
   gracePeriodMinutes: number; // e.g. 15 phút đầu giờ được phép đến muộn không phạt
+  earlyLeaveMinutes?: number; // e.g. 15 phút về sớm
+  maxLatePerMonth?: number; // e.g. 3 lần / tháng
+  latePenaltyAmount?: number; // e.g. 50000 đ
   halfDayMinHours: number; // 4.0h
   fullDayMinHours: number; // 7.0h
   overtimeMinMinutes: number; // 30 phút sau ca
   maxContinuousDays: number; // 6 ngày liên tục trước ngày nghỉ tuần
   minRestHoursBetweenShifts: number; // 12 giờ nghỉ ngơi giữa 2 ca theo Điều 110 BLLĐ 2019
+  requireGps?: boolean;
+  gpsRadiusMeters?: number;
+  requireWifi?: boolean;
+  livenessLevel?: 'standard' | 'strict' | 'maximum';
+  facialRecognitionEnabled?: boolean;
 }
 
 export interface LateLeaderboardItem {

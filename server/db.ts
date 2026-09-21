@@ -24,7 +24,8 @@ import {
   UserAccount,
   AuditLog,
   SecuritySetting,
-  PermissionMatrix
+  PermissionMatrix,
+  FaceBiometricProfile
 } from './types';
 import {
   initialDepartments,
@@ -42,6 +43,7 @@ import {
   initialShiftRosters,
   initialRawPunchLogs,
   initialAttendancePolicy,
+  initialFaceBiometrics,
   initialRoles,
   initialUserAccounts,
   initialAuditLogs,
@@ -66,6 +68,7 @@ interface DatabaseSchema {
   shiftRosters: ShiftRosterEntry[];
   rawPunches: RawPunchLog[];
   attendancePolicy: AttendancePolicySetting;
+  faceBiometrics: FaceBiometricProfile[];
   roles: SystemRole[];
   userAccounts: UserAccount[];
   auditLogs: AuditLog[];
@@ -99,6 +102,7 @@ class DatabaseStore {
         if (!parsed.shiftRosters) parsed.shiftRosters = initialShiftRosters;
         if (!parsed.rawPunches) parsed.rawPunches = initialRawPunchLogs;
         if (!parsed.attendancePolicy) parsed.attendancePolicy = initialAttendancePolicy;
+        if (!parsed.faceBiometrics) parsed.faceBiometrics = initialFaceBiometrics;
         if (!parsed.roles) parsed.roles = initialRoles;
         if (!parsed.userAccounts) parsed.userAccounts = initialUserAccounts;
         if (!parsed.auditLogs) parsed.auditLogs = initialAuditLogs;
@@ -127,6 +131,7 @@ class DatabaseStore {
       shiftRosters: initialShiftRosters,
       rawPunches: initialRawPunchLogs,
       attendancePolicy: initialAttendancePolicy,
+      faceBiometrics: initialFaceBiometrics,
       roles: initialRoles,
       userAccounts: initialUserAccounts,
       auditLogs: initialAuditLogs,
@@ -968,6 +973,82 @@ class DatabaseStore {
     this.data.attendancePolicy = { ...this.data.attendancePolicy, ...updates };
     this.saveData();
     return this.data.attendancePolicy;
+  }
+
+  // Face Biometric Profile Management
+  getFaceBiometrics(): FaceBiometricProfile[] {
+    return this.data.faceBiometrics || [];
+  }
+
+  getFaceBiometricByEmployeeId(empId: string): FaceBiometricProfile | undefined {
+    return (this.data.faceBiometrics || []).find((f) => f.employeeId === empId || f.employeeCode === empId);
+  }
+
+  enrollFaceBiometric(profile: Partial<FaceBiometricProfile>): FaceBiometricProfile {
+    const emp = this.getEmployeeById(profile.employeeId || '');
+    const newProfile: FaceBiometricProfile = {
+      id: profile.id || `face-${Date.now().toString().slice(-6)}`,
+      employeeId: profile.employeeId || (emp ? emp.id : 'emp-01'),
+      employeeCode: profile.employeeCode || (emp ? emp.code : 'AMIS-0001'),
+      employeeName: profile.employeeName || (emp ? emp.fullName : 'Nhân sự AMIS'),
+      departmentName: profile.departmentName || (emp ? emp.departmentName : 'Khối Kỹ Thuật'),
+      status: 'enrolled',
+      enrolledAt: new Date().toISOString().replace('T', ' ').slice(0, 19),
+      enrolledBy: profile.enrolledBy || 'Quản trị viên Hệ thống',
+      featuresHash: profile.featuresHash || `VEC-512-${Math.random().toString(36).substring(2, 10).toUpperCase()}`,
+      photoThumbnail: profile.photoThumbnail,
+      confidenceScore: profile.confidenceScore || 99.8,
+      anglesCaptured: profile.anglesCaptured || { frontal: true, left: true, right: true }
+    };
+
+    if (!this.data.faceBiometrics) this.data.faceBiometrics = [];
+    const existingIdx = this.data.faceBiometrics.findIndex((f) => f.employeeId === newProfile.employeeId);
+    if (existingIdx !== -1) {
+      this.data.faceBiometrics[existingIdx] = newProfile;
+    } else {
+      this.data.faceBiometrics.unshift(newProfile);
+    }
+
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'attendance',
+      action: 'UPDATE',
+      description: `Đăng ký hồ sơ sinh trắc khuôn mặt FaceID thành công cho: ${newProfile.employeeName} (${newProfile.employeeCode})`,
+      targetId: newProfile.id,
+      targetName: newProfile.employeeName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return newProfile;
+  }
+
+  deleteFaceBiometric(id: string): boolean {
+    if (!this.data.faceBiometrics) return false;
+    const found = this.data.faceBiometrics.find((f) => f.id === id || f.employeeId === id);
+    if (!found) return false;
+
+    this.data.faceBiometrics = this.data.faceBiometrics.filter((f) => f.id !== found.id);
+    this.addAuditLog({
+      userId: 'usr-01',
+      userCode: 'AMIS-0001',
+      userName: 'Trịnh Văn Cường',
+      roleName: 'Quản trị viên Toàn quyền',
+      module: 'attendance',
+      action: 'DELETE',
+      description: `Hủy mẫu sinh trắc khuôn mặt FaceID của: ${found.employeeName} (${found.employeeCode})`,
+      targetId: found.id,
+      targetName: found.employeeName,
+      ipAddress: '118.70.124.9',
+      status: 'success'
+    });
+
+    this.saveData();
+    return true;
   }
 
   // Attendance Analytics & Late Leaderboard

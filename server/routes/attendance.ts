@@ -343,4 +343,39 @@ router.put('/policy', (req, res) => {
   }
 });
 
+// FACE BIOMETRIC REGISTRATION & DIRECTORY
+router.get('/face-biometrics', (req, res) => {
+  try {
+    const profiles = db.getFaceBiometrics();
+    res.json({ success: true, data: profiles });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Lỗi tải danh mục sinh trắc khuôn mặt' });
+  }
+});
+
+router.post('/face-biometrics/enroll', (req, res) => {
+  try {
+    const enrolled = db.enrollFaceBiometric(req.body);
+    res.json({
+      success: true,
+      data: enrolled,
+      message: `Đã lưu mẫu nhận diện khuôn mặt FaceID thành công cho ${enrolled.employeeName}`
+    });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message || 'Lỗi lưu sinh trắc khuôn mặt' });
+  }
+});
+
+router.delete('/face-biometrics/:id', (req, res) => {
+  try {
+    const success = db.deleteFaceBiometric(req.params.id);
+    if (!success) {
+      return res.status(404).json({ success: false, message: 'Không tìm thấy mẫu khuôn mặt cần xóa' });
+    }
+    res.json({ success: true, message: 'Đã xóa mẫu khuôn mặt FaceID khỏi hệ thống' });
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message || 'Lỗi xóa mẫu khuôn mặt' });
+  }
+});
+
 export default router;
