@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "server": "npx tsx server/index.ts",
+    "server": "npx tsx watch server/index.ts",
     "client": "vite --host 0.0.0.0 --port 3000",
     "dev": "concurrently -k \"npm run server\" \"npm run client\"",
     "build": "tsc -b && vite build",
