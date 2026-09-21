@@ -11,13 +11,30 @@ import {
 
 const API_BASE = '/api';
 
+async function fetchJson<T = any>(url: string, options?: RequestInit): Promise<T> {
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    const text = await res.text();
+    let message = `Lỗi máy chủ (HTTP ${res.status})`;
+    try {
+      const json = JSON.parse(text);
+      if (json.message) message = json.message;
+    } catch {
+      // not json
+    }
+    throw new Error(message);
+  }
+  const data = await res.json();
+  if (data.success === false) {
+    throw new Error(data.message || 'Lỗi xử lý nghiệp vụ');
+  }
+  return data.data !== undefined ? data.data : data;
+}
+
 export const api = {
   // Dashboard
   async getDashboardStats(): Promise<DashboardStats> {
-    const res = await fetch(`${API_BASE}/dashboard/stats`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/dashboard/stats`);
   },
 
   // Employees
@@ -27,111 +44,80 @@ export const api = {
     if (params?.departmentId) query.append('departmentId', params.departmentId);
     if (params?.status) query.append('status', params.status);
 
-    const res = await fetch(`${API_BASE}/employees?${query.toString()}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/employees?${query.toString()}`);
   },
 
   async getEmployee(id: string): Promise<Employee> {
-    const res = await fetch(`${API_BASE}/employees/${id}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/employees/${id}`);
   },
 
   async createEmployee(payload: Partial<Employee>): Promise<Employee> {
-    const res = await fetch(`${API_BASE}/employees`, {
+    return fetchJson(`${API_BASE}/employees`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async updateEmployee(id: string, payload: Partial<Employee>): Promise<Employee> {
-    const res = await fetch(`${API_BASE}/employees/${id}`, {
+    return fetchJson(`${API_BASE}/employees/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async deleteEmployee(id: string): Promise<void> {
-    const res = await fetch(`${API_BASE}/employees/${id}`, {
+    await fetchJson(`${API_BASE}/employees/${id}`, {
       method: 'DELETE'
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
   },
 
   // Employee Sub-entities API
   async addEmployeeContract(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/employees/${id}/contracts`, {
+    return fetchJson(`${API_BASE}/employees/${id}/contracts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async addEmployeeWorkHistory(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/employees/${id}/work-history`, {
+    return fetchJson(`${API_BASE}/employees/${id}/work-history`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async addEmployeeReward(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/employees/${id}/rewards`, {
+    return fetchJson(`${API_BASE}/employees/${id}/rewards`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async addEmployeeDependent(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/employees/${id}/dependents`, {
+    return fetchJson(`${API_BASE}/employees/${id}/dependents`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async deleteEmployeeDependent(id: string, depId: string): Promise<void> {
-    const res = await fetch(`${API_BASE}/employees/${id}/dependents/${depId}`, {
+    await fetchJson(`${API_BASE}/employees/${id}/dependents/${depId}`, {
       method: 'DELETE'
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
   },
 
   async addEmployeeDocument(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/employees/${id}/documents`, {
+    return fetchJson(`${API_BASE}/employees/${id}/documents`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   // Attendance
@@ -139,62 +125,44 @@ export const api = {
     const query = new URLSearchParams({ date });
     if (departmentId) query.append('departmentId', departmentId);
 
-    const res = await fetch(`${API_BASE}/attendance?${query.toString()}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance?${query.toString()}`);
   },
 
   async checkIn(employeeId: string, time?: string): Promise<AttendanceRecord> {
-    const res = await fetch(`${API_BASE}/attendance/check-in`, {
+    return fetchJson(`${API_BASE}/attendance/check-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ employeeId, time })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async checkOut(employeeId: string, time?: string): Promise<AttendanceRecord> {
-    const res = await fetch(`${API_BASE}/attendance/check-out`, {
+    return fetchJson(`${API_BASE}/attendance/check-out`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ employeeId, time })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   // Advanced Attendance & Shifts API
   async getShifts(): Promise<any[]> {
-    const res = await fetch(`${API_BASE}/attendance/shifts`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance/shifts`);
   },
 
   async createShift(payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/shifts`, {
+    return fetchJson(`${API_BASE}/attendance/shifts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async updateShift(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/shifts/${id}`, {
+    return fetchJson(`${API_BASE}/attendance/shifts/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async getMonthlyTimesheets(params?: { period?: string; departmentName?: string; search?: string }): Promise<any[]> {
@@ -203,97 +171,67 @@ export const api = {
     if (params?.departmentName) query.append('departmentName', params.departmentName);
     if (params?.search) query.append('search', params.search);
 
-    const res = await fetch(`${API_BASE}/attendance/monthly?${query.toString()}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance/monthly?${query.toString()}`);
   },
 
   async updateTimesheetCell(employeeId: string, day: number, cellUpdates: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/monthly/cell`, {
+    return fetchJson(`${API_BASE}/attendance/monthly/cell`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ employeeId, day, cellUpdates })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async getShiftSwaps(): Promise<any[]> {
-    const res = await fetch(`${API_BASE}/attendance/swaps`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance/swaps`);
   },
 
   async createShiftSwap(payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/swaps`, {
+    return fetchJson(`${API_BASE}/attendance/swaps`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async updateShiftSwapStatus(id: string, status: 'approved' | 'rejected', approverName?: string): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/swaps/${id}/status`, {
+    return fetchJson(`${API_BASE}/attendance/swaps/${id}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status, approverName })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async getRegularizations(): Promise<any[]> {
-    const res = await fetch(`${API_BASE}/attendance/regularizations`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance/regularizations`);
   },
 
   async createRegularization(payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/regularizations`, {
+    return fetchJson(`${API_BASE}/attendance/regularizations`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async updateRegularizationStatus(id: string, status: 'approved' | 'rejected', approverName?: string): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/regularizations/${id}/status`, {
+    return fetchJson(`${API_BASE}/attendance/regularizations/${id}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status, approverName })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async getGeofenceLocations(): Promise<any[]> {
-    const res = await fetch(`${API_BASE}/attendance/locations`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/attendance/locations`);
   },
 
   async updateGeofenceLocation(id: string, payload: any): Promise<any> {
-    const res = await fetch(`${API_BASE}/attendance/locations/${id}`, {
+    return fetchJson(`${API_BASE}/attendance/locations/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   // Leaves & Approval
@@ -303,32 +241,23 @@ export const api = {
     if (params?.type) query.append('type', params.type);
     if (params?.employeeId) query.append('employeeId', params.employeeId);
 
-    const res = await fetch(`${API_BASE}/leaves?${query.toString()}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/leaves?${query.toString()}`);
   },
 
   async createLeave(payload: Partial<LeaveRequest>): Promise<LeaveRequest> {
-    const res = await fetch(`${API_BASE}/leaves`, {
+    return fetchJson(`${API_BASE}/leaves`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   async updateLeaveStatus(id: string, status: 'approved' | 'rejected', reviewNotes?: string): Promise<LeaveRequest> {
-    const res = await fetch(`${API_BASE}/leaves/${id}/status`, {
+    return fetchJson(`${API_BASE}/leaves/${id}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status, reviewNotes })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   // Payroll
@@ -342,63 +271,49 @@ export const api = {
     if (params?.search) query.append('search', params.search);
 
     const res = await fetch(`${API_BASE}/payroll?${query.toString()}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return { data: data.data, summary: data.summary };
+    if (!res.ok) throw new Error(`Lỗi máy chủ (HTTP ${res.status})`);
+    const json = await res.json();
+    return { data: json.data, summary: json.summary };
   },
 
   async getPayslip(id: string): Promise<{ data: PayrollRecord; employee: Employee }> {
     const res = await fetch(`${API_BASE}/payroll/${id}`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return { data: data.data, employee: data.employee };
+    if (!res.ok) throw new Error(`Lỗi máy chủ (HTTP ${res.status})`);
+    const json = await res.json();
+    return { data: json.data, employee: json.employee };
   },
 
   async updatePayrollStatus(period: string, status: 'draft' | 'approved' | 'paid'): Promise<void> {
-    const res = await fetch(`${API_BASE}/payroll/status`, {
+    await fetchJson(`${API_BASE}/payroll/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ period, status })
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
   },
 
   // Departments & Positions
   async getOrganization(): Promise<{ departments: Department[]; positions: Position[] }> {
-    const res = await fetch(`${API_BASE}/departments`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/departments`);
   },
 
   async createDepartment(payload: { code: string; name: string; managerName?: string; description?: string }): Promise<Department> {
-    const res = await fetch(`${API_BASE}/departments`, {
+    return fetchJson(`${API_BASE}/departments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   },
 
   // Settings
   async getSettings(): Promise<CompanySetting> {
-    const res = await fetch(`${API_BASE}/settings`);
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
+    return fetchJson(`${API_BASE}/settings`);
   },
 
   async updateSettings(payload: Partial<CompanySetting>): Promise<CompanySetting> {
-    const res = await fetch(`${API_BASE}/settings`, {
+    return fetchJson(`${API_BASE}/settings`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!data.success) throw new Error(data.message);
-    return data.data;
   }
 };
