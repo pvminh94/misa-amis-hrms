@@ -26,7 +26,8 @@ import {
   Sliders,
   Award,
   AlertOctagon,
-  Download
+  Download,
+  DollarSign
 } from 'lucide-react';
 import {
   AttendanceRecord,
@@ -53,6 +54,9 @@ import { ShiftSwapModal } from './ShiftSwapModal';
 import { RegularizationModal } from './RegularizationModal';
 import { BulkRosterModal } from './BulkRosterModal';
 import { RosterCellModal } from './RosterCellModal';
+import { OmniCheckInModal } from './OmniCheckInModal';
+import { SelfPayslipModal } from '../payroll/SelfPayslipModal';
+import { PayrollRecord } from '../../../types';
 
 interface AttendanceViewProps {
   attendanceList: AttendanceRecord[];
@@ -114,31 +118,40 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
   const [editingShift, setEditingShift] = useState<ShiftDefinition | null>(null);
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
   const [isRegModalOpen, setIsRegModalOpen] = useState(false);
+  const [isOmniCheckInOpen, setIsOmniCheckInOpen] = useState(false);
+  const [isSelfPayslipOpen, setIsSelfPayslipOpen] = useState(false);
+  const [userPayslip, setUserPayslip] = useState<PayrollRecord | null>(null);
 
   // Load all enterprise attendance module data
   const loadModuleData = async () => {
     try {
-      const [rRes, mRes, pRes, aRes, polRes, sRes, swRes, regRes, lRes] = await Promise.all([
-        api.getShiftRoster(),
-        api.getMonthlyTimesheets(),
-        api.getRawPunchLogs(),
-        api.getAttendanceAnalytics(),
-        api.getAttendancePolicy(),
-        api.getShifts(),
-        api.getShiftSwaps(),
-        api.getRegularizations(),
-        api.getGeofenceLocations()
+      const [rRes, mRes, pRes, aRes, polRes, sRes, swRes, regRes, lRes, payRes] = await Promise.all([
+        api.getShiftRoster().catch(() => []),
+        api.getMonthlyTimesheets().catch(() => []),
+        api.getRawPunchLogs().catch(() => []),
+        api.getAttendanceAnalytics().catch(() => null),
+        api.getAttendancePolicy().catch(() => null),
+        api.getShifts().catch(() => []),
+        api.getShiftSwaps().catch(() => []),
+        api.getRegularizations().catch(() => []),
+        api.getGeofenceLocations().catch(() => []),
+        api.getPayroll().catch(() => [])
       ]);
 
-      setRosterData(rRes);
-      setMonthlyData(mRes);
-      setRawPunches(pRes);
+      setRosterData(Array.isArray(rRes) ? rRes : []);
+      setMonthlyData(Array.isArray(mRes) ? mRes : []);
+      setRawPunches(Array.isArray(pRes) ? pRes : []);
       setAnalytics(aRes);
       setPolicy(polRes);
-      setShifts(sRes);
-      setSwaps(swRes);
-      setRegularizations(regRes);
-      setLocations(lRes);
+      setShifts(Array.isArray(sRes) ? sRes : []);
+      setSwaps(Array.isArray(swRes) ? swRes : []);
+      setRegularizations(Array.isArray(regRes) ? regRes : []);
+      setLocations(Array.isArray(lRes) ? lRes : []);
+
+      if (Array.isArray(payRes) && payRes.length > 0) {
+        const found = payRes.find((p: any) => p.employeeId === currentUser.id);
+        setUserPayslip(found || payRes[0]);
+      }
     } catch (err) {
       console.error('Error loading enterprise attendance data:', err);
     }
@@ -325,7 +338,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
     const headers = `Mã NV,Họ tên,Phòng ban,${daysHeader},Tổng công,Nghỉ phép,Đi muộn,Tăng ca OT`;
     const rows = monthlyData.map((emp) => {
       const daysStr = Array.from({ length: 30 }, (_, i) => emp.days[i + 1]?.status || '--').join(',');
-      return `${emp.employeeCode},"${emp.employeeName}","${emp.departmentName}",${daysStr},${emp.totalWorkDays},${emp.totalPaidLeaves},${emp.totalLateTimes},${emp.totalOTHours}`;
+      return `${emp.employeeCode},"${emp.employeeName}","${emp.departmentName}",${daysStr},${emp.totalWorkDays || 0},${emp.totalPaidLeaves || 0},${emp.totalLateTimes || 0},${emp.totalOTHours || 0}`;
     });
     const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers, ...rows].join('\n');
     const encodedUri = encodeURI(csvContent);
@@ -341,8 +354,8 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
   const handleExportRosterCSV = () => {
     const daysHeader = Array.from({ length: 30 }, (_, i) => `${i + 1}`).join(',');
     const headers = `Mã NV,Họ tên,Phòng ban,${daysHeader}`;
-    const rows = rosterData.map((emp) => {
-      const daysStr = Array.from({ length: 30 }, (_, i) => emp.schedules[i + 1]?.shiftCode || 'OFF').join(',');
+    const rows = (rosterData || []).map((emp) => {
+      const daysStr = Array.from({ length: 30 }, (_, i) => emp.schedules?.[i + 1]?.shiftCode || 'OFF').join(',');
       return `${emp.employeeCode},"${emp.employeeName}","${emp.departmentName}",${daysStr}`;
     });
     const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers, ...rows].join('\n');
@@ -356,29 +369,32 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
     showToast('Đã xuất file Kế hoạch phân ca tháng 09/2026', 'success');
   };
 
-  // Filtered views
-  const filteredRoster = rosterData.filter((item) => {
+  // Filtered views with strict null-safety
+  const filteredRoster = (rosterData || []).filter((item) => {
+    if (!item) return false;
     const matchesDept = selectedDept === 'all' || item.departmentName === selectedDept;
     const matchesSearch =
-      item.employeeName.toLowerCase().includes(search.toLowerCase()) ||
-      item.employeeCode.toLowerCase().includes(search.toLowerCase());
+      (item.employeeName || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.employeeCode || '').toLowerCase().includes(search.toLowerCase());
     return matchesDept && matchesSearch;
   });
 
-  const filteredMonthly = monthlyData.filter((item) => {
+  const filteredMonthly = (monthlyData || []).filter((item) => {
+    if (!item) return false;
     const matchesDept = selectedDept === 'all' || item.departmentName === selectedDept;
     const matchesSearch =
-      item.employeeName.toLowerCase().includes(search.toLowerCase()) ||
-      item.employeeCode.toLowerCase().includes(search.toLowerCase());
+      (item.employeeName || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.employeeCode || '').toLowerCase().includes(search.toLowerCase());
     return matchesDept && matchesSearch;
   });
 
-  const filteredPunches = rawPunches.filter((item) => {
+  const filteredPunches = (rawPunches || []).filter((item) => {
+    if (!item) return false;
     const matchesSource = punchSourceFilter === 'all' || item.source === punchSourceFilter;
     const matchesSearch =
-      item.employeeName.toLowerCase().includes(search.toLowerCase()) ||
-      item.employeeCode.toLowerCase().includes(search.toLowerCase()) ||
-      item.deviceName.toLowerCase().includes(search.toLowerCase());
+      (item.employeeName || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.employeeCode || '').toLowerCase().includes(search.toLowerCase()) ||
+      (item.deviceName || '').toLowerCase().includes(search.toLowerCase());
     return matchesSource && matchesSearch;
   });
 
@@ -443,40 +459,57 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           </p>
         </div>
 
-        {/* GPS Geofence Simulator Widget */}
-        <div className="flex items-center gap-4 bg-slate-50 border border-slate-200 p-3 rounded-xl w-full lg:w-auto">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-xs text-slate-800 font-semibold">
-              <MapPin className="w-3.5 h-3.5 text-rose-500" />
-              <span>Trụ sở AMIS Hà Nội (Duy Tân)</span>
-            </div>
-            <div className="flex items-center gap-2 text-[11px] text-slate-500">
-              <span className="flex items-center gap-1 text-emerald-600 font-medium">
-                <Wifi className="w-3 h-3" />
-                AMIS_CORP_5G
-              </span>
-              <span>•</span>
-              <span className="text-slate-600">Bán kính: 15m (Hợp lệ)</span>
-            </div>
-          </div>
+        {/* Action Buttons & Simulator Widget */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            onClick={() => setIsOmniCheckInOpen(true)}
+            className="px-3.5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+            title="Mở máy quét FaceID AI, App Mobile GPS Geofence & Selfie, hoặc Vân tay Ronald Jack"
+          >
+            <ScanFace className="w-4 h-4" />
+            <span>Bấm Công Đa Phương Thức</span>
+          </button>
 
-          <div className="flex items-center gap-2 pl-3 border-l border-slate-200">
-            <button
-              onClick={handleSelfCheckIn}
-              disabled={simulating}
-              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-sm transition flex items-center gap-1 cursor-pointer active:scale-95"
-            >
-              <LogIn className="w-3.5 h-3.5" />
-              <span>Chấm Vào</span>
-            </button>
-            <button
-              onClick={handleSelfCheckOut}
-              disabled={simulating}
-              className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-sm transition flex items-center gap-1 cursor-pointer active:scale-95"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span>Chấm Ra</span>
-            </button>
+          <button
+            onClick={() => setIsSelfPayslipOpen(true)}
+            className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-xs transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+            title="Nhân viên tự tra cứu chi tiết phiếu lương tháng, BHXH 10.5% và thuế TNCN của mình"
+          >
+            <DollarSign className="w-4 h-4" />
+            <span>Xem Phiếu Lương Của Tôi</span>
+          </button>
+
+          {/* GPS Geofence Simulator Widget */}
+          <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 p-2 rounded-xl">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-1.5 text-xs text-slate-800 font-semibold">
+                <MapPin className="w-3.5 h-3.5 text-rose-500" />
+                <span>AMIS Duy Tân</span>
+              </div>
+              <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                <Wifi className="w-3 h-3 text-emerald-600" />
+                <span>AMIS_5G • 15m (Hợp lệ)</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 pl-2.5 border-l border-slate-200">
+              <button
+                onClick={handleSelfCheckIn}
+                disabled={simulating}
+                className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow-xs transition flex items-center gap-1 cursor-pointer active:scale-95"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Chấm Vào</span>
+              </button>
+              <button
+                onClick={handleSelfCheckOut}
+                disabled={simulating}
+                className="px-2.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-xs transition flex items-center gap-1 cursor-pointer active:scale-95"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Chấm Ra</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -538,7 +571,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
         >
           <TrendingUp className="w-4 h-4" />
           <span>Báo cáo chuyên cần & Top đi muộn</span>
-          {analytics?.lateLeaderboard.some((l) => l.severity === 'penalty') && (
+          {analytics?.lateLeaderboard?.some((l) => l.severity === 'penalty') && (
             <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
           )}
         </button>
@@ -580,11 +613,11 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
         >
           <RefreshCw className="w-4 h-4" />
           <span>Đổi ca & Bù công</span>
-          {(swaps.filter((s) => s.status === 'pending').length > 0 ||
-            regularizations.filter((r) => r.status === 'pending').length > 0) && (
+          {(((swaps || []).filter((s) => s.status === 'pending').length > 0) ||
+            ((regularizations || []).filter((r) => r.status === 'pending').length > 0)) && (
             <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500 text-white font-bold animate-pulse">
-              {swaps.filter((s) => s.status === 'pending').length +
-                regularizations.filter((r) => r.status === 'pending').length}
+              {((swaps || []).filter((s) => s.status === 'pending').length) +
+                ((regularizations || []).filter((r) => r.status === 'pending').length)}
             </span>
           )}
         </button>
@@ -651,15 +684,14 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                 </span>
               </div>
 
-              {(role === 'admin' || role === 'manager') && (
-                <button
-                  onClick={() => setIsBulkRosterOpen(true)}
-                  className="px-3 py-1.5 bg-[#0072BC] hover:bg-[#005A96] text-white text-xs font-semibold rounded-lg shadow-sm transition flex items-center gap-1.5 cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>Phân Ca Hàng Loạt</span>
-                </button>
-              )}
+              <button
+                onClick={() => setIsBulkRosterOpen(true)}
+                className="px-3 py-1.5 bg-[#0072BC] hover:bg-[#005A96] text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+                title="Cho phép trưởng bộ phận / quản lý tự sắp lịch phân ca cho nhân viên của mình"
+              >
+                <Sliders className="w-3.5 h-3.5" />
+                <span>Bộ Phận Tự Sắp Lịch Cho Nhân Viên</span>
+              </button>
 
               <button
                 onClick={handleExportRosterCSV}
@@ -720,13 +752,13 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                             {row.employeeName}
                           </div>
                           <div className="text-[10px] text-slate-400 font-mono">
-                            {row.employeeCode} • {row.departmentName.split(' ')[0]}
+                            {row.employeeCode} • {row.departmentName?.split(' ')?.[0] || 'Phòng'}
                           </div>
                         </td>
 
                         {Array.from({ length: 30 }, (_, i) => {
                           const day = i + 1;
-                          const schedule = row.schedules[day];
+                          const schedule = row.schedules?.[day];
                           const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
 
                           return (
@@ -881,13 +913,13 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                           {row.employeeName}
                         </div>
                         <div className="text-[10px] text-slate-400 font-mono">
-                          {row.employeeCode} • {row.departmentName.split(' ')[0]}
+                          {row.employeeCode} • {row.departmentName?.split(' ')?.[0] || 'Phòng'}
                         </div>
                       </td>
 
                       {Array.from({ length: 30 }, (_, i) => {
                         const day = i + 1;
-                        const cell = row.days[day];
+                        const cell = row.days?.[day];
                         const isWeekend = [5, 6, 12, 13, 19, 20, 26, 27].includes(day);
 
                         return (
@@ -927,16 +959,16 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                       })}
 
                       <td className="py-2 px-2 text-center font-bold text-emerald-700 bg-emerald-50/30 font-mono">
-                        {row.totalWorkDays}
+                        {row.totalWorkDays || 0}
                       </td>
                       <td className="py-2 px-2 text-center font-bold text-[#0072BC] bg-blue-50/30 font-mono">
-                        {row.totalPaidLeaves}
+                        {row.totalPaidLeaves || 0}
                       </td>
                       <td className="py-2 px-2 text-center font-bold text-amber-700 bg-amber-50/30 font-mono">
-                        {row.totalLateTimes > 0 ? `${row.totalLateTimes} (${row.totalLateMinutes}p)` : '0'}
+                        {(row.totalLateTimes || 0) > 0 ? `${row.totalLateTimes} (${row.totalLateMinutes || 0}p)` : '0'}
                       </td>
                       <td className="py-2 px-2 text-center font-bold text-purple-700 bg-purple-50/30 font-mono">
-                        {row.totalOTHours > 0 ? `${row.totalOTHours}h` : '0'}
+                        {(row.totalOTHours || 0) > 0 ? `${row.totalOTHours}h` : '0'}
                       </td>
                     </tr>
                   ))}
@@ -1121,10 +1153,10 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                 <span>Số nhân sự vi phạm đi muộn</span>
               </div>
               <div className="text-2xl font-black text-amber-600 mt-1">
-                {analytics.lateLeaderboard.length} <span className="text-xs font-normal text-slate-400">người</span>
+                {(analytics.lateLeaderboard || []).length} <span className="text-xs font-normal text-slate-400">người</span>
               </div>
               <div className="text-[11px] text-amber-700 font-medium mt-0.5">
-                {analytics.lateLeaderboard.filter((l) => l.severity === 'penalty').length} người vượt khung phạt
+                {(analytics.lateLeaderboard || []).filter((l) => l.severity === 'penalty').length} người vượt khung phạt
               </div>
             </div>
           </div>
@@ -1157,14 +1189,14 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    {analytics.lateLeaderboard.length === 0 ? (
+                    {(analytics.lateLeaderboard || []).length === 0 ? (
                       <tr>
                         <td colSpan={6} className="py-8 text-center text-slate-400">
                           Tuyệt vời! Không có nhân sự nào đi muộn trong tháng
                         </td>
                       </tr>
                     ) : (
-                      analytics.lateLeaderboard.map((item, index) => (
+                      (analytics.lateLeaderboard || []).map((item, index) => (
                         <tr key={item.employeeId} className="hover:bg-slate-50 transition">
                           <td className="py-3 px-4">
                             <span
@@ -1220,7 +1252,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
               <h3 className="font-bold text-xs text-slate-800">Tỷ lệ Chuyên cần theo Khối / Phòng Ban</h3>
 
               <div className="space-y-3">
-                {analytics.departmentRates.map((d) => (
+                {(analytics.departmentRates || []).map((d) => (
                   <div key={d.departmentName} className="space-y-1">
                     <div className="flex justify-between text-xs">
                       <span className="font-semibold text-slate-700 truncate max-w-[180px]">
@@ -1779,6 +1811,7 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           onClose={() => setIsBulkRosterOpen(false)}
           departments={departments}
           shifts={shifts}
+          defaultDepartment={selectedDept}
           onApply={handleApplyBulkRoster}
         />
       )}
@@ -1811,6 +1844,29 @@ export const AttendanceView: React.FC<AttendanceViewProps> = ({
           onClose={() => setIsRegModalOpen(false)}
           onSubmit={handleCreateRegularization}
           employees={employees}
+        />
+      )}
+
+      {isOmniCheckInOpen && (
+        <OmniCheckInModal
+          isOpen={isOmniCheckInOpen}
+          onClose={() => setIsOmniCheckInOpen(false)}
+          currentUser={currentUser}
+          employees={employees}
+          locations={locations}
+          onSuccess={() => {
+            onRefresh();
+            loadModuleData();
+          }}
+        />
+      )}
+
+      {isSelfPayslipOpen && (
+        <SelfPayslipModal
+          isOpen={isSelfPayslipOpen}
+          onClose={() => setIsSelfPayslipOpen(false)}
+          record={userPayslip}
+          employee={employees.find((e) => e.id === currentUser.id) || employees[0]}
         />
       )}
     </div>

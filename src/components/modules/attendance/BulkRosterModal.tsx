@@ -7,6 +7,7 @@ interface BulkRosterModalProps {
   onClose: () => void;
   departments: Department[];
   shifts: ShiftDefinition[];
+  defaultDepartment?: string;
   onApply: (data: {
     departmentName: string;
     shiftCode: string;
@@ -23,9 +24,10 @@ export const BulkRosterModal: React.FC<BulkRosterModalProps> = ({
   onClose,
   departments,
   shifts,
+  defaultDepartment = 'all',
   onApply
 }) => {
-  const [selectedDept, setSelectedDept] = useState('all');
+  const [selectedDept, setSelectedDept] = useState(defaultDepartment !== 'all' ? defaultDepartment : 'all');
   const [selectedShiftCode, setSelectedShiftCode] = useState('CA-HC');
   const [startDay, setStartDay] = useState(1);
   const [endDay, setEndDay] = useState(30);

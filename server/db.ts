@@ -895,6 +895,70 @@ class DatabaseStore {
     };
   }
 
+  addRawPunch(punch: Partial<RawPunchLog>): RawPunchLog {
+    const today = punch.punchDate || '2026-09-21';
+    let time = punch.punchTime || '08:00:00';
+    if (time.length === 5) time = `${time}:00`;
+    const timestamp = punch.timestamp && /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(punch.timestamp)
+      ? punch.timestamp
+      : `${today} ${time}`;
+
+    const newPunch: RawPunchLog = {
+      id: punch.id || `punch-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+      employeeId: punch.employeeId || 'emp-01',
+      employeeCode: punch.employeeCode || 'NV001',
+      employeeName: punch.employeeName || 'Nhân sự AMIS',
+      departmentName: punch.departmentName || 'Khối Công Nghệ & Kỹ Thuật',
+      timestamp,
+      punchDate: today,
+      punchTime: time,
+      source: (punch.source as any) || 'face_id',
+      deviceName: punch.deviceName || 'AMIS Smart Terminal',
+      deviceIp: punch.deviceIp || '192.168.1.100',
+      accuracyScore: punch.accuracyScore ?? 99.4,
+      pairingStatus: punch.pairingStatus || 'paired',
+      pairingType: punch.pairingType || 'check_in'
+    };
+    this.data.rawPunches.unshift(newPunch);
+    this.saveData();
+    return newPunch;
+  }
+
+  getShiftRoster(period = '2026-09', departmentName?: string, search?: string) {
+    return this.getShiftRosters(period, departmentName, search);
+  }
+
+  getRawPunches(params?: { date?: string; employeeId?: string; source?: string; search?: string }) {
+    return this.getRawPunchLogs(params);
+  }
+
+  bulkAssignRoster(params: {
+    departmentName: string;
+    shiftCode: string;
+    shiftName: string;
+    shiftId: string;
+    startDay: number;
+    endDay: number;
+    includeWeekends?: boolean;
+  }) {
+    return this.bulkAssignShiftRoster(params);
+  }
+
+  checkShiftConflict(employeeId: string, day: number, newShiftCode: string): { hasConflict: boolean; message?: string } {
+    const roster = this.data.shiftRosters.find(r => r.employeeId === employeeId && r.period === '2026-09');
+    if (!roster || !roster.schedules) return { hasConflict: false };
+
+    // Labor Code 2019 Article 110: At least 12 hours between consecutive shifts
+    const prevDaySchedule = roster.schedules[day - 1];
+    if (prevDaySchedule?.shiftCode === 'CA-DEM' && (newShiftCode === 'CA-S' || newShiftCode === 'CA-HC')) {
+      return {
+        hasConflict: true,
+        message: 'Vi phạm Điều 110 BLLĐ 2019: Ca đêm hôm trước kết thúc lúc 06:00, không đủ 12 giờ nghỉ trước ca sáng/hành chính tiếp theo.'
+      };
+    }
+    return { hasConflict: false };
+  }
+
   // Attendance Policy
   getAttendancePolicy(): AttendancePolicySetting {
     return this.data.attendancePolicy;
@@ -1304,9 +1368,9 @@ class DatabaseStore {
       timestamp: `2026-09-21 ${timeStr}`
     };
     this.data.auditLogs.unshift(newLog);
-    // Keep max 200 logs
-    if (this.data.auditLogs.length > 200) {
-      this.data.auditLogs = this.data.auditLogs.slice(0, 200);
+    // Keep max 1000 logs
+    if (this.data.auditLogs.length > 1000) {
+      this.data.auditLogs = this.data.auditLogs.slice(0, 1000);
     }
     return newLog;
   }
